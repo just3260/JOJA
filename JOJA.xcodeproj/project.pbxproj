@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4966627524FAB10C00E23563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966627424FAB10C00E23563 /* AppDelegate.swift */; };
+		4966627724FAB10C00E23563 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966627624FAB10C00E23563 /* SceneDelegate.swift */; };
+		4966627924FAB10C00E23563 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966627824FAB10C00E23563 /* LoginViewController.swift */; };
+		4966627C24FAB10C00E23563 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4966627A24FAB10C00E23563 /* Main.storyboard */; };
+		4966627E24FAB10E00E23563 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4966627D24FAB10E00E23563 /* Assets.xcassets */; };
+		4966628124FAB10E00E23563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4966627F24FAB10E00E23563 /* LaunchScreen.storyboard */; };
+		49F980AF24FE9ABF002137CF /* GoogleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F980AE24FE9ABF002137CF /* GoogleLoginManager.swift */; };
+		49F980B124FE9B66002137CF /* SpreadSheetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F980B024FE9B66002137CF /* SpreadSheetService.swift */; };
+		49F980B424FE9F9D002137CF /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F980B324FE9F9D002137CF /* Utility.swift */; };
+		49F980B624FEA622002137CF /* GoogleSheetsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F980B524FEA622002137CF /* GoogleSheetsDataProvider.swift */; };
+		BB767B9181805ABA6ED23BA6 /* Pods_JOJA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322B12DA76D5E0C59148299E /* Pods_JOJA.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		322B12DA76D5E0C59148299E /* Pods_JOJA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JOJA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4966627124FAB10C00E23563 /* JOJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JOJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4966627424FAB10C00E23563 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4966627624FAB10C00E23563 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4966627824FAB10C00E23563 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4966627B24FAB10C00E23563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4966627D24FAB10E00E23563 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4966628024FAB10E00E23563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4966628224FAB10E00E23563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49F980AE24FE9ABF002137CF /* GoogleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginManager.swift; sourceTree = "<group>"; };
+		49F980B024FE9B66002137CF /* SpreadSheetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetService.swift; sourceTree = "<group>"; };
+		49F980B324FE9F9D002137CF /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		49F980B524FEA622002137CF /* GoogleSheetsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSheetsDataProvider.swift; sourceTree = "<group>"; };
+		4F0CCC030BF74F4E8ED2A729 /* Pods-JOJA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JOJA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JOJA/Pods-JOJA.debug.xcconfig"; sourceTree = "<group>"; };
+		AC420702AAEA29619F9238EC /* Pods-JOJA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JOJA.release.xcconfig"; path = "Pods/Target Support Files/Pods-JOJA/Pods-JOJA.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4966626E24FAB10C00E23563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB767B9181805ABA6ED23BA6 /* Pods_JOJA.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4966626824FAB10C00E23563 = {
+			isa = PBXGroup;
+			children = (
+				4966627324FAB10C00E23563 /* JOJA */,
+				4966627224FAB10C00E23563 /* Products */,
+				CF06C2A0D97BF146801C431A /* Pods */,
+				CD907417FEC32F073C75AD47 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4966627224FAB10C00E23563 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4966627124FAB10C00E23563 /* JOJA.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4966627324FAB10C00E23563 /* JOJA */ = {
+			isa = PBXGroup;
+			children = (
+				4966627424FAB10C00E23563 /* AppDelegate.swift */,
+				4966627624FAB10C00E23563 /* SceneDelegate.swift */,
+				4966627824FAB10C00E23563 /* LoginViewController.swift */,
+				49F980B024FE9B66002137CF /* SpreadSheetService.swift */,
+				49F980AE24FE9ABF002137CF /* GoogleLoginManager.swift */,
+				49F980B524FEA622002137CF /* GoogleSheetsDataProvider.swift */,
+				49F980B224FE9F80002137CF /* Utility */,
+				4966627A24FAB10C00E23563 /* Main.storyboard */,
+				4966627D24FAB10E00E23563 /* Assets.xcassets */,
+				4966627F24FAB10E00E23563 /* LaunchScreen.storyboard */,
+				4966628224FAB10E00E23563 /* Info.plist */,
+			);
+			path = JOJA;
+			sourceTree = "<group>";
+		};
+		49F980B224FE9F80002137CF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				49F980B324FE9F9D002137CF /* Utility.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		CD907417FEC32F073C75AD47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				322B12DA76D5E0C59148299E /* Pods_JOJA.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF06C2A0D97BF146801C431A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F0CCC030BF74F4E8ED2A729 /* Pods-JOJA.debug.xcconfig */,
+				AC420702AAEA29619F9238EC /* Pods-JOJA.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4966627024FAB10C00E23563 /* JOJA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4966628524FAB10E00E23563 /* Build configuration list for PBXNativeTarget "JOJA" */;
+			buildPhases = (
+				3517A25A3A64163535DFEB7D /* [CP] Check Pods Manifest.lock */,
+				4966626D24FAB10C00E23563 /* Sources */,
+				4966626E24FAB10C00E23563 /* Frameworks */,
+				4966626F24FAB10C00E23563 /* Resources */,
+				630F1C04E4B7EED08743E2EB /* [CP] Embed Pods Frameworks */,
+				ACE6A0C7C4085199F6E24860 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JOJA;
+			productName = JOJA;
+			productReference = 4966627124FAB10C00E23563 /* JOJA.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4966626924FAB10C00E23563 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				KnownAssetTags = (
+					New,
+				);
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = Andrew;
+				TargetAttributes = {
+					4966627024FAB10C00E23563 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = 4966626C24FAB10C00E23563 /* Build configuration list for PBXProject "JOJA" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4966626824FAB10C00E23563;
+			productRefGroup = 4966627224FAB10C00E23563 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4966627024FAB10C00E23563 /* JOJA */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4966626F24FAB10C00E23563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4966628124FAB10E00E23563 /* LaunchScreen.storyboard in Resources */,
+				4966627E24FAB10E00E23563 /* Assets.xcassets in Resources */,
+				4966627C24FAB10C00E23563 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3517A25A3A64163535DFEB7D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JOJA-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		630F1C04E4B7EED08743E2EB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JOJA/Pods-JOJA-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JOJA/Pods-JOJA-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACE6A0C7C4085199F6E24860 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JOJA/Pods-JOJA-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JOJA/Pods-JOJA-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4966626D24FAB10C00E23563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49F980AF24FE9ABF002137CF /* GoogleLoginManager.swift in Sources */,
+				49F980B124FE9B66002137CF /* SpreadSheetService.swift in Sources */,
+				49F980B424FE9F9D002137CF /* Utility.swift in Sources */,
+				4966627924FAB10C00E23563 /* LoginViewController.swift in Sources */,
+				4966627524FAB10C00E23563 /* AppDelegate.swift in Sources */,
+				4966627724FAB10C00E23563 /* SceneDelegate.swift in Sources */,
+				49F980B624FEA622002137CF /* GoogleSheetsDataProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4966627A24FAB10C00E23563 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4966627B24FAB10C00E23563 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4966627F24FAB10E00E23563 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4966628024FAB10E00E23563 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4966628324FAB10E00E23563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4966628424FAB10E00E23563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4966628624FAB10E00E23563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F0CCC030BF74F4E8ED2A729 /* Pods-JOJA.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z7353C93M9;
+				INFOPLIST_FILE = JOJA/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Andrew.JOJA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4966628724FAB10E00E23563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC420702AAEA29619F9238EC /* Pods-JOJA.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z7353C93M9;
+				INFOPLIST_FILE = JOJA/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Andrew.JOJA;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4966626C24FAB10C00E23563 /* Build configuration list for PBXProject "JOJA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4966628324FAB10E00E23563 /* Debug */,
+				4966628424FAB10E00E23563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4966628524FAB10E00E23563 /* Build configuration list for PBXNativeTarget "JOJA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4966628624FAB10E00E23563 /* Debug */,
+				4966628724FAB10E00E23563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4966626924FAB10C00E23563 /* Project object */;
+}
