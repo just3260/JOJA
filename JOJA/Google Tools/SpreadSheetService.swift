@@ -10,6 +10,11 @@ import Foundation
 import GoogleAPIClientForREST
 
 
+protocol SpreadSheetServiceDelegate: class {
+    func didFailFetchingData(with error: Error)
+    func getString(with string: String)
+}
+
 class SpreadSheetService {
     
     // for test
@@ -21,7 +26,7 @@ class SpreadSheetService {
     
     var arrValues = [[Any]]()
     
-    
+    weak var delegate: SpreadSheetServiceDelegate?
     
     func setDatas() {
         self.arrValues = [["TRUE", "FALSE", "TRUE", "FALSE","FALSE"], ["TRUE", "FALSE", "TRUE", "FALSE","FALSE"], ["TRUE", "FALSE", "TRUE", "FALSE","FALSE"], ["TRUE", "FALSE", "TRUE", "FALSE","FALSE"], ["TRUE", "FALSE", "TRUE", "FALSE","FALSE"],["TRUE", "FALSE", "TRUE", "FALSE","FALSE"],["TRUE", "FALSE", "TRUE", "FALSE","FALSE"]]
@@ -35,7 +40,7 @@ class SpreadSheetService {
         //        service.apiKey = "AIzaSyBg42iUHcRKKkLRhlRv5HUq1_p3Lv7aVPs"
         print("Getting sheet data...")
         
-        let range = "A1:J8"
+        let range = "B2:D50"
         let query = GTLRSheetsQuery_SpreadsheetsValuesGet
             .query(withSpreadsheetId: spreadsheetId, range:range)
         service.executeQuery(query,
@@ -48,10 +53,11 @@ class SpreadSheetService {
     // Process the response and display output
     @objc func displayResultWithTicket(ticket: GTLRServiceTicket,
                                        finishedWithObject result : GTLRSheets_ValueRange,
-                                       error : NSError?) {
+                                       error : Error?) {
         
         if let error = error {
-            showAlert(title: "Error", message: error.localizedDescription)
+            delegate?.didFailFetchingData(with: error)
+//            showAlert(title: "Error", message: error.localizedDescription)
             return
         }
         
@@ -76,12 +82,13 @@ class SpreadSheetService {
             majorsString += "\(name), \(value)\n"
         }
         
-        print(majorsString)
+        delegate?.getString(with: majorsString)
     }
     
-    @objc func dummy(ticket: GTLRServiceTicket, finishedWithObject result : GTLRSheets_ValueRange, error : NSError?) {
+    @objc func dummy(ticket: GTLRServiceTicket, finishedWithObject result : GTLRSheets_ValueRange, error : Error?) {
         if let error = error {
-            showAlert(title: "Error", message: error.localizedDescription)
+            delegate?.didFailFetchingData(with: error)
+//            showAlert(title: "Error", message: error.localizedDescription)
             return
         }
         print("OK")
@@ -100,24 +107,6 @@ class SpreadSheetService {
         //        service.executeQuery(query,
         //                             delegate: self,
         //                             didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:))
-    }
-    
-    
-    
-    // Helper for showing an alert
-    func showAlert(title : String, message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: UIAlertController.Style.alert
-        )
-        let ok = UIAlertAction(
-            title: "OK",
-            style: UIAlertAction.Style.default,
-            handler: nil
-        )
-        alert.addAction(ok)
-        alert.show()
     }
     
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4912539A2500ACA9003FFF35 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491253992500ACA9003FFF35 /* AlertPresentable.swift */; };
+		4912539D25013272003FFF35 /* CustomerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4912539C25013272003FFF35 /* CustomerListViewController.swift */; };
+		491253A025013610003FFF35 /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4912539F25013610003FFF35 /* CustomerModel.swift */; };
+		491253A225013F58003FFF35 /* DebugUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491253A125013F58003FFF35 /* DebugUtils.swift */; };
 		4966627524FAB10C00E23563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966627424FAB10C00E23563 /* AppDelegate.swift */; };
 		4966627724FAB10C00E23563 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966627624FAB10C00E23563 /* SceneDelegate.swift */; };
 		4966627924FAB10C00E23563 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966627824FAB10C00E23563 /* LoginViewController.swift */; };
@@ -22,6 +26,10 @@
 
 /* Begin PBXFileReference section */
 		322B12DA76D5E0C59148299E /* Pods_JOJA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JOJA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		491253992500ACA9003FFF35 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
+		4912539C25013272003FFF35 /* CustomerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListViewController.swift; sourceTree = "<group>"; };
+		4912539F25013610003FFF35 /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
+		491253A125013F58003FFF35 /* DebugUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugUtils.swift; sourceTree = "<group>"; };
 		4966627124FAB10C00E23563 /* JOJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JOJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4966627424FAB10C00E23563 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4966627624FAB10C00E23563 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +58,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4912539B250131F8003FFF35 /* Google Tools */ = {
+			isa = PBXGroup;
+			children = (
+				49F980AE24FE9ABF002137CF /* GoogleLoginManager.swift */,
+				49F980B524FEA622002137CF /* GoogleSheetsDataProvider.swift */,
+				49F980B024FE9B66002137CF /* SpreadSheetService.swift */,
+			);
+			path = "Google Tools";
+			sourceTree = "<group>";
+		};
+		4912539E250135CC003FFF35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4912539F25013610003FFF35 /* CustomerModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4966626824FAB10C00E23563 = {
 			isa = PBXGroup;
 			children = (
@@ -74,9 +100,9 @@
 				4966627424FAB10C00E23563 /* AppDelegate.swift */,
 				4966627624FAB10C00E23563 /* SceneDelegate.swift */,
 				4966627824FAB10C00E23563 /* LoginViewController.swift */,
-				49F980B024FE9B66002137CF /* SpreadSheetService.swift */,
-				49F980AE24FE9ABF002137CF /* GoogleLoginManager.swift */,
-				49F980B524FEA622002137CF /* GoogleSheetsDataProvider.swift */,
+				4912539C25013272003FFF35 /* CustomerListViewController.swift */,
+				4912539E250135CC003FFF35 /* Model */,
+				4912539B250131F8003FFF35 /* Google Tools */,
 				49F980B224FE9F80002137CF /* Utility */,
 				4966627A24FAB10C00E23563 /* Main.storyboard */,
 				4966627D24FAB10E00E23563 /* Assets.xcassets */,
@@ -90,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				49F980B324FE9F9D002137CF /* Utility.swift */,
+				491253992500ACA9003FFF35 /* AlertPresentable.swift */,
+				491253A125013F58003FFF35 /* DebugUtils.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -213,6 +241,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -220,6 +250,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -252,11 +284,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				49F980AF24FE9ABF002137CF /* GoogleLoginManager.swift in Sources */,
+				4912539D25013272003FFF35 /* CustomerListViewController.swift in Sources */,
 				49F980B124FE9B66002137CF /* SpreadSheetService.swift in Sources */,
+				491253A225013F58003FFF35 /* DebugUtils.swift in Sources */,
+				491253A025013610003FFF35 /* CustomerModel.swift in Sources */,
 				49F980B424FE9F9D002137CF /* Utility.swift in Sources */,
 				4966627924FAB10C00E23563 /* LoginViewController.swift in Sources */,
 				4966627524FAB10C00E23563 /* AppDelegate.swift in Sources */,
 				4966627724FAB10C00E23563 /* SceneDelegate.swift in Sources */,
+				4912539A2500ACA9003FFF35 /* AlertPresentable.swift in Sources */,
 				49F980B624FEA622002137CF /* GoogleSheetsDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

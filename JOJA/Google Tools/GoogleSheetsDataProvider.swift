@@ -16,7 +16,11 @@ protocol GoogleSheetsDataProviderDelegate: class {
 
 class GoogleSheetsDataProvider: NSObject {
     
-    private let spreadsheetId = "1NrPDjp80_7venKB0OsIqZLrq47jbx9c-lrWILYJPS88"
+    // for test
+//    private let spreadsheetId = "1y3e_hKM7nDjDudZFU9ciUdSY3zdVe9-jGC7bzkZ8qlc"
+    
+    // official
+    private let spreadsheetId = "1dJs3rjIdYwpWbwT5ekmFRK7tPbEXrFLHW-ag2XILpiE"
     
     private let service = GTLRSheetsService()
     
@@ -48,16 +52,16 @@ class GoogleSheetsDataProvider: NSObject {
     }
     
     
-//    func listMajors(_ completionHandler: @escaping ((DailyMenuModel) -> ()), range: String){
-//        let query = GTLRSheetsQuery_SpreadsheetsValuesGet
-//            .query(withSpreadsheetId: spreadsheetId, range: range)
+    func listMajors(range: String) {
+        let query = GTLRSheetsQuery_SpreadsheetsValuesGet
+            .query(withSpreadsheetId: spreadsheetId, range: range)
 //        self.listLoadingCompletionHandler = completionHandler
-//        service.executeQuery(query,
-//                             delegate: self,
-//                             didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:))
-//
-//        )
-//    }
+        service.executeQuery(query,
+                             delegate: self,
+                             didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:))
+
+        )
+    }
     
     @objc private func displayResultWithTicket(ticket: GTLRServiceTicket,
                                                finishedWithObject result : GTLRSheets_ValueRange,

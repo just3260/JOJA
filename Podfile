@@ -8,5 +8,7 @@ target 'JOJA' do
   # Pods for JOJA
   pod 'GoogleAPIClientForREST/Sheets'
   pod 'GoogleSignIn'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 
 end

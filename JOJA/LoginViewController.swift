@@ -10,13 +10,11 @@ import UIKit
 import GoogleSignIn
 import GoogleAPIClientForREST
 
-class LoginViewController: UIViewController, GIDSignInUIDelegate {
-    
+class LoginViewController: UIViewController, GIDSignInUIDelegate, AlertPresentable {
     
     @IBOutlet weak var signInBtn: GIDSignInButton!
     
     private var loginManager: GoogleLoginManager!
-    private var sheetService = SpreadSheetService()
     private var authorizer: GTMFetcherAuthorizationProtocol!
     
     override func viewDidLoad() {
@@ -31,23 +29,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
         loginManager.delegate = self
     }
     
-    
-    // Helper for showing an alert
-    func showAlert(title : String, message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: UIAlertController.Style.alert
-        )
-        let ok = UIAlertAction(
-            title: "OK",
-            style: UIAlertAction.Style.default,
-            handler: nil
-        )
-        alert.addAction(ok)
-        present(alert, animated: true, completion: nil)
-    }
-    
 }
 
 
@@ -59,7 +40,13 @@ extension LoginViewController: GoogleLoginManagerDelegate {
     }
     
     func didLoginSuccessfully(with authorizer: GTMFetcherAuthorizationProtocol) {
-        self.signInBtn.isHidden = true
         self.authorizer = authorizer
+        
+        debug("Login Google success!!")
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CustomerListVC") as? CustomerListViewController {
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
+

@@ -46,6 +46,39 @@
             </objects>
             <point key="canvasLocation" x="141" y="139"/>
         </scene>
+        <!--Customer List View Controller-->
+        <scene sceneID="kiN-y7-aog">
+            <objects>
+                <viewController storyboardIdentifier="CustomerListVC" id="c0Y-mF-KKr" customClass="CustomerListViewController" customModule="JOJA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X1b-k8-yIJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IzH-mu-Ual">
+                                <rect key="frame" x="50" y="94" width="314" height="718"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6UC-8j-oFc" firstAttribute="trailing" secondItem="IzH-mu-Ual" secondAttribute="trailing" constant="50" id="Glg-km-Bz3"/>
+                            <constraint firstItem="IzH-mu-Ual" firstAttribute="top" secondItem="6UC-8j-oFc" secondAttribute="top" constant="50" id="ic4-gf-rAt"/>
+                            <constraint firstItem="6UC-8j-oFc" firstAttribute="bottom" secondItem="IzH-mu-Ual" secondAttribute="bottom" constant="50" id="p7K-X9-QCw"/>
+                            <constraint firstItem="IzH-mu-Ual" firstAttribute="leading" secondItem="6UC-8j-oFc" secondAttribute="leading" constant="50" id="u36-WQ-E7V"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6UC-8j-oFc"/>
+                    </view>
+                    <connections>
+                        <outlet property="output" destination="IzH-mu-Ual" id="c5F-hW-8Vy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pIE-Ed-X5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="921" y="136"/>
+        </scene>
     </scenes>
     <resources>
         <image name="JOJA" width="585" height="585"/>
