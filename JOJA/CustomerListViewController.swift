@@ -21,8 +21,7 @@ class CustomerListViewController: UIViewController, AlertPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        token = GIDSignIn.sharedInstance().currentUser.authentication.fetcherAuthorizer()
-        configureSheetsDataProvider(from: token)
+        configureSheetsDataProvider()
 
         configView()
     }
@@ -39,8 +38,7 @@ class CustomerListViewController: UIViewController, AlertPresentable {
     }
     
     
-    private func configureSheetsDataProvider(from token: GTMFetcherAuthorizationProtocol) {
-        sheetsDataProvider = GoogleSheetsDataProvider(token)
+    private func configureSheetsDataProvider() {
         sheetsDataProvider.delegate = self
     }
 

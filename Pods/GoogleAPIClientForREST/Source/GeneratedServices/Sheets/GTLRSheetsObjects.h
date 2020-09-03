@@ -8,7 +8,9 @@
 // Documentation:
 //   https://developers.google.com/sheets/
 
-#if GTLR_BUILT_AS_FRAMEWORK
+#if SWIFT_PACKAGE || GTLR_USE_MODULAR_IMPORT
+  @import GoogleAPIClientForRESTCore;
+#elif GTLR_BUILT_AS_FRAMEWORK
   #import "GTLR/GTLRObject.h"
 #else
   #import "GTLRObject.h"
@@ -23,6 +25,10 @@
 @class GTLRSheets_AddChartRequest;
 @class GTLRSheets_AddChartResponse;
 @class GTLRSheets_AddConditionalFormatRuleRequest;
+@class GTLRSheets_AddDataSourceRequest;
+@class GTLRSheets_AddDataSourceResponse;
+@class GTLRSheets_AddDimensionGroupRequest;
+@class GTLRSheets_AddDimensionGroupResponse;
 @class GTLRSheets_AddFilterViewRequest;
 @class GTLRSheets_AddFilterViewResponse;
 @class GTLRSheets_AddNamedRangeRequest;
@@ -31,44 +37,94 @@
 @class GTLRSheets_AddProtectedRangeResponse;
 @class GTLRSheets_AddSheetRequest;
 @class GTLRSheets_AddSheetResponse;
+@class GTLRSheets_AddSlicerRequest;
+@class GTLRSheets_AddSlicerResponse;
 @class GTLRSheets_AppendCellsRequest;
 @class GTLRSheets_AppendDimensionRequest;
 @class GTLRSheets_AutoFillRequest;
 @class GTLRSheets_AutoResizeDimensionsRequest;
 @class GTLRSheets_BandedRange;
 @class GTLRSheets_BandingProperties;
+@class GTLRSheets_BaselineValueFormat;
 @class GTLRSheets_BasicChartAxis;
 @class GTLRSheets_BasicChartDomain;
 @class GTLRSheets_BasicChartSeries;
 @class GTLRSheets_BasicChartSpec;
 @class GTLRSheets_BasicFilter;
 @class GTLRSheets_BasicFilter_Criteria;
+@class GTLRSheets_BigQueryDataSourceSpec;
+@class GTLRSheets_BigQueryQuerySpec;
+@class GTLRSheets_BigQueryTableSpec;
 @class GTLRSheets_BooleanCondition;
 @class GTLRSheets_BooleanRule;
 @class GTLRSheets_Border;
 @class GTLRSheets_Borders;
+@class GTLRSheets_BubbleChartSpec;
+@class GTLRSheets_CandlestickChartSpec;
+@class GTLRSheets_CandlestickData;
+@class GTLRSheets_CandlestickDomain;
+@class GTLRSheets_CandlestickSeries;
 @class GTLRSheets_CellData;
 @class GTLRSheets_CellFormat;
+@class GTLRSheets_ChartAxisViewWindowOptions;
+@class GTLRSheets_ChartCustomNumberFormatOptions;
 @class GTLRSheets_ChartData;
+@class GTLRSheets_ChartDateTimeRule;
+@class GTLRSheets_ChartGroupRule;
+@class GTLRSheets_ChartHistogramRule;
 @class GTLRSheets_ChartSourceRange;
 @class GTLRSheets_ChartSpec;
 @class GTLRSheets_ClearBasicFilterRequest;
 @class GTLRSheets_Color;
+@class GTLRSheets_ColorStyle;
 @class GTLRSheets_ConditionalFormatRule;
 @class GTLRSheets_ConditionValue;
 @class GTLRSheets_CopyPasteRequest;
+@class GTLRSheets_CreateDeveloperMetadataRequest;
+@class GTLRSheets_CreateDeveloperMetadataResponse;
 @class GTLRSheets_CutPasteRequest;
+@class GTLRSheets_DataExecutionStatus;
+@class GTLRSheets_DataFilter;
+@class GTLRSheets_DataFilterValueRange;
+@class GTLRSheets_DataSource;
+@class GTLRSheets_DataSourceChartProperties;
+@class GTLRSheets_DataSourceColumn;
+@class GTLRSheets_DataSourceColumnReference;
+@class GTLRSheets_DataSourceFormula;
+@class GTLRSheets_DataSourceObjectReference;
+@class GTLRSheets_DataSourceObjectReferences;
+@class GTLRSheets_DataSourceParameter;
+@class GTLRSheets_DataSourceRefreshDailySchedule;
+@class GTLRSheets_DataSourceRefreshMonthlySchedule;
+@class GTLRSheets_DataSourceRefreshSchedule;
+@class GTLRSheets_DataSourceRefreshWeeklySchedule;
+@class GTLRSheets_DataSourceSheetDimensionRange;
+@class GTLRSheets_DataSourceSheetProperties;
+@class GTLRSheets_DataSourceSpec;
+@class GTLRSheets_DataSourceTable;
 @class GTLRSheets_DataValidationRule;
+@class GTLRSheets_DateTimeRule;
 @class GTLRSheets_DeleteBandingRequest;
 @class GTLRSheets_DeleteConditionalFormatRuleRequest;
 @class GTLRSheets_DeleteConditionalFormatRuleResponse;
+@class GTLRSheets_DeleteDataSourceRequest;
+@class GTLRSheets_DeleteDeveloperMetadataRequest;
+@class GTLRSheets_DeleteDeveloperMetadataResponse;
+@class GTLRSheets_DeleteDimensionGroupRequest;
+@class GTLRSheets_DeleteDimensionGroupResponse;
 @class GTLRSheets_DeleteDimensionRequest;
+@class GTLRSheets_DeleteDuplicatesRequest;
+@class GTLRSheets_DeleteDuplicatesResponse;
 @class GTLRSheets_DeleteEmbeddedObjectRequest;
 @class GTLRSheets_DeleteFilterViewRequest;
 @class GTLRSheets_DeleteNamedRangeRequest;
 @class GTLRSheets_DeleteProtectedRangeRequest;
 @class GTLRSheets_DeleteRangeRequest;
 @class GTLRSheets_DeleteSheetRequest;
+@class GTLRSheets_DeveloperMetadata;
+@class GTLRSheets_DeveloperMetadataLocation;
+@class GTLRSheets_DeveloperMetadataLookup;
+@class GTLRSheets_DimensionGroup;
 @class GTLRSheets_DimensionProperties;
 @class GTLRSheets_DimensionRange;
 @class GTLRSheets_DuplicateFilterViewRequest;
@@ -81,6 +137,7 @@
 @class GTLRSheets_ErrorValue;
 @class GTLRSheets_ExtendedValue;
 @class GTLRSheets_FilterCriteria;
+@class GTLRSheets_FilterSpec;
 @class GTLRSheets_FilterView;
 @class GTLRSheets_FilterView_Criteria;
 @class GTLRSheets_FindReplaceRequest;
@@ -90,43 +147,72 @@
 @class GTLRSheets_GridData;
 @class GTLRSheets_GridProperties;
 @class GTLRSheets_GridRange;
+@class GTLRSheets_HistogramChartSpec;
+@class GTLRSheets_HistogramRule;
+@class GTLRSheets_HistogramSeries;
 @class GTLRSheets_InsertDimensionRequest;
 @class GTLRSheets_InsertRangeRequest;
 @class GTLRSheets_InterpolationPoint;
+@class GTLRSheets_Interval;
 @class GTLRSheets_IterativeCalculationSettings;
+@class GTLRSheets_KeyValueFormat;
+@class GTLRSheets_LineStyle;
+@class GTLRSheets_ManualRule;
+@class GTLRSheets_ManualRuleGroup;
+@class GTLRSheets_MatchedDeveloperMetadata;
+@class GTLRSheets_MatchedValueRange;
 @class GTLRSheets_MergeCellsRequest;
 @class GTLRSheets_MoveDimensionRequest;
 @class GTLRSheets_NamedRange;
 @class GTLRSheets_NumberFormat;
+@class GTLRSheets_OrgChartSpec;
 @class GTLRSheets_OverlayPosition;
 @class GTLRSheets_Padding;
 @class GTLRSheets_PasteDataRequest;
 @class GTLRSheets_PieChartSpec;
 @class GTLRSheets_PivotFilterCriteria;
+@class GTLRSheets_PivotFilterSpec;
 @class GTLRSheets_PivotGroup;
+@class GTLRSheets_PivotGroupLimit;
+@class GTLRSheets_PivotGroupRule;
 @class GTLRSheets_PivotGroupSortValueBucket;
 @class GTLRSheets_PivotGroupValueMetadata;
 @class GTLRSheets_PivotTable;
 @class GTLRSheets_PivotTable_Criteria;
 @class GTLRSheets_PivotValue;
 @class GTLRSheets_ProtectedRange;
+@class GTLRSheets_RandomizeRangeRequest;
+@class GTLRSheets_RefreshDataSourceObjectExecutionStatus;
+@class GTLRSheets_RefreshDataSourceRequest;
+@class GTLRSheets_RefreshDataSourceResponse;
 @class GTLRSheets_RepeatCellRequest;
 @class GTLRSheets_Request;
 @class GTLRSheets_Response;
 @class GTLRSheets_RowData;
+@class GTLRSheets_ScorecardChartSpec;
 @class GTLRSheets_SetBasicFilterRequest;
 @class GTLRSheets_SetDataValidationRequest;
 @class GTLRSheets_Sheet;
 @class GTLRSheets_SheetProperties;
+@class GTLRSheets_Slicer;
+@class GTLRSheets_SlicerSpec;
 @class GTLRSheets_SortRangeRequest;
 @class GTLRSheets_SortSpec;
 @class GTLRSheets_SourceAndDestination;
 @class GTLRSheets_Spreadsheet;
 @class GTLRSheets_SpreadsheetProperties;
+@class GTLRSheets_SpreadsheetTheme;
 @class GTLRSheets_TextFormat;
 @class GTLRSheets_TextFormatRun;
+@class GTLRSheets_TextPosition;
 @class GTLRSheets_TextRotation;
 @class GTLRSheets_TextToColumnsRequest;
+@class GTLRSheets_ThemeColorPair;
+@class GTLRSheets_TimeOfDay;
+@class GTLRSheets_TreemapChartColorScale;
+@class GTLRSheets_TreemapChartSpec;
+@class GTLRSheets_TrimWhitespaceRequest;
+@class GTLRSheets_TrimWhitespaceResponse;
 @class GTLRSheets_UnmergeCellsRequest;
 @class GTLRSheets_UpdateBandingRequest;
 @class GTLRSheets_UpdateBordersRequest;
@@ -134,6 +220,11 @@
 @class GTLRSheets_UpdateChartSpecRequest;
 @class GTLRSheets_UpdateConditionalFormatRuleRequest;
 @class GTLRSheets_UpdateConditionalFormatRuleResponse;
+@class GTLRSheets_UpdateDataSourceRequest;
+@class GTLRSheets_UpdateDataSourceResponse;
+@class GTLRSheets_UpdateDeveloperMetadataRequest;
+@class GTLRSheets_UpdateDeveloperMetadataResponse;
+@class GTLRSheets_UpdateDimensionGroupRequest;
 @class GTLRSheets_UpdateDimensionPropertiesRequest;
 @class GTLRSheets_UpdateEmbeddedObjectPositionRequest;
 @class GTLRSheets_UpdateEmbeddedObjectPositionResponse;
@@ -141,9 +232,21 @@
 @class GTLRSheets_UpdateNamedRangeRequest;
 @class GTLRSheets_UpdateProtectedRangeRequest;
 @class GTLRSheets_UpdateSheetPropertiesRequest;
+@class GTLRSheets_UpdateSlicerSpecRequest;
 @class GTLRSheets_UpdateSpreadsheetPropertiesRequest;
+@class GTLRSheets_UpdateValuesByDataFilterResponse;
 @class GTLRSheets_UpdateValuesResponse;
 @class GTLRSheets_ValueRange;
+@class GTLRSheets_WaterfallChartColumnStyle;
+@class GTLRSheets_WaterfallChartCustomSubtotal;
+@class GTLRSheets_WaterfallChartDomain;
+@class GTLRSheets_WaterfallChartSeries;
+@class GTLRSheets_WaterfallChartSpec;
+
+// Generated comments include content from the discovery document; avoid them
+// causing warnings since clang's checks are some what arbitrary.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -158,19 +261,41 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Value: "COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_AppendDimensionRequest_Dimension_Columns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_AppendDimensionRequest_Dimension_Columns;
 /**
  *  The default value, do not use.
  *
  *  Value: "DIMENSION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_AppendDimensionRequest_Dimension_DimensionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_AppendDimensionRequest_Dimension_DimensionUnspecified;
 /**
  *  Operates on the rows of a sheet.
  *
  *  Value: "ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_AppendDimensionRequest_Dimension_Rows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_AppendDimensionRequest_Dimension_Rows;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BaselineValueFormat.comparisonType
+
+/**
+ *  Use absolute difference between key and baseline value.
+ *
+ *  Value: "ABSOLUTE_DIFFERENCE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BaselineValueFormat_ComparisonType_AbsoluteDifference;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "COMPARISON_TYPE_UNDEFINED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BaselineValueFormat_ComparisonType_ComparisonTypeUndefined;
+/**
+ *  Use percentage difference between key and baseline value.
+ *
+ *  Value: "PERCENTAGE_DIFFERENCE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BaselineValueFormat_ComparisonType_PercentageDifference;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BasicChartAxis.position
@@ -180,31 +305,28 @@ GTLR_EXTERN NSString * const kGTLRSheets_AppendDimensionRequest_Dimension_Rows;
  *
  *  Value: "BASIC_CHART_AXIS_POSITION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_BasicChartAxisPositionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_BasicChartAxisPositionUnspecified;
 /**
- *  The axis rendered at the bottom of a chart.
- *  For most charts, this is the standard major axis.
- *  For bar charts, this is a minor axis.
+ *  The axis rendered at the bottom of a chart. For most charts, this is the
+ *  standard major axis. For bar charts, this is a minor axis.
  *
  *  Value: "BOTTOM_AXIS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_BottomAxis;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_BottomAxis;
 /**
- *  The axis rendered at the left of a chart.
- *  For most charts, this is a minor axis.
- *  For bar charts, this is the standard major axis.
+ *  The axis rendered at the left of a chart. For most charts, this is a minor
+ *  axis. For bar charts, this is the standard major axis.
  *
  *  Value: "LEFT_AXIS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_LeftAxis;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_LeftAxis;
 /**
- *  The axis rendered at the right of a chart.
- *  For most charts, this is a minor axis.
- *  For bar charts, this is an unusual major axis.
+ *  The axis rendered at the right of a chart. For most charts, this is a minor
+ *  axis. For bar charts, this is an unusual major axis.
  *
  *  Value: "RIGHT_AXIS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_RightAxis;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_RightAxis;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BasicChartSeries.targetAxis
@@ -214,123 +336,155 @@ GTLR_EXTERN NSString * const kGTLRSheets_BasicChartAxis_Position_RightAxis;
  *
  *  Value: "BASIC_CHART_AXIS_POSITION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_BasicChartAxisPositionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_BasicChartAxisPositionUnspecified;
 /**
- *  The axis rendered at the bottom of a chart.
- *  For most charts, this is the standard major axis.
- *  For bar charts, this is a minor axis.
+ *  The axis rendered at the bottom of a chart. For most charts, this is the
+ *  standard major axis. For bar charts, this is a minor axis.
  *
  *  Value: "BOTTOM_AXIS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_BottomAxis;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_BottomAxis;
 /**
- *  The axis rendered at the left of a chart.
- *  For most charts, this is a minor axis.
- *  For bar charts, this is the standard major axis.
+ *  The axis rendered at the left of a chart. For most charts, this is a minor
+ *  axis. For bar charts, this is the standard major axis.
  *
  *  Value: "LEFT_AXIS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_LeftAxis;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_LeftAxis;
 /**
- *  The axis rendered at the right of a chart.
- *  For most charts, this is a minor axis.
- *  For bar charts, this is an unusual major axis.
+ *  The axis rendered at the right of a chart. For most charts, this is a minor
+ *  axis. For bar charts, this is an unusual major axis.
  *
  *  Value: "RIGHT_AXIS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_RightAxis;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_TargetAxis_RightAxis;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BasicChartSeries.type
 
 /**
- *  An <a href="/chart/interactive/docs/gallery/areachart">area chart</a>.
+ *  An area chart.
  *
  *  Value: "AREA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Area;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Area;
 /**
- *  A <a href="/chart/interactive/docs/gallery/barchart">bar chart</a>.
+ *  A bar chart.
  *
  *  Value: "BAR"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Bar;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Bar;
 /**
  *  Default value, do not use.
  *
  *  Value: "BASIC_CHART_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_BasicChartTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_BasicChartTypeUnspecified;
 /**
- *  A <a href="/chart/interactive/docs/gallery/columnchart">column chart</a>.
+ *  A column chart.
  *
  *  Value: "COLUMN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Column;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Column;
 /**
- *  A <a href="/chart/interactive/docs/gallery/combochart">combo chart</a>.
+ *  A combo chart.
  *
  *  Value: "COMBO"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Combo;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Combo;
 /**
- *  A <a href="/chart/interactive/docs/gallery/linechart">line chart</a>.
+ *  A line chart.
  *
  *  Value: "LINE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Line;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Line;
 /**
- *  A <a href="/chart/interactive/docs/gallery/scatterchart">scatter chart</a>.
+ *  A scatter chart.
  *
  *  Value: "SCATTER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Scatter;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_Scatter;
+/**
+ *  A stepped area chart.
+ *
+ *  Value: "STEPPED_AREA"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSeries_Type_SteppedArea;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BasicChartSpec.chartType
 
 /**
- *  An <a href="/chart/interactive/docs/gallery/areachart">area chart</a>.
+ *  An area chart.
  *
  *  Value: "AREA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Area;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Area;
 /**
- *  A <a href="/chart/interactive/docs/gallery/barchart">bar chart</a>.
+ *  A bar chart.
  *
  *  Value: "BAR"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Bar;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Bar;
 /**
  *  Default value, do not use.
  *
  *  Value: "BASIC_CHART_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_BasicChartTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_BasicChartTypeUnspecified;
 /**
- *  A <a href="/chart/interactive/docs/gallery/columnchart">column chart</a>.
+ *  A column chart.
  *
  *  Value: "COLUMN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Column;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Column;
 /**
- *  A <a href="/chart/interactive/docs/gallery/combochart">combo chart</a>.
+ *  A combo chart.
  *
  *  Value: "COMBO"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Combo;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Combo;
 /**
- *  A <a href="/chart/interactive/docs/gallery/linechart">line chart</a>.
+ *  A line chart.
  *
  *  Value: "LINE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Line;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Line;
 /**
- *  A <a href="/chart/interactive/docs/gallery/scatterchart">scatter chart</a>.
+ *  A scatter chart.
  *
  *  Value: "SCATTER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Scatter;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Scatter;
+/**
+ *  A stepped area chart.
+ *
+ *  Value: "STEPPED_AREA"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_SteppedArea;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BasicChartSpec.compareMode
+
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "BASIC_CHART_COMPARE_MODE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_CompareMode_BasicChartCompareModeUnspecified;
+/**
+ *  All data elements with the same category (e.g., domain value) are
+ *  highlighted and shown in the tooltip.
+ *
+ *  Value: "CATEGORY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_CompareMode_Category;
+/**
+ *  Only the focused data element is highlighted and shown in the tooltip.
+ *
+ *  Value: "DATUM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_CompareMode_Datum;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BasicChartSpec.legendPosition
@@ -340,91 +494,273 @@ GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_ChartType_Scatter;
  *
  *  Value: "BASIC_CHART_LEGEND_POSITION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_BasicChartLegendPositionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_BasicChartLegendPositionUnspecified;
 /**
  *  The legend is rendered on the bottom of the chart.
  *
  *  Value: "BOTTOM_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_BottomLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_BottomLegend;
 /**
  *  The legend is rendered on the left of the chart.
  *
  *  Value: "LEFT_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_LeftLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_LeftLegend;
 /**
  *  No legend is rendered.
  *
  *  Value: "NO_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_NoLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_NoLegend;
 /**
  *  The legend is rendered on the right of the chart.
  *
  *  Value: "RIGHT_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_RightLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_RightLegend;
 /**
  *  The legend is rendered on the top of the chart.
  *
  *  Value: "TOP_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_TopLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_LegendPosition_TopLegend;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BasicChartSpec.stackedType
+
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "BASIC_CHART_STACKED_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_StackedType_BasicChartStackedTypeUnspecified;
+/**
+ *  Series are not stacked.
+ *
+ *  Value: "NOT_STACKED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_StackedType_NotStacked;
+/**
+ *  Vertical stacks are stretched to reach the top of the chart, with values
+ *  laid out as percentages of each other.
+ *
+ *  Value: "PERCENT_STACKED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_StackedType_PercentStacked;
+/**
+ *  Series values are stacked, each value is rendered vertically beginning from
+ *  the top of the value below it.
+ *
+ *  Value: "STACKED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BasicChartSpec_StackedType_Stacked;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BatchGetValuesByDataFilterRequest.dateTimeRenderOption
+
+/**
+ *  Instructs date, time, datetime, and duration fields to be output as strings
+ *  in their given number format (which is dependent on the spreadsheet locale).
+ *
+ *  Value: "FORMATTED_STRING"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_DateTimeRenderOption_FormattedString;
+/**
+ *  Instructs date, time, datetime, and duration fields to be output as doubles
+ *  in "serial number" format, as popularized by Lotus 1-2-3. The whole number
+ *  portion of the value (left of the decimal) counts the days since December
+ *  30th 1899. The fractional portion (right of the decimal) counts the time as
+ *  a fraction of the day. For example, January 1st 1900 at noon would be 2.5, 2
+ *  because it's 2 days after December 30st 1899, and .5 because noon is half a
+ *  day. February 1st 1900 at 3pm would be 33.625. This correctly treats the
+ *  year 1900 as not a leap year.
+ *
+ *  Value: "SERIAL_NUMBER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_DateTimeRenderOption_SerialNumber;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BatchGetValuesByDataFilterRequest.majorDimension
+
+/**
+ *  Operates on the columns of a sheet.
+ *
+ *  Value: "COLUMNS"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_MajorDimension_Columns;
+/**
+ *  The default value, do not use.
+ *
+ *  Value: "DIMENSION_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_MajorDimension_DimensionUnspecified;
+/**
+ *  Operates on the rows of a sheet.
+ *
+ *  Value: "ROWS"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_MajorDimension_Rows;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BatchGetValuesByDataFilterRequest.valueRenderOption
+
+/**
+ *  Values will be calculated & formatted in the reply according to the cell's
+ *  formatting. Formatting is based on the spreadsheet's locale, not the
+ *  requesting user's locale. For example, if `A1` is `1.23` and `A2` is `=A1`
+ *  and formatted as currency, then `A2` would return `"$1.23"`.
+ *
+ *  Value: "FORMATTED_VALUE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_ValueRenderOption_FormattedValue;
+/**
+ *  Values will not be calculated. The reply will include the formulas. For
+ *  example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then
+ *  A2 would return `"=A1"`.
+ *
+ *  Value: "FORMULA"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_ValueRenderOption_Formula;
+/**
+ *  Values will be calculated, but not formatted in the reply. For example, if
+ *  `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then `A2` would
+ *  return the number `1.23`.
+ *
+ *  Value: "UNFORMATTED_VALUE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchGetValuesByDataFilterRequest_ValueRenderOption_UnformattedValue;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BatchUpdateValuesByDataFilterRequest.responseDateTimeRenderOption
+
+/**
+ *  Instructs date, time, datetime, and duration fields to be output as strings
+ *  in their given number format (which is dependent on the spreadsheet locale).
+ *
+ *  Value: "FORMATTED_STRING"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseDateTimeRenderOption_FormattedString;
+/**
+ *  Instructs date, time, datetime, and duration fields to be output as doubles
+ *  in "serial number" format, as popularized by Lotus 1-2-3. The whole number
+ *  portion of the value (left of the decimal) counts the days since December
+ *  30th 1899. The fractional portion (right of the decimal) counts the time as
+ *  a fraction of the day. For example, January 1st 1900 at noon would be 2.5, 2
+ *  because it's 2 days after December 30st 1899, and .5 because noon is half a
+ *  day. February 1st 1900 at 3pm would be 33.625. This correctly treats the
+ *  year 1900 as not a leap year.
+ *
+ *  Value: "SERIAL_NUMBER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseDateTimeRenderOption_SerialNumber;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BatchUpdateValuesByDataFilterRequest.responseValueRenderOption
+
+/**
+ *  Values will be calculated & formatted in the reply according to the cell's
+ *  formatting. Formatting is based on the spreadsheet's locale, not the
+ *  requesting user's locale. For example, if `A1` is `1.23` and `A2` is `=A1`
+ *  and formatted as currency, then `A2` would return `"$1.23"`.
+ *
+ *  Value: "FORMATTED_VALUE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_FormattedValue;
+/**
+ *  Values will not be calculated. The reply will include the formulas. For
+ *  example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then
+ *  A2 would return `"=A1"`.
+ *
+ *  Value: "FORMULA"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_Formula;
+/**
+ *  Values will be calculated, but not formatted in the reply. For example, if
+ *  `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then `A2` would
+ *  return the number `1.23`.
+ *
+ *  Value: "UNFORMATTED_VALUE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_UnformattedValue;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BatchUpdateValuesByDataFilterRequest.valueInputOption
+
+/**
+ *  Default input value. This value must not be used.
+ *
+ *  Value: "INPUT_VALUE_OPTION_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ValueInputOption_InputValueOptionUnspecified;
+/**
+ *  The values the user has entered will not be parsed and will be stored as-is.
+ *
+ *  Value: "RAW"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ValueInputOption_Raw;
+/**
+ *  The values will be parsed as if the user typed them into the UI. Numbers
+ *  will stay as numbers, but strings may be converted to numbers, dates, etc.
+ *  following the same rules that are applied when entering text into a cell via
+ *  the Google Sheets UI.
+ *
+ *  Value: "USER_ENTERED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ValueInputOption_UserEntered;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BatchUpdateValuesRequest.responseDateTimeRenderOption
 
 /**
- *  Instructs date, time, datetime, and duration fields to be output
- *  as strings in their given number format (which is dependent
- *  on the spreadsheet locale).
+ *  Instructs date, time, datetime, and duration fields to be output as strings
+ *  in their given number format (which is dependent on the spreadsheet locale).
  *
  *  Value: "FORMATTED_STRING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_FormattedString;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_FormattedString;
 /**
- *  Instructs date, time, datetime, and duration fields to be output
- *  as doubles in "serial number" format, as popularized by Lotus 1-2-3.
- *  Days are counted from December 31st 1899 and are incremented by 1,
- *  and times are fractions of a day. For example, January 1st 1900 at noon
- *  would be 1.5, 1 because it's 1 day offset from December 31st 1899,
- *  and .5 because noon is half a day. February 1st 1900 at 3pm would
- *  be 32.625. This correctly treats the year 1900 as not a leap year.
+ *  Instructs date, time, datetime, and duration fields to be output as doubles
+ *  in "serial number" format, as popularized by Lotus 1-2-3. The whole number
+ *  portion of the value (left of the decimal) counts the days since December
+ *  30th 1899. The fractional portion (right of the decimal) counts the time as
+ *  a fraction of the day. For example, January 1st 1900 at noon would be 2.5, 2
+ *  because it's 2 days after December 30st 1899, and .5 because noon is half a
+ *  day. February 1st 1900 at 3pm would be 33.625. This correctly treats the
+ *  year 1900 as not a leap year.
  *
  *  Value: "SERIAL_NUMBER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_SerialNumber;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_SerialNumber;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BatchUpdateValuesRequest.responseValueRenderOption
 
 /**
- *  Values will be calculated & formatted in the reply according to the
- *  cell's formatting. Formatting is based on the spreadsheet's locale,
- *  not the requesting user's locale.
- *  For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency,
- *  then `A2` would return `"$1.23"`.
+ *  Values will be calculated & formatted in the reply according to the cell's
+ *  formatting. Formatting is based on the spreadsheet's locale, not the
+ *  requesting user's locale. For example, if `A1` is `1.23` and `A2` is `=A1`
+ *  and formatted as currency, then `A2` would return `"$1.23"`.
  *
  *  Value: "FORMATTED_VALUE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_FormattedValue;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_FormattedValue;
 /**
- *  Values will not be calculated. The reply will include the formulas.
- *  For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency,
- *  then A2 would return `"=A1"`.
+ *  Values will not be calculated. The reply will include the formulas. For
+ *  example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then
+ *  A2 would return `"=A1"`.
  *
  *  Value: "FORMULA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_Formula;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_Formula;
 /**
- *  Values will be calculated, but not formatted in the reply.
- *  For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency,
- *  then `A2` would return the number `1.23`.
+ *  Values will be calculated, but not formatted in the reply. For example, if
+ *  `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then `A2` would
+ *  return the number `1.23`.
  *
  *  Value: "UNFORMATTED_VALUE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_UnformattedValue;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_UnformattedValue;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BatchUpdateValuesRequest.valueInputOption
@@ -434,264 +770,275 @@ GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ResponseValueR
  *
  *  Value: "INPUT_VALUE_OPTION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ValueInputOption_InputValueOptionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ValueInputOption_InputValueOptionUnspecified;
 /**
- *  The values the user has entered will not be parsed and will be stored
- *  as-is.
+ *  The values the user has entered will not be parsed and will be stored as-is.
  *
  *  Value: "RAW"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ValueInputOption_Raw;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ValueInputOption_Raw;
 /**
- *  The values will be parsed as if the user typed them into the UI.
- *  Numbers will stay as numbers, but strings may be converted to numbers,
- *  dates, etc. following the same rules that are applied when entering
- *  text into a cell via the Google Sheets UI.
+ *  The values will be parsed as if the user typed them into the UI. Numbers
+ *  will stay as numbers, but strings may be converted to numbers, dates, etc.
+ *  following the same rules that are applied when entering text into a cell via
+ *  the Google Sheets UI.
  *
  *  Value: "USER_ENTERED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ValueInputOption_UserEntered;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BatchUpdateValuesRequest_ValueInputOption_UserEntered;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_BooleanCondition.type
 
 /**
- *  The cell's value must be empty.
- *  Supported by conditional formatting and filters.
- *  Requires no ConditionValues.
+ *  The cell's value must be empty. Supported by conditional formatting and
+ *  filters. Requires no ConditionValues.
  *
  *  Value: "BLANK"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_Blank;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_Blank;
+/**
+ *  The cell's value must be TRUE/FALSE or in the list of condition values.
+ *  Supported by data validation. Renders as a cell checkbox. Supports zero, one
+ *  or two ConditionValues. No values indicates the cell must be TRUE or FALSE,
+ *  where TRUE renders as checked and FALSE renders as unchecked. One value
+ *  indicates the cell will render as checked when it contains that value and
+ *  unchecked when it is blank. Two values indicate that the cell will render as
+ *  checked when it contains the first value and unchecked when it contains the
+ *  second value. For example, ["Yes","No"] indicates that the cell will render
+ *  a checked box when it has the value "Yes" and an unchecked box when it has
+ *  the value "No".
+ *
+ *  Value: "BOOLEAN"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_Boolean;
 /**
  *  The default value, do not use.
  *
  *  Value: "CONDITION_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_ConditionTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_ConditionTypeUnspecified;
 /**
- *  The condition's formula must evaluate to true.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The condition's formula must evaluate to true. Supported by data validation,
+ *  conditional formatting and filters. Requires a single ConditionValue.
  *
  *  Value: "CUSTOM_FORMULA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_CustomFormula;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_CustomFormula;
 /**
- *  The cell's value must be after the date of the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue
- *  that may be a relative date.
+ *  The cell's value must be after the date of the condition's value. Supported
+ *  by data validation, conditional formatting and filters. Requires a single
+ *  ConditionValue that may be a relative date.
  *
  *  Value: "DATE_AFTER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateAfter;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateAfter;
 /**
- *  The cell's value must be before the date of the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue
- *  that may be a relative date.
+ *  The cell's value must be before the date of the condition's value. Supported
+ *  by data validation, conditional formatting and filters. Requires a single
+ *  ConditionValue that may be a relative date.
  *
  *  Value: "DATE_BEFORE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateBefore;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateBefore;
 /**
  *  The cell's value must be between the dates of the two condition values.
- *  Supported by data validation.
- *  Requires exactly two ConditionValues.
+ *  Supported by data validation. Requires exactly two ConditionValues.
  *
  *  Value: "DATE_BETWEEN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateBetween;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateBetween;
 /**
- *  The cell's value must be the same date as the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must be the same date as the condition's value. Supported
+ *  by data validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "DATE_EQ"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateEq;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateEq;
 /**
- *  The cell's value must be a date.
- *  Supported by data validation.
- *  Requires no ConditionValues.
+ *  The cell's value must be a date. Supported by data validation. Requires no
+ *  ConditionValues.
  *
  *  Value: "DATE_IS_VALID"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateIsValid;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateIsValid;
 /**
  *  The cell's value must be outside the dates of the two condition values.
- *  Supported by data validation.
- *  Requires exactly two ConditionValues.
+ *  Supported by data validation. Requires exactly two ConditionValues.
  *
  *  Value: "DATE_NOT_BETWEEN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateNotBetween;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateNotBetween;
+/**
+ *  The cell's value must be exactly not the condition's value. Supported by
+ *  filters on data source objects. Requires at least one ConditionValue.
+ *
+ *  Value: "DATE_NOT_EQ"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateNotEq;
 /**
  *  The cell's value must be on or after the date of the condition's value.
- *  Supported by data validation.
- *  Requires a single ConditionValue
- *  that may be a relative date.
+ *  Supported by data validation. Requires a single ConditionValue that may be a
+ *  relative date.
  *
  *  Value: "DATE_ON_OR_AFTER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateOnOrAfter;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateOnOrAfter;
 /**
  *  The cell's value must be on or before the date of the condition's value.
- *  Supported by data validation.
- *  Requires a single ConditionValue
- *  that may be a relative date.
+ *  Supported by data validation. Requires a single ConditionValue that may be a
+ *  relative date.
  *
  *  Value: "DATE_ON_OR_BEFORE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateOnOrBefore;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_DateOnOrBefore;
 /**
- *  The cell's value must not be empty.
- *  Supported by conditional formatting and filters.
- *  Requires no ConditionValues.
+ *  The cell's value must not be empty. Supported by conditional formatting and
+ *  filters. Requires no ConditionValues.
  *
  *  Value: "NOT_BLANK"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NotBlank;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NotBlank;
 /**
- *  The cell's value must be between the two condition values.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires exactly two ConditionValues.
+ *  The cell's value must be between the two condition values. Supported by data
+ *  validation, conditional formatting and filters. Requires exactly two
+ *  ConditionValues.
  *
  *  Value: "NUMBER_BETWEEN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberBetween;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberBetween;
 /**
- *  The cell's value must be equal to the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must be equal to the condition's value. Supported by data
+ *  validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "NUMBER_EQ"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberEq;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberEq;
 /**
- *  The cell's value must be greater than the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must be greater than the condition's value. Supported by
+ *  data validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "NUMBER_GREATER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberGreater;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberGreater;
 /**
  *  The cell's value must be greater than or equal to the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  Supported by data validation, conditional formatting and filters. Requires a
+ *  single ConditionValue.
  *
  *  Value: "NUMBER_GREATER_THAN_EQ"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberGreaterThanEq;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberGreaterThanEq;
 /**
- *  The cell's value must be less than the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must be less than the condition's value. Supported by data
+ *  validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "NUMBER_LESS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberLess;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberLess;
 /**
  *  The cell's value must be less than or equal to the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  Supported by data validation, conditional formatting and filters. Requires a
+ *  single ConditionValue.
  *
  *  Value: "NUMBER_LESS_THAN_EQ"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberLessThanEq;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberLessThanEq;
 /**
- *  The cell's value must not be between the two condition values.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires exactly two ConditionValues.
+ *  The cell's value must not be between the two condition values. Supported by
+ *  data validation, conditional formatting and filters. Requires exactly two
+ *  ConditionValues.
  *
  *  Value: "NUMBER_NOT_BETWEEN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberNotBetween;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberNotBetween;
 /**
- *  The cell's value must be not equal to the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must be not equal to the condition's value. Supported by
+ *  data validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "NUMBER_NOT_EQ"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberNotEq;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_NumberNotEq;
 /**
- *  The cell's value must in the list of condition values.
- *  Supported by data validation.
- *  Supports any number of condition values,
- *  one per item in the list.
- *  Formulas are not supported in the values.
+ *  The cell's value must be in the list of condition values. Supported by data
+ *  validation. Supports any number of condition values, one per item in the
+ *  list. Formulas are not supported in the values.
  *
  *  Value: "ONE_OF_LIST"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_OneOfList;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_OneOfList;
 /**
  *  The cell's value must be listed in the grid in condition value's range.
- *  Supported by data validation.
- *  Requires a single ConditionValue,
- *  and the value must be a valid range in A1 notation.
+ *  Supported by data validation. Requires a single ConditionValue, and the
+ *  value must be a valid range in A1 notation.
  *
  *  Value: "ONE_OF_RANGE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_OneOfRange;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_OneOfRange;
 /**
- *  The cell's value must contain the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must contain the condition's value. Supported by data
+ *  validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "TEXT_CONTAINS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextContains;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextContains;
 /**
- *  The cell's value must end with the condition's value.
- *  Supported by conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must end with the condition's value. Supported by
+ *  conditional formatting and filters. Requires a single ConditionValue.
  *
  *  Value: "TEXT_ENDS_WITH"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextEndsWith;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextEndsWith;
 /**
- *  The cell's value must be exactly the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must be exactly the condition's value. Supported by data
+ *  validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "TEXT_EQ"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextEq;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextEq;
 /**
- *  The cell's value must be a valid email address.
- *  Supported by data validation.
- *  Requires no ConditionValues.
+ *  The cell's value must be a valid email address. Supported by data
+ *  validation. Requires no ConditionValues.
  *
  *  Value: "TEXT_IS_EMAIL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextIsEmail;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextIsEmail;
 /**
- *  The cell's value must be a valid URL.
- *  Supported by data validation.
- *  Requires no ConditionValues.
+ *  The cell's value must be a valid URL. Supported by data validation. Requires
+ *  no ConditionValues.
  *
  *  Value: "TEXT_IS_URL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextIsUrl;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextIsUrl;
 /**
- *  The cell's value must not contain the condition's value.
- *  Supported by data validation, conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must not contain the condition's value. Supported by data
+ *  validation, conditional formatting and filters. Requires a single
+ *  ConditionValue.
  *
  *  Value: "TEXT_NOT_CONTAINS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextNotContains;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextNotContains;
 /**
- *  The cell's value must start with the condition's value.
- *  Supported by conditional formatting and filters.
- *  Requires a single ConditionValue.
+ *  The cell's value must be exactly not the condition's value. Supported by
+ *  filters on data source objects. Requires at least one ConditionValue.
+ *
+ *  Value: "TEXT_NOT_EQ"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextNotEq;
+/**
+ *  The cell's value must start with the condition's value. Supported by
+ *  conditional formatting and filters. Requires a single ConditionValue.
  *
  *  Value: "TEXT_STARTS_WITH"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextStartsWith;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextStartsWith;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_Border.style
@@ -701,50 +1048,95 @@ GTLR_EXTERN NSString * const kGTLRSheets_BooleanCondition_Type_TextStartsWith;
  *
  *  Value: "DASHED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_Dashed;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_Dashed;
 /**
  *  The border is dotted.
  *
  *  Value: "DOTTED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_Dotted;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_Dotted;
 /**
  *  The border is two solid lines.
  *
  *  Value: "DOUBLE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_Double;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_Double;
 /**
- *  No border.
- *  Used only when updating a border in order to erase it.
+ *  No border. Used only when updating a border in order to erase it.
  *
  *  Value: "NONE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_None;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_None;
 /**
  *  The border is a thin solid line.
  *
  *  Value: "SOLID"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_Solid;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_Solid;
 /**
  *  The border is a medium solid line.
  *
  *  Value: "SOLID_MEDIUM"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_SolidMedium;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_SolidMedium;
 /**
  *  The border is a thick solid line.
  *
  *  Value: "SOLID_THICK"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_SolidThick;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_SolidThick;
 /**
  *  The style is not specified. Do not use this.
  *
  *  Value: "STYLE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_StyleUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_Border_Style_StyleUnspecified;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_BubbleChartSpec.legendPosition
+
+/**
+ *  The legend is rendered on the bottom of the chart.
+ *
+ *  Value: "BOTTOM_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BubbleChartSpec_LegendPosition_BottomLegend;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "BUBBLE_CHART_LEGEND_POSITION_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BubbleChartSpec_LegendPosition_BubbleChartLegendPositionUnspecified;
+/**
+ *  The legend is rendered inside the chart area.
+ *
+ *  Value: "INSIDE_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BubbleChartSpec_LegendPosition_InsideLegend;
+/**
+ *  The legend is rendered on the left of the chart.
+ *
+ *  Value: "LEFT_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BubbleChartSpec_LegendPosition_LeftLegend;
+/**
+ *  No legend is rendered.
+ *
+ *  Value: "NO_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BubbleChartSpec_LegendPosition_NoLegend;
+/**
+ *  The legend is rendered on the right of the chart.
+ *
+ *  Value: "RIGHT_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BubbleChartSpec_LegendPosition_RightLegend;
+/**
+ *  The legend is rendered on the top of the chart.
+ *
+ *  Value: "TOP_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_BubbleChartSpec_LegendPosition_TopLegend;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CellFormat.horizontalAlignment
@@ -754,25 +1146,25 @@ GTLR_EXTERN NSString * const kGTLRSheets_Border_Style_StyleUnspecified;
  *
  *  Value: "CENTER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_Center;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_Center;
 /**
  *  The horizontal alignment is not specified. Do not use this.
  *
  *  Value: "HORIZONTAL_ALIGN_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_HorizontalAlignUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_HorizontalAlignUnspecified;
 /**
  *  The text is explicitly aligned to the left of the cell.
  *
  *  Value: "LEFT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_Left;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_Left;
 /**
  *  The text is explicitly aligned to the right of the cell.
  *
  *  Value: "RIGHT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_Right;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_Right;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CellFormat.hyperlinkDisplayType
@@ -782,19 +1174,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HorizontalAlignment_Right;
  *
  *  Value: "HYPERLINK_DISPLAY_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HyperlinkDisplayType_HyperlinkDisplayTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_HyperlinkDisplayType_HyperlinkDisplayTypeUnspecified;
 /**
  *  A hyperlink should be explicitly rendered.
  *
  *  Value: "LINKED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HyperlinkDisplayType_Linked;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_HyperlinkDisplayType_Linked;
 /**
  *  A hyperlink should not be rendered.
  *
  *  Value: "PLAIN_TEXT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HyperlinkDisplayType_PlainText;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_HyperlinkDisplayType_PlainText;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CellFormat.textDirection
@@ -804,19 +1196,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_HyperlinkDisplayType_PlainTe
  *
  *  Value: "LEFT_TO_RIGHT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_TextDirection_LeftToRight;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_TextDirection_LeftToRight;
 /**
  *  The text direction of right-to-left was set by the user.
  *
  *  Value: "RIGHT_TO_LEFT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_TextDirection_RightToLeft;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_TextDirection_RightToLeft;
 /**
  *  The text direction is not specified. Do not use this.
  *
  *  Value: "TEXT_DIRECTION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_TextDirection_TextDirectionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_TextDirection_TextDirectionUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CellFormat.verticalAlignment
@@ -826,83 +1218,256 @@ GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_TextDirection_TextDirectionU
  *
  *  Value: "BOTTOM"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_Bottom;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_Bottom;
 /**
  *  The text is explicitly aligned to the middle of the cell.
  *
  *  Value: "MIDDLE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_Middle;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_Middle;
 /**
  *  The text is explicitly aligned to the top of the cell.
  *
  *  Value: "TOP"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_Top;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_Top;
 /**
  *  The vertical alignment is not specified. Do not use this.
  *
  *  Value: "VERTICAL_ALIGN_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_VerticalAlignUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_VerticalAlignment_VerticalAlignUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CellFormat.wrapStrategy
 
 /**
- *  Lines that are longer than the cell width will be clipped.
- *  The text will never wrap to the next line unless the user manually
- *  inserts a new line.
- *  Example:
- *  | First sentence. |
- *  | Manual newline t| <- Text is clipped
- *  | Next newline. |
+ *  Lines that are longer than the cell width will be clipped. The text will
+ *  never wrap to the next line unless the user manually inserts a new line.
+ *  Example: | First sentence. | | Manual newline t| <- Text is clipped | Next
+ *  newline. |
  *
  *  Value: "CLIP"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_Clip;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_Clip;
 /**
  *  This wrap strategy represents the old Google Sheets wrap strategy where
  *  words that are longer than a line are clipped rather than broken. This
- *  strategy is not supported on all platforms and is being phased out.
- *  Example:
- *  | Cell has a |
- *  | loooooooooo| <- Word is clipped.
- *  | word. |
+ *  strategy is not supported on all platforms and is being phased out. Example:
+ *  | Cell has a | | loooooooooo| <- Word is clipped. | word. |
  *
  *  Value: "LEGACY_WRAP"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_LegacyWrap;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_LegacyWrap;
 /**
- *  Lines that are longer than the cell width will be written in the next
- *  cell over, so long as that cell is empty. If the next cell over is
- *  non-empty, this behaves the same as CLIP. The text will never wrap
- *  to the next line unless the user manually inserts a new line.
- *  Example:
- *  | First sentence. |
- *  | Manual newline that is very long. <- Text continues into next cell
- *  | Next newline. |
+ *  Lines that are longer than the cell width will be written in the next cell
+ *  over, so long as that cell is empty. If the next cell over is non-empty,
+ *  this behaves the same as CLIP. The text will never wrap to the next line
+ *  unless the user manually inserts a new line. Example: | First sentence. | |
+ *  Manual newline that is very long. <- Text continues into next cell | Next
+ *  newline. |
  *
  *  Value: "OVERFLOW_CELL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_OverflowCell;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_OverflowCell;
 /**
- *  Words that are longer than a line are wrapped at the character level
- *  rather than clipped.
- *  Example:
- *  | Cell has a |
- *  | loooooooooo| <- Word is broken.
- *  | ong word. |
+ *  Words that are longer than a line are wrapped at the character level rather
+ *  than clipped. Example: | Cell has a | | loooooooooo| <- Word is broken. |
+ *  ong word. |
  *
  *  Value: "WRAP"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_Wrap;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_Wrap;
 /**
  *  The default value, do not use.
  *
  *  Value: "WRAP_STRATEGY_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_WrapStrategyUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_WrapStrategyUnspecified;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_ChartAxisViewWindowOptions.viewWindowMode
+
+/**
+ *  The default view window mode used in the Sheets editor for this chart type.
+ *  In most cases, if set, the default mode is equivalent to `PRETTY`.
+ *
+ *  Value: "DEFAULT_VIEW_WINDOW_MODE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_DefaultViewWindowMode;
+/**
+ *  Follows the min and max exactly if specified. If a value is unspecified, it
+ *  will fall back to the `PRETTY` value.
+ *
+ *  Value: "EXPLICIT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_Explicit;
+/**
+ *  Chooses a min and max that make the chart look good. Both min and max are
+ *  ignored in this mode.
+ *
+ *  Value: "PRETTY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_Pretty;
+/**
+ *  Do not use. Represents that the currently set mode is not supported by the
+ *  API.
+ *
+ *  Value: "VIEW_WINDOW_MODE_UNSUPPORTED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_ViewWindowModeUnsupported;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_ChartData.aggregateType
+
+/**
+ *  Average aggregate function.
+ *
+ *  Value: "AVERAGE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartData_AggregateType_Average;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "CHART_AGGREGATE_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartData_AggregateType_ChartAggregateTypeUnspecified;
+/**
+ *  Count aggregate function.
+ *
+ *  Value: "COUNT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartData_AggregateType_Count;
+/**
+ *  Maximum aggregate function.
+ *
+ *  Value: "MAX"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartData_AggregateType_Max;
+/**
+ *  Median aggregate function.
+ *
+ *  Value: "MEDIAN"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartData_AggregateType_Median;
+/**
+ *  Minimum aggregate function.
+ *
+ *  Value: "MIN"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartData_AggregateType_Min;
+/**
+ *  Sum aggregate function.
+ *
+ *  Value: "SUM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartData_AggregateType_Sum;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_ChartDateTimeRule.type
+
+/**
+ *  The default type, do not use.
+ *
+ *  Value: "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_ChartDateTimeRuleTypeUnspecified;
+/**
+ *  Group dates by day and month, for example 22-Nov. The month is translated
+ *  based on the spreadsheet locale.
+ *
+ *  Value: "DAY_MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_DayMonth;
+/**
+ *  Group dates by day of month, from 1 to 31.
+ *
+ *  Value: "DAY_OF_MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_DayOfMonth;
+/**
+ *  Group dates by day of week, for example Sunday. The days of the week will be
+ *  translated based on the spreadsheet locale.
+ *
+ *  Value: "DAY_OF_WEEK"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_DayOfWeek;
+/**
+ *  Group dates by day of year, from 1 to 366. Note that dates after Feb. 29
+ *  fall in different buckets in leap years than in non-leap years.
+ *
+ *  Value: "DAY_OF_YEAR"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_DayOfYear;
+/**
+ *  Group dates by hour using a 24-hour system, from 0 to 23.
+ *
+ *  Value: "HOUR"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_Hour;
+/**
+ *  Group dates by hour and minute using a 24-hour system, for example 19:45.
+ *
+ *  Value: "HOUR_MINUTE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_HourMinute;
+/**
+ *  Group dates by hour and minute using a 12-hour system, for example 7:45 PM.
+ *  The AM/PM designation is translated based on the spreadsheet locale.
+ *
+ *  Value: "HOUR_MINUTE_AMPM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_HourMinuteAmpm;
+/**
+ *  Group dates by minute, from 0 to 59.
+ *
+ *  Value: "MINUTE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_Minute;
+/**
+ *  Group dates by month, for example Nov. The month is translated based on the
+ *  spreadsheet locale.
+ *
+ *  Value: "MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_Month;
+/**
+ *  Group dates by quarter, for example Q1 (which represents Jan-Mar).
+ *
+ *  Value: "QUARTER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_Quarter;
+/**
+ *  Group dates by second, from 0 to 59.
+ *
+ *  Value: "SECOND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_Second;
+/**
+ *  Group dates by year, for example 2008.
+ *
+ *  Value: "YEAR"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_Year;
+/**
+ *  Group dates by year and month, for example 2008-Nov. The month is translated
+ *  based on the spreadsheet locale.
+ *
+ *  Value: "YEAR_MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_YearMonth;
+/**
+ *  Group dates by year, month, and day, for example 2008-11-22.
+ *
+ *  Value: "YEAR_MONTH_DAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_YearMonthDay;
+/**
+ *  Group dates by year and quarter, for example 2008 Q4.
+ *
+ *  Value: "YEAR_QUARTER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartDateTimeRule_Type_YearQuarter;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_ChartSpec.hiddenDimensionStrategy
@@ -912,31 +1477,95 @@ GTLR_EXTERN NSString * const kGTLRSheets_CellFormat_WrapStrategy_WrapStrategyUns
  *
  *  Value: "CHART_HIDDEN_DIMENSION_STRATEGY_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_ChartHiddenDimensionStrategyUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_ChartHiddenDimensionStrategyUnspecified;
 /**
  *  Charts will not skip any hidden rows or columns.
  *
  *  Value: "SHOW_ALL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_ShowAll;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_ShowAll;
 /**
  *  Charts will skip hidden columns only.
  *
  *  Value: "SKIP_HIDDEN_COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_SkipHiddenColumns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_SkipHiddenColumns;
 /**
  *  Charts will skip hidden rows only.
  *
  *  Value: "SKIP_HIDDEN_ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_SkipHiddenRows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_SkipHiddenRows;
 /**
  *  Charts will skip hidden rows and columns.
  *
  *  Value: "SKIP_HIDDEN_ROWS_AND_COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_SkipHiddenRowsAndColumns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_SkipHiddenRowsAndColumns;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_ColorStyle.themeColor
+
+/**
+ *  Represents the first accent color
+ *
+ *  Value: "ACCENT1"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Accent1;
+/**
+ *  Represents the second accent color
+ *
+ *  Value: "ACCENT2"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Accent2;
+/**
+ *  Represents the third accent color
+ *
+ *  Value: "ACCENT3"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Accent3;
+/**
+ *  Represents the fourth accent color
+ *
+ *  Value: "ACCENT4"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Accent4;
+/**
+ *  Represents the fifth accent color
+ *
+ *  Value: "ACCENT5"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Accent5;
+/**
+ *  Represents the sixth accent color
+ *
+ *  Value: "ACCENT6"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Accent6;
+/**
+ *  Represents the primary background color
+ *
+ *  Value: "BACKGROUND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Background;
+/**
+ *  Represents the color to use for hyperlinks
+ *
+ *  Value: "LINK"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Link;
+/**
+ *  Represents the primary text color
+ *
+ *  Value: "TEXT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_Text;
+/**
+ *  Unspecified theme color
+ *
+ *  Value: "THEME_COLOR_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ColorStyle_ThemeColor_ThemeColorTypeUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_ConditionValue.relativeDate
@@ -946,43 +1575,43 @@ GTLR_EXTERN NSString * const kGTLRSheets_ChartSpec_HiddenDimensionStrategy_SkipH
  *
  *  Value: "PAST_MONTH"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_PastMonth;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_PastMonth;
 /**
  *  The value is one week before today.
  *
  *  Value: "PAST_WEEK"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_PastWeek;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_PastWeek;
 /**
  *  The value is one year before today.
  *
  *  Value: "PAST_YEAR"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_PastYear;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_PastYear;
 /**
  *  Default value, do not use.
  *
  *  Value: "RELATIVE_DATE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_RelativeDateUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_RelativeDateUnspecified;
 /**
  *  The value is today.
  *
  *  Value: "TODAY"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_Today;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_Today;
 /**
  *  The value is tomorrow.
  *
  *  Value: "TOMORROW"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_Tomorrow;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_Tomorrow;
 /**
  *  The value is yesterday.
  *
  *  Value: "YESTERDAY"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_Yesterday;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_Yesterday;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CopyPasteRequest.pasteOrientation
@@ -992,13 +1621,13 @@ GTLR_EXTERN NSString * const kGTLRSheets_ConditionValue_RelativeDate_Yesterday;
  *
  *  Value: "NORMAL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteOrientation_Normal;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteOrientation_Normal;
 /**
  *  Paste transposed, where all rows become columns and vice versa.
  *
  *  Value: "TRANSPOSE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteOrientation_Transpose;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteOrientation_Transpose;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CopyPasteRequest.pasteType
@@ -1008,43 +1637,43 @@ GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteOrientation_Trans
  *
  *  Value: "PASTE_CONDITIONAL_FORMATTING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteConditionalFormatting;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteConditionalFormatting;
 /**
  *  Paste the data validation only.
  *
  *  Value: "PASTE_DATA_VALIDATION"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteDataValidation;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteDataValidation;
 /**
  *  Paste the format and data validation only.
  *
  *  Value: "PASTE_FORMAT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteFormat;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteFormat;
 /**
  *  Paste the formulas only.
  *
  *  Value: "PASTE_FORMULA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteFormula;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteFormula;
 /**
  *  Like PASTE_NORMAL but without borders.
  *
  *  Value: "PASTE_NO_BORDERS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteNoBorders;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteNoBorders;
 /**
  *  Paste values, formulas, formats, and merges.
  *
  *  Value: "PASTE_NORMAL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteNormal;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteNormal;
 /**
  *  Paste the values ONLY without formats, formulas, or merges.
  *
  *  Value: "PASTE_VALUES"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteValues;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteValues;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_CutPasteRequest.pasteType
@@ -1054,43 +1683,414 @@ GTLR_EXTERN NSString * const kGTLRSheets_CopyPasteRequest_PasteType_PasteValues;
  *
  *  Value: "PASTE_CONDITIONAL_FORMATTING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteConditionalFormatting;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteConditionalFormatting;
 /**
  *  Paste the data validation only.
  *
  *  Value: "PASTE_DATA_VALIDATION"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteDataValidation;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteDataValidation;
 /**
  *  Paste the format and data validation only.
  *
  *  Value: "PASTE_FORMAT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteFormat;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteFormat;
 /**
  *  Paste the formulas only.
  *
  *  Value: "PASTE_FORMULA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteFormula;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteFormula;
 /**
  *  Like PASTE_NORMAL but without borders.
  *
  *  Value: "PASTE_NO_BORDERS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteNoBorders;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteNoBorders;
 /**
  *  Paste values, formulas, formats, and merges.
  *
  *  Value: "PASTE_NORMAL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteNormal;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteNormal;
 /**
  *  Paste the values ONLY without formats, formulas, or merges.
  *
  *  Value: "PASTE_VALUES"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteValues;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteValues;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DataExecutionStatus.errorCode
+
+/**
+ *  The data execution is currently in progress, can not be refreshed until it
+ *  completes.
+ *
+ *  Value: "CONCURRENT_QUERY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_ConcurrentQuery;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "DATA_EXECUTION_ERROR_CODE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_DataExecutionErrorCodeUnspecified;
+/**
+ *  The database referenced by the data source is not found. * /
+ *
+ *  Value: "DATA_NOT_FOUND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_DataNotFound;
+/**
+ *  The data execution returns duplicate column names or aliases.
+ *
+ *  Value: "DUPLICATE_COLUMN_NAMES"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_DuplicateColumnNames;
+/**
+ *  Error is received from the backend data execution engine (e.g. BigQuery).
+ *  Check error_message for details.
+ *
+ *  Value: "ENGINE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_Engine;
+/**
+ *  The data execution is interrupted. Please refresh later.
+ *
+ *  Value: "INTERRUPTED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_Interrupted;
+/**
+ *  The data execution returns columns with missing aliases.
+ *
+ *  Value: "MISSING_COLUMN_ALIAS"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_MissingColumnAlias;
+/**
+ *  The data source object is currently in error state. To force refresh, set
+ *  force in RefreshDataSourceRequest.
+ *
+ *  Value: "OBJECT_IN_ERROR_STATE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_ObjectInErrorState;
+/**
+ *  The data source object does not exist.
+ *
+ *  Value: "OBJECT_NOT_FOUND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_ObjectNotFound;
+/**
+ *  The data source object specification is invalid.
+ *
+ *  Value: "OBJECT_SPEC_INVALID"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_ObjectSpecInvalid;
+/**
+ *  Other errors.
+ *
+ *  Value: "OTHER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_Other;
+/**
+ *  One or some of the provided data source parameters are invalid.
+ *
+ *  Value: "PARAMETER_INVALID"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_ParameterInvalid;
+/**
+ *  The user does not have access to the database referenced by the data source.
+ *
+ *  Value: "PERMISSION_DENIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_PermissionDenied;
+/**
+ *  The data execution timed out.
+ *
+ *  Value: "TIMED_OUT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_TimedOut;
+/**
+ *  The data execution returns more cells than the limit.
+ *
+ *  Value: "TOO_MANY_CELLS"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_TooManyCells;
+/**
+ *  The data execution returns values that exceed the maximum characters allowed
+ *  in a single cell.
+ *
+ *  Value: "TOO_MANY_CHARS_PER_CELL"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_TooManyCharsPerCell;
+/**
+ *  The data execution returns more rows than the limit.
+ *
+ *  Value: "TOO_MANY_ROWS"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_TooManyRows;
+/**
+ *  The data execution returns an unsupported data type.
+ *
+ *  Value: "UNSUPPORTED_DATA_TYPE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_ErrorCode_UnsupportedDataType;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DataExecutionStatus.state
+
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "DATA_EXECUTION_STATE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_State_DataExecutionStateUnspecified;
+/**
+ *  The data execution has completed with errors.
+ *
+ *  Value: "FAILED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_State_Failed;
+/**
+ *  The data execution has not started.
+ *
+ *  Value: "NOT_STARTED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_State_NotStarted;
+/**
+ *  The data execution has started and is running.
+ *
+ *  Value: "RUNNING"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_State_Running;
+/**
+ *  The data execution has completed successfully.
+ *
+ *  Value: "SUCCEEDED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataExecutionStatus_State_Succeeded;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DataFilterValueRange.majorDimension
+
+/**
+ *  Operates on the columns of a sheet.
+ *
+ *  Value: "COLUMNS"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataFilterValueRange_MajorDimension_Columns;
+/**
+ *  The default value, do not use.
+ *
+ *  Value: "DIMENSION_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataFilterValueRange_MajorDimension_DimensionUnspecified;
+/**
+ *  Operates on the rows of a sheet.
+ *
+ *  Value: "ROWS"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataFilterValueRange_MajorDimension_Rows;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DataSourceRefreshSchedule.refreshScope
+
+/**
+ *  Refreshes all data sources and their associated data source objects in the
+ *  spreadsheet.
+ *
+ *  Value: "ALL_DATA_SOURCES"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshSchedule_RefreshScope_AllDataSources;
+/**
+ *  Default value; Do not use.
+ *
+ *  Value: "DATA_SOURCE_REFRESH_SCOPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshSchedule_RefreshScope_DataSourceRefreshScopeUnspecified;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DataSourceRefreshWeeklySchedule.daysOfWeek
+
+/**
+ *  The day of the week is unspecified.
+ *
+ *  Value: "DAY_OF_WEEK_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_DayOfWeekUnspecified;
+/**
+ *  Friday
+ *
+ *  Value: "FRIDAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_Friday;
+/**
+ *  Monday
+ *
+ *  Value: "MONDAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_Monday;
+/**
+ *  Saturday
+ *
+ *  Value: "SATURDAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_Saturday;
+/**
+ *  Sunday
+ *
+ *  Value: "SUNDAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_Sunday;
+/**
+ *  Thursday
+ *
+ *  Value: "THURSDAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_Thursday;
+/**
+ *  Tuesday
+ *
+ *  Value: "TUESDAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_Tuesday;
+/**
+ *  Wednesday
+ *
+ *  Value: "WEDNESDAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceRefreshWeeklySchedule_DaysOfWeek_Wednesday;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DataSourceTable.columnSelectionType
+
+/**
+ *  The default column selection type, do not use.
+ *
+ *  Value: "DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceTable_ColumnSelectionType_DataSourceTableColumnSelectionTypeUnspecified;
+/**
+ *  Select columns specified by columns field.
+ *
+ *  Value: "SELECTED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceTable_ColumnSelectionType_Selected;
+/**
+ *  Sync all current and future columns in the data source. If set, the data
+ *  source table fetches all the columns in the data source at the time of
+ *  refresh.
+ *
+ *  Value: "SYNC_ALL"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DataSourceTable_ColumnSelectionType_SyncAll;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DateTimeRule.type
+
+/**
+ *  The default type, do not use.
+ *
+ *  Value: "DATE_TIME_RULE_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_DateTimeRuleTypeUnspecified;
+/**
+ *  Group dates by day and month, for example 22-Nov. The month is translated
+ *  based on the spreadsheet locale.
+ *
+ *  Value: "DAY_MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_DayMonth;
+/**
+ *  Group dates by day of month, from 1 to 31.
+ *
+ *  Value: "DAY_OF_MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_DayOfMonth;
+/**
+ *  Group dates by day of week, for example Sunday. The days of the week will be
+ *  translated based on the spreadsheet locale.
+ *
+ *  Value: "DAY_OF_WEEK"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_DayOfWeek;
+/**
+ *  Group dates by day of year, from 1 to 366. Note that dates after Feb. 29
+ *  fall in different buckets in leap years than in non-leap years.
+ *
+ *  Value: "DAY_OF_YEAR"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_DayOfYear;
+/**
+ *  Group dates by hour using a 24-hour system, from 0 to 23.
+ *
+ *  Value: "HOUR"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_Hour;
+/**
+ *  Group dates by hour and minute using a 24-hour system, for example 19:45.
+ *
+ *  Value: "HOUR_MINUTE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_HourMinute;
+/**
+ *  Group dates by hour and minute using a 12-hour system, for example 7:45 PM.
+ *  The AM/PM designation is translated based on the spreadsheet locale.
+ *
+ *  Value: "HOUR_MINUTE_AMPM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_HourMinuteAmpm;
+/**
+ *  Group dates by minute, from 0 to 59.
+ *
+ *  Value: "MINUTE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_Minute;
+/**
+ *  Group dates by month, for example Nov. The month is translated based on the
+ *  spreadsheet locale.
+ *
+ *  Value: "MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_Month;
+/**
+ *  Group dates by quarter, for example Q1 (which represents Jan-Mar).
+ *
+ *  Value: "QUARTER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_Quarter;
+/**
+ *  Group dates by second, from 0 to 59.
+ *
+ *  Value: "SECOND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_Second;
+/**
+ *  Group dates by year, for example 2008.
+ *
+ *  Value: "YEAR"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_Year;
+/**
+ *  Group dates by year and month, for example 2008-Nov. The month is translated
+ *  based on the spreadsheet locale.
+ *
+ *  Value: "YEAR_MONTH"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_YearMonth;
+/**
+ *  Group dates by year, month, and day, for example 2008-11-22.
+ *
+ *  Value: "YEAR_MONTH_DAY"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_YearMonthDay;
+/**
+ *  Group dates by year and quarter, for example 2008 Q4.
+ *
+ *  Value: "YEAR_QUARTER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DateTimeRule_Type_YearQuarter;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_DeleteRangeRequest.shiftDimension
@@ -1100,19 +2100,166 @@ GTLR_EXTERN NSString * const kGTLRSheets_CutPasteRequest_PasteType_PasteValues;
  *
  *  Value: "COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_Columns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_Columns;
 /**
  *  The default value, do not use.
  *
  *  Value: "DIMENSION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_DimensionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_DimensionUnspecified;
 /**
  *  Operates on the rows of a sheet.
  *
  *  Value: "ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_Rows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_Rows;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DeveloperMetadata.visibility
+
+/**
+ *  Default value.
+ *
+ *  Value: "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadata_Visibility_DeveloperMetadataVisibilityUnspecified;
+/**
+ *  Document-visible metadata is accessible from any developer project with
+ *  access to the document.
+ *
+ *  Value: "DOCUMENT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadata_Visibility_Document;
+/**
+ *  Project-visible metadata is only visible to and accessible by the developer
+ *  project that created the metadata.
+ *
+ *  Value: "PROJECT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadata_Visibility_Project;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DeveloperMetadataLocation.locationType
+
+/**
+ *  Developer metadata associated on an entire column dimension.
+ *
+ *  Value: "COLUMN"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLocation_LocationType_Column;
+/**
+ *  Default value.
+ *
+ *  Value: "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLocation_LocationType_DeveloperMetadataLocationTypeUnspecified;
+/**
+ *  Developer metadata associated on an entire row dimension.
+ *
+ *  Value: "ROW"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLocation_LocationType_Row;
+/**
+ *  Developer metadata associated on an entire sheet.
+ *
+ *  Value: "SHEET"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLocation_LocationType_Sheet;
+/**
+ *  Developer metadata associated on the entire spreadsheet.
+ *
+ *  Value: "SPREADSHEET"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLocation_LocationType_Spreadsheet;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DeveloperMetadataLookup.locationMatchingStrategy
+
+/**
+ *  Default value. This value must not be used.
+ *
+ *  Value: "DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationMatchingStrategy_DeveloperMetadataLocationMatchingStrategyUnspecified;
+/**
+ *  Indicates that a specified location should be matched exactly. For example,
+ *  if row three were specified as a location this matching strategy would only
+ *  match developer metadata also associated on row three. Metadata associated
+ *  on other locations would not be considered.
+ *
+ *  Value: "EXACT_LOCATION"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationMatchingStrategy_ExactLocation;
+/**
+ *  Indicates that a specified location should match that exact location as well
+ *  as any intersecting locations. For example, if row three were specified as a
+ *  location this matching strategy would match developer metadata associated on
+ *  row three as well as metadata associated on locations that intersect row
+ *  three. If, for instance, there was developer metadata associated on column
+ *  B, this matching strategy would also match that location because column B
+ *  intersects row three.
+ *
+ *  Value: "INTERSECTING_LOCATION"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationMatchingStrategy_IntersectingLocation;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DeveloperMetadataLookup.locationType
+
+/**
+ *  Developer metadata associated on an entire column dimension.
+ *
+ *  Value: "COLUMN"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationType_Column;
+/**
+ *  Default value.
+ *
+ *  Value: "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationType_DeveloperMetadataLocationTypeUnspecified;
+/**
+ *  Developer metadata associated on an entire row dimension.
+ *
+ *  Value: "ROW"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationType_Row;
+/**
+ *  Developer metadata associated on an entire sheet.
+ *
+ *  Value: "SHEET"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationType_Sheet;
+/**
+ *  Developer metadata associated on the entire spreadsheet.
+ *
+ *  Value: "SPREADSHEET"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_LocationType_Spreadsheet;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_DeveloperMetadataLookup.visibility
+
+/**
+ *  Default value.
+ *
+ *  Value: "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_Visibility_DeveloperMetadataVisibilityUnspecified;
+/**
+ *  Document-visible metadata is accessible from any developer project with
+ *  access to the document.
+ *
+ *  Value: "DOCUMENT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_Visibility_Document;
+/**
+ *  Project-visible metadata is only visible to and accessible by the developer
+ *  project that created the metadata.
+ *
+ *  Value: "PROJECT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DeveloperMetadataLookup_Visibility_Project;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_DimensionRange.dimension
@@ -1122,19 +2269,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_DeleteRangeRequest_ShiftDimension_Rows;
  *
  *  Value: "COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_DimensionRange_Dimension_Columns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DimensionRange_Dimension_Columns;
 /**
  *  The default value, do not use.
  *
  *  Value: "DIMENSION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_DimensionRange_Dimension_DimensionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DimensionRange_Dimension_DimensionUnspecified;
 /**
  *  Operates on the rows of a sheet.
  *
  *  Value: "ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_DimensionRange_Dimension_Rows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_DimensionRange_Dimension_Rows;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_ErrorValue.type
@@ -1144,61 +2291,107 @@ GTLR_EXTERN NSString * const kGTLRSheets_DimensionRange_Dimension_Rows;
  *
  *  Value: "DIVIDE_BY_ZERO"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_DivideByZero;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_DivideByZero;
 /**
  *  Corresponds to the `#ERROR!` error.
  *
  *  Value: "ERROR"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Error;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Error;
 /**
  *  The default error type, do not use this.
  *
  *  Value: "ERROR_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_ErrorTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_ErrorTypeUnspecified;
 /**
  *  Corresponds to the `Loading...` state.
  *
  *  Value: "LOADING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Loading;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Loading;
 /**
  *  Corresponds to the `#N/A` error.
  *
  *  Value: "N_A"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_NA;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_NA;
 /**
  *  Corresponds to the `#NAME?` error.
  *
  *  Value: "NAME"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Name;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Name;
 /**
  *  Corresponds to the `#NULL!` error.
  *
  *  Value: "NULL_VALUE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_NullValue;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_NullValue;
 /**
- *  Corresponds to the `#NUM`! error.
+ *  Corresponds to the `#NUM!` error.
  *
  *  Value: "NUM"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Num;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Num;
 /**
  *  Corresponds to the `#REF!` error.
  *
  *  Value: "REF"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Ref;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Ref;
 /**
  *  Corresponds to the `#VALUE!` error.
  *
  *  Value: "VALUE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Value;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Value;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_HistogramChartSpec.legendPosition
+
+/**
+ *  The legend is rendered on the bottom of the chart.
+ *
+ *  Value: "BOTTOM_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_HistogramChartSpec_LegendPosition_BottomLegend;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "HISTOGRAM_CHART_LEGEND_POSITION_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_HistogramChartSpec_LegendPosition_HistogramChartLegendPositionUnspecified;
+/**
+ *  The legend is rendered inside the chart area.
+ *
+ *  Value: "INSIDE_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_HistogramChartSpec_LegendPosition_InsideLegend;
+/**
+ *  The legend is rendered on the left of the chart.
+ *
+ *  Value: "LEFT_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_HistogramChartSpec_LegendPosition_LeftLegend;
+/**
+ *  No legend is rendered.
+ *
+ *  Value: "NO_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_HistogramChartSpec_LegendPosition_NoLegend;
+/**
+ *  The legend is rendered on the right of the chart.
+ *
+ *  Value: "RIGHT_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_HistogramChartSpec_LegendPosition_RightLegend;
+/**
+ *  The legend is rendered on the top of the chart.
+ *
+ *  Value: "TOP_LEGEND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_HistogramChartSpec_LegendPosition_TopLegend;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_InsertRangeRequest.shiftDimension
@@ -1208,19 +2401,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_ErrorValue_Type_Value;
  *
  *  Value: "COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_Columns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_Columns;
 /**
  *  The default value, do not use.
  *
  *  Value: "DIMENSION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_DimensionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_DimensionUnspecified;
 /**
  *  Operates on the rows of a sheet.
  *
  *  Value: "ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_Rows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_Rows;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_InterpolationPoint.type
@@ -1230,49 +2423,104 @@ GTLR_EXTERN NSString * const kGTLRSheets_InsertRangeRequest_ShiftDimension_Rows;
  *
  *  Value: "INTERPOLATION_POINT_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_InterpolationPointTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_InterpolationPointTypeUnspecified;
 /**
- *  The interpolation point will use the maximum value in the
- *  cells over the range of the conditional format.
+ *  The interpolation point uses the maximum value in the cells over the range
+ *  of the conditional format.
  *
  *  Value: "MAX"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Max;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Max;
 /**
- *  The interpolation point will use the minimum value in the
- *  cells over the range of the conditional format.
+ *  The interpolation point uses the minimum value in the cells over the range
+ *  of the conditional format.
  *
  *  Value: "MIN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Min;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Min;
 /**
- *  The interpolation point will use exactly the value in
- *  InterpolationPoint.value.
+ *  The interpolation point uses exactly the value in InterpolationPoint.value.
  *
  *  Value: "NUMBER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Number;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Number;
 /**
- *  The interpolation point will be the given percentage over
- *  all the cells in the range of the conditional format.
- *  This is equivalent to NUMBER if the value was:
- *  `=(MAX(FLATTEN(range)) * (value / 100))
- *  + (MIN(FLATTEN(range)) * (1 - (value / 100)))`
- *  (where errors in the range are ignored when flattening).
+ *  The interpolation point is the given percentage over all the cells in the
+ *  range of the conditional format. This is equivalent to NUMBER if the value
+ *  was: `=(MAX(FLATTEN(range)) * (value / 100)) + (MIN(FLATTEN(range)) * (1 -
+ *  (value / 100)))` (where errors in the range are ignored when flattening).
  *
  *  Value: "PERCENT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Percent;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Percent;
 /**
- *  The interpolation point will be the given percentile
- *  over all the cells in the range of the conditional format.
- *  This is equivalent to NUMBER if the value was:
- *  `=PERCENTILE(FLATTEN(range), value / 100)`
- *  (where errors in the range are ignored when flattening).
+ *  The interpolation point is the given percentile over all the cells in the
+ *  range of the conditional format. This is equivalent to NUMBER if the value
+ *  was: `=PERCENTILE(FLATTEN(range), value / 100)` (where errors in the range
+ *  are ignored when flattening).
  *
  *  Value: "PERCENTILE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Percentile;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Percentile;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_LineStyle.type
+
+/**
+ *  A custom dash for a line. Modifying the exact custom dash style is currently
+ *  unsupported.
+ *
+ *  Value: "CUSTOM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_Custom;
+/**
+ *  A dotted line.
+ *
+ *  Value: "DOTTED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_Dotted;
+/**
+ *  No dash type, which is equivalent to a non-visible line.
+ *
+ *  Value: "INVISIBLE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_Invisible;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "LINE_DASH_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_LineDashTypeUnspecified;
+/**
+ *  A dashed line where the dashes have "long" length.
+ *
+ *  Value: "LONG_DASHED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_LongDashed;
+/**
+ *  A line that alternates between a "long" dash and a dot.
+ *
+ *  Value: "LONG_DASHED_DOTTED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_LongDashedDotted;
+/**
+ *  A dashed line where the dashes have "medium" length.
+ *
+ *  Value: "MEDIUM_DASHED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_MediumDashed;
+/**
+ *  A line that alternates between a "medium" dash and a dot.
+ *
+ *  Value: "MEDIUM_DASHED_DOTTED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_MediumDashedDotted;
+/**
+ *  A solid line.
+ *
+ *  Value: "SOLID"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_LineStyle_Type_Solid;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_MergeCellsRequest.mergeType
@@ -1282,19 +2530,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_InterpolationPoint_Type_Percentile;
  *
  *  Value: "MERGE_ALL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_MergeCellsRequest_MergeType_MergeAll;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_MergeCellsRequest_MergeType_MergeAll;
 /**
  *  Create a merge for each column in the range
  *
  *  Value: "MERGE_COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_MergeCellsRequest_MergeType_MergeColumns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_MergeCellsRequest_MergeType_MergeColumns;
 /**
  *  Create a merge for each row in the range
  *
  *  Value: "MERGE_ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_MergeCellsRequest_MergeType_MergeRows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_MergeCellsRequest_MergeType_MergeRows;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_NumberFormat.type
@@ -1304,57 +2552,84 @@ GTLR_EXTERN NSString * const kGTLRSheets_MergeCellsRequest_MergeType_MergeRows;
  *
  *  Value: "CURRENCY"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Currency;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Currency;
 /**
  *  Date formatting, e.g `9/26/2008`
  *
  *  Value: "DATE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Date;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Date;
 /**
  *  Date+Time formatting, e.g `9/26/08 15:59:00`
  *
  *  Value: "DATE_TIME"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_DateTime;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_DateTime;
 /**
  *  Number formatting, e.g, `1,000.12`
  *
  *  Value: "NUMBER"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Number;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Number;
 /**
- *  The number format is not specified
- *  and is based on the contents of the cell.
+ *  The number format is not specified and is based on the contents of the cell.
  *  Do not explicitly use this.
  *
  *  Value: "NUMBER_FORMAT_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_NumberFormatTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_NumberFormatTypeUnspecified;
 /**
  *  Percent formatting, e.g `10.12%`
  *
  *  Value: "PERCENT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Percent;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Percent;
 /**
  *  Scientific number formatting, e.g `1.01E+03`
  *
  *  Value: "SCIENTIFIC"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Scientific;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Scientific;
 /**
  *  Text formatting, e.g `1000.12`
  *
  *  Value: "TEXT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Text;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Text;
 /**
  *  Time formatting, e.g `3:59:00 PM`
  *
  *  Value: "TIME"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Time;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Time;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_OrgChartSpec.nodeSize
+
+/**
+ *  The large org chart node size.
+ *
+ *  Value: "LARGE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_OrgChartSpec_NodeSize_Large;
+/**
+ *  The medium org chart node size.
+ *
+ *  Value: "MEDIUM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_OrgChartSpec_NodeSize_Medium;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "ORG_CHART_LABEL_SIZE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_OrgChartSpec_NodeSize_OrgChartLabelSizeUnspecified;
+/**
+ *  The small org chart node size.
+ *
+ *  Value: "SMALL"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_OrgChartSpec_NodeSize_Small;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_PasteDataRequest.type
@@ -1364,43 +2639,43 @@ GTLR_EXTERN NSString * const kGTLRSheets_NumberFormat_Type_Time;
  *
  *  Value: "PASTE_CONDITIONAL_FORMATTING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteConditionalFormatting;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteConditionalFormatting;
 /**
  *  Paste the data validation only.
  *
  *  Value: "PASTE_DATA_VALIDATION"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteDataValidation;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteDataValidation;
 /**
  *  Paste the format and data validation only.
  *
  *  Value: "PASTE_FORMAT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteFormat;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteFormat;
 /**
  *  Paste the formulas only.
  *
  *  Value: "PASTE_FORMULA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteFormula;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteFormula;
 /**
  *  Like PASTE_NORMAL but without borders.
  *
  *  Value: "PASTE_NO_BORDERS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteNoBorders;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteNoBorders;
 /**
  *  Paste values, formulas, formats, and merges.
  *
  *  Value: "PASTE_NORMAL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteNormal;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteNormal;
 /**
  *  Paste the values ONLY without formats, formulas, or merges.
  *
  *  Value: "PASTE_VALUES"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteValues;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteValues;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_PieChartSpec.legendPosition
@@ -1410,43 +2685,43 @@ GTLR_EXTERN NSString * const kGTLRSheets_PasteDataRequest_Type_PasteValues;
  *
  *  Value: "BOTTOM_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_BottomLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_BottomLegend;
 /**
  *  Each pie slice has a label attached to it.
  *
  *  Value: "LABELED_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_LabeledLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_LabeledLegend;
 /**
  *  The legend is rendered on the left of the chart.
  *
  *  Value: "LEFT_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_LeftLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_LeftLegend;
 /**
  *  No legend is rendered.
  *
  *  Value: "NO_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_NoLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_NoLegend;
 /**
  *  Default value, do not use.
  *
  *  Value: "PIE_CHART_LEGEND_POSITION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_PieChartLegendPositionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_PieChartLegendPositionUnspecified;
 /**
  *  The legend is rendered on the right of the chart.
  *
  *  Value: "RIGHT_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_RightLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_RightLegend;
 /**
  *  The legend is rendered on the top of the chart.
  *
  *  Value: "TOP_LEGEND"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_TopLegend;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_TopLegend;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_PivotGroup.sortOrder
@@ -1456,19 +2731,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_PieChartSpec_LegendPosition_TopLegend;
  *
  *  Value: "ASCENDING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotGroup_SortOrder_Ascending;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotGroup_SortOrder_Ascending;
 /**
  *  Sort descending.
  *
  *  Value: "DESCENDING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotGroup_SortOrder_Descending;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotGroup_SortOrder_Descending;
 /**
  *  Default value, do not use this.
  *
  *  Value: "SORT_ORDER_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotGroup_SortOrder_SortOrderUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotGroup_SortOrder_SortOrderUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_PivotTable.valueLayout
@@ -1478,13 +2753,41 @@ GTLR_EXTERN NSString * const kGTLRSheets_PivotGroup_SortOrder_SortOrderUnspecifi
  *
  *  Value: "HORIZONTAL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotTable_ValueLayout_Horizontal;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotTable_ValueLayout_Horizontal;
 /**
  *  Values are laid out vertically (as rows).
  *
  *  Value: "VERTICAL"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotTable_ValueLayout_Vertical;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotTable_ValueLayout_Vertical;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_PivotValue.calculatedDisplayType
+
+/**
+ *  Shows the pivot values as percentage of the column total values.
+ *
+ *  Value: "PERCENT_OF_COLUMN_TOTAL"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_CalculatedDisplayType_PercentOfColumnTotal;
+/**
+ *  Shows the pivot values as percentage of the grand total values.
+ *
+ *  Value: "PERCENT_OF_GRAND_TOTAL"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_CalculatedDisplayType_PercentOfGrandTotal;
+/**
+ *  Shows the pivot values as percentage of the row total values.
+ *
+ *  Value: "PERCENT_OF_ROW_TOTAL"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_CalculatedDisplayType_PercentOfRowTotal;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_CalculatedDisplayType_PivotValueCalculatedDisplayTypeUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_PivotValue.summarizeFunction
@@ -1494,114 +2797,217 @@ GTLR_EXTERN NSString * const kGTLRSheets_PivotTable_ValueLayout_Vertical;
  *
  *  Value: "AVERAGE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Average;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Average;
 /**
  *  Corresponds to the `COUNT` function.
  *
  *  Value: "COUNT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Count;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Count;
 /**
  *  Corresponds to the `COUNTA` function.
  *
  *  Value: "COUNTA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Counta;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Counta;
 /**
  *  Corresponds to the `COUNTUNIQUE` function.
  *
  *  Value: "COUNTUNIQUE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Countunique;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Countunique;
 /**
- *  Indicates the formula should be used as-is.
- *  Only valid if PivotValue.formula was set.
+ *  Indicates the formula should be used as-is. Only valid if PivotValue.formula
+ *  was set.
  *
  *  Value: "CUSTOM"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Custom;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Custom;
 /**
  *  Corresponds to the `MAX` function.
  *
  *  Value: "MAX"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Max;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Max;
 /**
  *  Corresponds to the `MEDIAN` function.
  *
  *  Value: "MEDIAN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Median;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Median;
 /**
  *  Corresponds to the `MIN` function.
  *
  *  Value: "MIN"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Min;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Min;
 /**
  *  The default, do not use.
  *
  *  Value: "PIVOT_STANDARD_VALUE_FUNCTION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_PivotStandardValueFunctionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_PivotStandardValueFunctionUnspecified;
 /**
  *  Corresponds to the `PRODUCT` function.
  *
  *  Value: "PRODUCT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Product;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Product;
 /**
  *  Corresponds to the `STDEV` function.
  *
  *  Value: "STDEV"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Stdev;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Stdev;
 /**
  *  Corresponds to the `STDEVP` function.
  *
  *  Value: "STDEVP"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Stdevp;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Stdevp;
 /**
  *  Corresponds to the `SUM` function.
  *
  *  Value: "SUM"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Sum;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Sum;
 /**
  *  Corresponds to the `VAR` function.
  *
  *  Value: "VAR"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Var;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Var;
 /**
  *  Corresponds to the `VARP` function.
  *
  *  Value: "VARP"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Varp;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_PivotValue_SummarizeFunction_Varp;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_ScorecardChartSpec.aggregateType
+
+/**
+ *  Average aggregate function.
+ *
+ *  Value: "AVERAGE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_AggregateType_Average;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "CHART_AGGREGATE_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_AggregateType_ChartAggregateTypeUnspecified;
+/**
+ *  Count aggregate function.
+ *
+ *  Value: "COUNT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_AggregateType_Count;
+/**
+ *  Maximum aggregate function.
+ *
+ *  Value: "MAX"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_AggregateType_Max;
+/**
+ *  Median aggregate function.
+ *
+ *  Value: "MEDIAN"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_AggregateType_Median;
+/**
+ *  Minimum aggregate function.
+ *
+ *  Value: "MIN"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_AggregateType_Min;
+/**
+ *  Sum aggregate function.
+ *
+ *  Value: "SUM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_AggregateType_Sum;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_ScorecardChartSpec.numberFormatSource
+
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "CHART_NUMBER_FORMAT_SOURCE_UNDEFINED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_NumberFormatSource_ChartNumberFormatSourceUndefined;
+/**
+ *  Apply custom formatting as specified by ChartCustomNumberFormatOptions.
+ *
+ *  Value: "CUSTOM"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_NumberFormatSource_Custom;
+/**
+ *  Inherit number formatting from data.
+ *
+ *  Value: "FROM_DATA"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ScorecardChartSpec_NumberFormatSource_FromData;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_SheetProperties.sheetType
 
 /**
+ *  The sheet connects with an external DataSource and shows the preview of
+ *  data.
+ *
+ *  Value: "DATA_SOURCE"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_DataSource;
+/**
  *  The sheet is a grid.
  *
  *  Value: "GRID"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_Grid;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_Grid;
 /**
  *  The sheet has no grid and instead has an object like a chart or image.
  *
  *  Value: "OBJECT"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_Object;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_Object;
 /**
  *  Default value, do not use.
  *
  *  Value: "SHEET_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_SheetTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_SheetTypeUnspecified;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_SlicerSpec.horizontalAlignment
+
+/**
+ *  The text is explicitly aligned to the center of the cell.
+ *
+ *  Value: "CENTER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SlicerSpec_HorizontalAlignment_Center;
+/**
+ *  The horizontal alignment is not specified. Do not use this.
+ *
+ *  Value: "HORIZONTAL_ALIGN_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SlicerSpec_HorizontalAlignment_HorizontalAlignUnspecified;
+/**
+ *  The text is explicitly aligned to the left of the cell.
+ *
+ *  Value: "LEFT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SlicerSpec_HorizontalAlignment_Left;
+/**
+ *  The text is explicitly aligned to the right of the cell.
+ *
+ *  Value: "RIGHT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SlicerSpec_HorizontalAlignment_Right;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_SortSpec.sortOrder
@@ -1611,19 +3017,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_SheetProperties_SheetType_SheetTypeUnsp
  *
  *  Value: "ASCENDING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SortSpec_SortOrder_Ascending;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SortSpec_SortOrder_Ascending;
 /**
  *  Sort descending.
  *
  *  Value: "DESCENDING"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SortSpec_SortOrder_Descending;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SortSpec_SortOrder_Descending;
 /**
  *  Default value, do not use this.
  *
  *  Value: "SORT_ORDER_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SortSpec_SortOrder_SortOrderUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SortSpec_SortOrder_SortOrderUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_SourceAndDestination.dimension
@@ -1633,19 +3039,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_SortSpec_SortOrder_SortOrderUnspecified
  *
  *  Value: "COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SourceAndDestination_Dimension_Columns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SourceAndDestination_Dimension_Columns;
 /**
  *  The default value, do not use.
  *
  *  Value: "DIMENSION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SourceAndDestination_Dimension_DimensionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SourceAndDestination_Dimension_DimensionUnspecified;
 /**
  *  Operates on the rows of a sheet.
  *
  *  Value: "ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SourceAndDestination_Dimension_Rows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SourceAndDestination_Dimension_Rows;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_SpreadsheetProperties.autoRecalc
@@ -1655,65 +3061,163 @@ GTLR_EXTERN NSString * const kGTLRSheets_SourceAndDestination_Dimension_Rows;
  *
  *  Value: "HOUR"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_Hour;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_Hour;
 /**
  *  Volatile functions are updated on every change and every minute.
  *
  *  Value: "MINUTE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_Minute;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_Minute;
 /**
  *  Volatile functions are updated on every change.
  *
  *  Value: "ON_CHANGE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_OnChange;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_OnChange;
 /**
  *  Default value. This value must not be used.
  *
  *  Value: "RECALCULATION_INTERVAL_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_RecalculationIntervalUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_SpreadsheetProperties_AutoRecalc_RecalculationIntervalUnspecified;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_TextPosition.horizontalAlignment
+
+/**
+ *  The text is explicitly aligned to the center of the cell.
+ *
+ *  Value: "CENTER"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextPosition_HorizontalAlignment_Center;
+/**
+ *  The horizontal alignment is not specified. Do not use this.
+ *
+ *  Value: "HORIZONTAL_ALIGN_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextPosition_HorizontalAlignment_HorizontalAlignUnspecified;
+/**
+ *  The text is explicitly aligned to the left of the cell.
+ *
+ *  Value: "LEFT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextPosition_HorizontalAlignment_Left;
+/**
+ *  The text is explicitly aligned to the right of the cell.
+ *
+ *  Value: "RIGHT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextPosition_HorizontalAlignment_Right;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_TextToColumnsRequest.delimiterType
 
 /**
+ *  Automatically detect columns.
+ *
+ *  Value: "AUTODETECT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Autodetect;
+/**
  *  ","
  *
  *  Value: "COMMA"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Comma;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Comma;
 /**
  *  A custom value as defined in delimiter.
  *
  *  Value: "CUSTOM"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Custom;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Custom;
 /**
  *  Default value. This value must not be used.
  *
  *  Value: "DELIMITER_TYPE_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_DelimiterTypeUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_DelimiterTypeUnspecified;
 /**
  *  "."
  *
  *  Value: "PERIOD"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Period;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Period;
 /**
  *  ";"
  *
  *  Value: "SEMICOLON"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Semicolon;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Semicolon;
 /**
  *  " "
  *
  *  Value: "SPACE"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Space;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Space;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_ThemeColorPair.colorType
+
+/**
+ *  Represents the first accent color
+ *
+ *  Value: "ACCENT1"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Accent1;
+/**
+ *  Represents the second accent color
+ *
+ *  Value: "ACCENT2"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Accent2;
+/**
+ *  Represents the third accent color
+ *
+ *  Value: "ACCENT3"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Accent3;
+/**
+ *  Represents the fourth accent color
+ *
+ *  Value: "ACCENT4"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Accent4;
+/**
+ *  Represents the fifth accent color
+ *
+ *  Value: "ACCENT5"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Accent5;
+/**
+ *  Represents the sixth accent color
+ *
+ *  Value: "ACCENT6"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Accent6;
+/**
+ *  Represents the primary background color
+ *
+ *  Value: "BACKGROUND"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Background;
+/**
+ *  Represents the color to use for hyperlinks
+ *
+ *  Value: "LINK"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Link;
+/**
+ *  Represents the primary text color
+ *
+ *  Value: "TEXT"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_Text;
+/**
+ *  Unspecified theme color
+ *
+ *  Value: "THEME_COLOR_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ThemeColorPair_ColorType_ThemeColorTypeUnspecified;
 
 // ----------------------------------------------------------------------------
 // GTLRSheets_ValueRange.majorDimension
@@ -1723,19 +3227,42 @@ GTLR_EXTERN NSString * const kGTLRSheets_TextToColumnsRequest_DelimiterType_Spac
  *
  *  Value: "COLUMNS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Columns;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Columns;
 /**
  *  The default value, do not use.
  *
  *  Value: "DIMENSION_UNSPECIFIED"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_DimensionUnspecified;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_DimensionUnspecified;
 /**
  *  Operates on the rows of a sheet.
  *
  *  Value: "ROWS"
  */
-GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
+FOUNDATION_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
+
+// ----------------------------------------------------------------------------
+// GTLRSheets_WaterfallChartSpec.stackedType
+
+/**
+ *  Series will spread out along the horizontal axis.
+ *
+ *  Value: "SEQUENTIAL"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_WaterfallChartSpec_StackedType_Sequential;
+/**
+ *  Values corresponding to the same domain (horizontal axis) value will be
+ *  stacked vertically.
+ *
+ *  Value: "STACKED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_WaterfallChartSpec_StackedType_Stacked;
+/**
+ *  Default value, do not use.
+ *
+ *  Value: "WATERFALL_STACKED_TYPE_UNSPECIFIED"
+ */
+FOUNDATION_EXTERN NSString * const kGTLRSheets_WaterfallChartSpec_StackedType_WaterfallStackedTypeUnspecified;
 
 /**
  *  Adds a new banded range to the spreadsheet.
@@ -1743,9 +3270,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_AddBandingRequest : GTLRObject
 
 /**
- *  The banded range to add. The bandedRangeId
- *  field is optional; if one is not set, an id will be randomly generated. (It
- *  is an error to specify the ID of a range that already exists.)
+ *  The banded range to add. The bandedRangeId field is optional; if one is not
+ *  set, an id will be randomly generated. (It is an error to specify the ID of
+ *  a range that already exists.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_BandedRange *bandedRange;
 
@@ -1770,9 +3297,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /**
  *  The chart that should be added to the spreadsheet, including the position
- *  where it should be placed. The chartId
- *  field is optional; if one is not set, an id will be randomly generated. (It
- *  is an error to specify the ID of a chart that already exists.)
+ *  where it should be placed. The chartId field is optional; if one is not set,
+ *  an id will be randomly generated. (It is an error to specify the ID of an
+ *  embedded object that already exists.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_EmbeddedChart *chart;
 
@@ -1791,8 +3318,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Adds a new conditional format rule at the given index.
- *  All subsequent rules' indexes are incremented.
+ *  Adds a new conditional format rule at the given index. All subsequent rules'
+ *  indexes are incremented.
  */
 @interface GTLRSheets_AddConditionalFormatRuleRequest : GTLRObject
 
@@ -1810,14 +3337,76 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  Adds a data source. After the data source is added successfully, an
+ *  associated DataSource sheet is created and an execution is triggered to
+ *  refresh the sheet to read data from the data source. The request requires an
+ *  additional bigquery.readonly OAuth scope.
+ */
+@interface GTLRSheets_AddDataSourceRequest : GTLRObject
+
+/** The data source to add. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSource *dataSource;
+
+@end
+
+
+/**
+ *  The result of adding a data source.
+ */
+@interface GTLRSheets_AddDataSourceResponse : GTLRObject
+
+/** The data execution status. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** The data source that was created. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSource *dataSource;
+
+@end
+
+
+/**
+ *  Creates a group over the specified range. If the requested range is a
+ *  superset of the range of an existing group G, then the depth of G is
+ *  incremented and this new group G' has the depth of that group. For example,
+ *  a group [C:D, depth 1] + [B:E] results in groups [B:E, depth 1] and [C:D,
+ *  depth 2]. If the requested range is a subset of the range of an existing
+ *  group G, then the depth of the new group G' becomes one greater than the
+ *  depth of G. For example, a group [B:E, depth 1] + [C:D] results in groups
+ *  [B:E, depth 1] and [C:D, depth 2]. If the requested range starts before and
+ *  ends within, or starts within and ends after, the range of an existing group
+ *  G, then the range of the existing group G becomes the union of the ranges,
+ *  and the new group G' has depth one greater than the depth of G and range as
+ *  the intersection of the ranges. For example, a group [B:D, depth 1] + [C:E]
+ *  results in groups [B:E, depth 1] and [C:D, depth 2].
+ */
+@interface GTLRSheets_AddDimensionGroupRequest : GTLRObject
+
+/** The range over which to create a group. */
+@property(nonatomic, strong, nullable) GTLRSheets_DimensionRange *range;
+
+@end
+
+
+/**
+ *  The result of adding a group.
+ */
+@interface GTLRSheets_AddDimensionGroupResponse : GTLRObject
+
+/** All groups of a dimension after adding a group to that dimension. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DimensionGroup *> *dimensionGroups;
+
+@end
+
+
+/**
  *  Adds a filter view.
  */
 @interface GTLRSheets_AddFilterViewRequest : GTLRObject
 
 /**
- *  The filter to add. The filterViewId
- *  field is optional; if one is not set, an id will be randomly generated. (It
- *  is an error to specify the ID of a filter that already exists.)
+ *  The filter to add. The filterViewId field is optional; if one is not set, an
+ *  id will be randomly generated. (It is an error to specify the ID of a filter
+ *  that already exists.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_FilterView *filter;
 
@@ -1841,9 +3430,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_AddNamedRangeRequest : GTLRObject
 
 /**
- *  The named range to add. The namedRangeId
- *  field is optional; if one is not set, an id will be randomly generated. (It
- *  is an error to specify the ID of a range that already exists.)
+ *  The named range to add. The namedRangeId field is optional; if one is not
+ *  set, an id will be randomly generated. (It is an error to specify the ID of
+ *  a range that already exists.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_NamedRange *namedRange;
 
@@ -1867,10 +3456,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_AddProtectedRangeRequest : GTLRObject
 
 /**
- *  The protected range to be added. The
- *  protectedRangeId field is optional; if
- *  one is not set, an id will be randomly generated. (It is an error to
- *  specify the ID of a range that already exists.)
+ *  The protected range to be added. The protectedRangeId field is optional; if
+ *  one is not set, an id will be randomly generated. (It is an error to specify
+ *  the ID of a range that already exists.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ProtectedRange *protectedRange;
 
@@ -1889,21 +3477,18 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Adds a new sheet.
- *  When a sheet is added at a given index,
- *  all subsequent sheets' indexes are incremented.
- *  To add an object sheet, use AddChartRequest instead and specify
- *  EmbeddedObjectPosition.sheetId or
+ *  Adds a new sheet. When a sheet is added at a given index, all subsequent
+ *  sheets' indexes are incremented. To add an object sheet, use AddChartRequest
+ *  instead and specify EmbeddedObjectPosition.sheetId or
  *  EmbeddedObjectPosition.newSheet.
  */
 @interface GTLRSheets_AddSheetRequest : GTLRObject
 
 /**
- *  The properties the new sheet should have.
- *  All properties are optional.
- *  The sheetId field is optional; if one is not
- *  set, an id will be randomly generated. (It is an error to specify the ID
- *  of a sheet that already exists.)
+ *  The properties the new sheet should have. All properties are optional. The
+ *  sheetId field is optional; if one is not set, an id will be randomly
+ *  generated. (It is an error to specify the ID of a sheet that already
+ *  exists.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_SheetProperties *properties;
 
@@ -1922,15 +3507,41 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Adds new cells after the last row with data in a sheet,
- *  inserting new rows into the sheet if necessary.
+ *  Adds a slicer to a sheet in the spreadsheet.
+ */
+@interface GTLRSheets_AddSlicerRequest : GTLRObject
+
+/**
+ *  The slicer that should be added to the spreadsheet, including the position
+ *  where it should be placed. The slicerId field is optional; if one is not
+ *  set, an id will be randomly generated. (It is an error to specify the ID of
+ *  a slicer that already exists.)
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Slicer *slicer;
+
+@end
+
+
+/**
+ *  The result of adding a slicer to a spreadsheet.
+ */
+@interface GTLRSheets_AddSlicerResponse : GTLRObject
+
+/** The newly added slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_Slicer *slicer;
+
+@end
+
+
+/**
+ *  Adds new cells after the last row with data in a sheet, inserting new rows
+ *  into the sheet if necessary.
  */
 @interface GTLRSheets_AppendCellsRequest : GTLRObject
 
 /**
- *  The fields of CellData that should be updated.
- *  At least one field must be specified.
- *  The root is the CellData; 'row.values.' should not be specified.
+ *  The fields of CellData that should be updated. At least one field must be
+ *  specified. The root is the CellData; 'row.values.' should not be specified.
  *  A single `"*"` can be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
@@ -1995,8 +3606,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /**
  *  The range (in A1 notation) of the table that values are being appended to
- *  (before the values were appended).
- *  Empty if no table was found.
+ *  (before the values were appended). Empty if no table was found.
  */
 @property(nonatomic, copy, nullable) NSString *tableRange;
 
@@ -2012,22 +3622,20 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_AutoFillRequest : GTLRObject
 
 /**
- *  The range to autofill. This will examine the range and detect
- *  the location that has data and automatically fill that data
- *  in to the rest of the range.
+ *  The range to autofill. This will examine the range and detect the location
+ *  that has data and automatically fill that data in to the rest of the range.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  The source and destination areas to autofill.
- *  This explicitly lists the source of the autofill and where to
- *  extend that data.
+ *  The source and destination areas to autofill. This explicitly lists the
+ *  source of the autofill and where to extend that data.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_SourceAndDestination *sourceAndDestination;
 
 /**
- *  True if we should generate data with the "alternate" series.
- *  This differs based on the type and amount of source data.
+ *  True if we should generate data with the "alternate" series. This differs
+ *  based on the type and amount of source data.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -2037,15 +3645,15 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Automatically resizes one or more dimensions based on the contents
- *  of the cells in that dimension.
+ *  Automatically resizes one or more dimensions based on the contents of the
+ *  cells in that dimension.
  */
 @interface GTLRSheets_AutoResizeDimensionsRequest : GTLRObject
 
-/**
- *  The dimensions to automatically resize.
- *  Only COLUMNS are supported.
- */
+/** The dimensions on a data source sheet to automatically resize. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceSheetDimensionRange *dataSourceSheetDimensions;
+
+/** The dimensions to automatically resize. */
 @property(nonatomic, strong, nullable) GTLRSheets_DimensionRange *dimensions;
 
 @end
@@ -2064,7 +3672,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *bandedRangeId;
 
 /**
- *  Properties for column bands. These properties will be applied on a column-
+ *  Properties for column bands. These properties are applied on a column-
  *  by-column basis throughout all the columns in the range. At least one of
  *  row_properties or column_properties must be specified.
  */
@@ -2074,9 +3682,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  Properties for row bands. These properties will be applied on a row-by-row
- *  basis throughout all the rows in the range. At least one of
- *  row_properties or column_properties must be specified.
+ *  Properties for row bands. These properties are applied on a row-by-row basis
+ *  throughout all the rows in the range. At least one of row_properties or
+ *  column_properties must be specified.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_BandingProperties *rowProperties;
 
@@ -2085,16 +3693,15 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /**
  *  Properties referring a single dimension (either row or column). If both
- *  BandedRange.row_properties and BandedRange.column_properties are
- *  set, the fill colors are applied to cells according to the following rules:
- *  * header_color and footer_color take priority over band colors.
- *  * first_band_color takes priority over second_band_color.
- *  * row_properties takes priority over column_properties.
- *  For example, the first row color takes priority over the first column
- *  color, but the first column color takes priority over the second row color.
- *  Similarly, the row header takes priority over the column header in the
- *  top left cell, but the column header takes priority over the first row
- *  color if the row header is not set.
+ *  BandedRange.row_properties and BandedRange.column_properties are set, the
+ *  fill colors are applied to cells according to the following rules: *
+ *  header_color and footer_color take priority over band colors. *
+ *  first_band_color takes priority over second_band_color. * row_properties
+ *  takes priority over column_properties. For example, the first row color
+ *  takes priority over the first column color, but the first column color takes
+ *  priority over the second row color. Similarly, the row header takes priority
+ *  over the column header in the top left cell, but the column header takes
+ *  priority over the first row color if the row header is not set.
  */
 @interface GTLRSheets_BandingProperties : GTLRObject
 
@@ -2102,39 +3709,132 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_Color *firstBandColor;
 
 /**
- *  The color of the last row or column. If this field is not set, the last
- *  row or column will be filled with either first_band_color or
- *  second_band_color, depending on the color of the previous row or
- *  column.
+ *  The first color that is alternating. (Required) If first_band_color is also
+ *  set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *firstBandColorStyle;
+
+/**
+ *  The color of the last row or column. If this field is not set, the last row
+ *  or column is filled with either first_band_color or second_band_color,
+ *  depending on the color of the previous row or column.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_Color *footerColor;
 
 /**
- *  The color of the first row or column. If this field is set, the first
- *  row or column will be filled with this color and the colors will
- *  alternate between first_band_color and second_band_color starting
- *  from the second row or column. Otherwise, the first row or column will be
- *  filled with first_band_color and the colors will proceed to alternate
- *  as they normally would.
+ *  The color of the last row or column. If this field is not set, the last row
+ *  or column is filled with either first_band_color or second_band_color,
+ *  depending on the color of the previous row or column. If footer_color is
+ *  also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *footerColorStyle;
+
+/**
+ *  The color of the first row or column. If this field is set, the first row or
+ *  column is filled with this color and the colors alternate between
+ *  first_band_color and second_band_color starting from the second row or
+ *  column. Otherwise, the first row or column is filled with first_band_color
+ *  and the colors proceed to alternate as they normally would.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_Color *headerColor;
 
+/**
+ *  The color of the first row or column. If this field is set, the first row or
+ *  column is filled with this color and the colors alternate between
+ *  first_band_color and second_band_color starting from the second row or
+ *  column. Otherwise, the first row or column is filled with first_band_color
+ *  and the colors proceed to alternate as they normally would. If header_color
+ *  is also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *headerColorStyle;
+
 /** The second color that is alternating. (Required) */
 @property(nonatomic, strong, nullable) GTLRSheets_Color *secondBandColor;
+
+/**
+ *  The second color that is alternating. (Required) If second_band_color is
+ *  also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *secondBandColorStyle;
 
 @end
 
 
 /**
- *  An axis of the chart.
- *  A chart may not have more than one axis per
- *  axis position.
+ *  Formatting options for baseline value.
+ */
+@interface GTLRSheets_BaselineValueFormat : GTLRObject
+
+/**
+ *  The comparison type of key value with baseline value.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BaselineValueFormat_ComparisonType_AbsoluteDifference
+ *        Use absolute difference between key and baseline value. (Value:
+ *        "ABSOLUTE_DIFFERENCE")
+ *    @arg @c kGTLRSheets_BaselineValueFormat_ComparisonType_ComparisonTypeUndefined
+ *        Default value, do not use. (Value: "COMPARISON_TYPE_UNDEFINED")
+ *    @arg @c kGTLRSheets_BaselineValueFormat_ComparisonType_PercentageDifference
+ *        Use percentage difference between key and baseline value. (Value:
+ *        "PERCENTAGE_DIFFERENCE")
+ */
+@property(nonatomic, copy, nullable) NSString *comparisonType;
+
+/**
+ *  Description which is appended after the baseline value. This field is
+ *  optional.
+ *
+ *  Remapped to 'descriptionProperty' to avoid NSObject's 'description'.
+ */
+@property(nonatomic, copy, nullable) NSString *descriptionProperty;
+
+/**
+ *  Color to be used, in case baseline value represents a negative change for
+ *  key value. This field is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *negativeColor;
+
+/**
+ *  Color to be used, in case baseline value represents a negative change for
+ *  key value. This field is optional. If negative_color is also set, this field
+ *  takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *negativeColorStyle;
+
+/**
+ *  Specifies the horizontal text positioning of baseline value. This field is
+ *  optional. If not specified, default positioning is used.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TextPosition *position;
+
+/**
+ *  Color to be used, in case baseline value represents a positive change for
+ *  key value. This field is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *positiveColor;
+
+/**
+ *  Color to be used, in case baseline value represents a positive change for
+ *  key value. This field is optional. If positive_color is also set, this field
+ *  takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *positiveColorStyle;
+
+/** Text formatting options for baseline value. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextFormat *textFormat;
+
+@end
+
+
+/**
+ *  An axis of the chart. A chart may not have more than one axis per axis
+ *  position.
  */
 @interface GTLRSheets_BasicChartAxis : GTLRObject
 
 /**
- *  The format of the title.
- *  Only valid if the axis is not associated with the domain.
+ *  The format of the title. Only valid if the axis is not associated with the
+ *  domain.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_TextFormat *format;
 
@@ -2146,32 +3846,35 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *        Default value, do not use. (Value:
  *        "BASIC_CHART_AXIS_POSITION_UNSPECIFIED")
  *    @arg @c kGTLRSheets_BasicChartAxis_Position_BottomAxis The axis rendered
- *        at the bottom of a chart.
- *        For most charts, this is the standard major axis.
- *        For bar charts, this is a minor axis. (Value: "BOTTOM_AXIS")
+ *        at the bottom of a chart. For most charts, this is the standard major
+ *        axis. For bar charts, this is a minor axis. (Value: "BOTTOM_AXIS")
  *    @arg @c kGTLRSheets_BasicChartAxis_Position_LeftAxis The axis rendered at
- *        the left of a chart.
- *        For most charts, this is a minor axis.
- *        For bar charts, this is the standard major axis. (Value: "LEFT_AXIS")
+ *        the left of a chart. For most charts, this is a minor axis. For bar
+ *        charts, this is the standard major axis. (Value: "LEFT_AXIS")
  *    @arg @c kGTLRSheets_BasicChartAxis_Position_RightAxis The axis rendered at
- *        the right of a chart.
- *        For most charts, this is a minor axis.
- *        For bar charts, this is an unusual major axis. (Value: "RIGHT_AXIS")
+ *        the right of a chart. For most charts, this is a minor axis. For bar
+ *        charts, this is an unusual major axis. (Value: "RIGHT_AXIS")
  */
 @property(nonatomic, copy, nullable) NSString *position;
 
 /**
- *  The title of this axis. If set, this overrides any title inferred
- *  from headers of the data.
+ *  The title of this axis. If set, this overrides any title inferred from
+ *  headers of the data.
  */
 @property(nonatomic, copy, nullable) NSString *title;
+
+/** The axis title text position. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextPosition *titleTextPosition;
+
+/** The view window options for this axis. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartAxisViewWindowOptions *viewWindowOptions;
 
 @end
 
 
 /**
- *  The domain of a chart.
- *  For example, if charting stock prices over time, this would be the date.
+ *  The domain of a chart. For example, if charting stock prices over time, this
+ *  would be the date.
  */
 @interface GTLRSheets_BasicChartDomain : GTLRObject
 
@@ -2181,76 +3884,92 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ChartData *domain;
 
+/**
+ *  True to reverse the order of the domain values (horizontal axis).
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *reversed;
+
 @end
 
 
 /**
- *  A single series of data in a chart.
- *  For example, if charting stock prices over time, multiple series may exist,
- *  one for the "Open Price", "High Price", "Low Price" and "Close Price".
+ *  A single series of data in a chart. For example, if charting stock prices
+ *  over time, multiple series may exist, one for the "Open Price", "High
+ *  Price", "Low Price" and "Close Price".
  */
 @interface GTLRSheets_BasicChartSeries : GTLRObject
+
+/**
+ *  The color for elements (such as bars, lines, and points) associated with
+ *  this series. If empty, a default color is used.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *color;
+
+/**
+ *  The color for elements (such as bars, lines, and points) associated with
+ *  this series. If empty, a default color is used. If color is also set, this
+ *  field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *colorStyle;
+
+/**
+ *  The line style of this series. Valid only if the chartType is AREA, LINE, or
+ *  SCATTER. COMBO charts are also supported if the series chart type is AREA or
+ *  LINE.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_LineStyle *lineStyle;
 
 /** The data being visualized in this chart series. */
 @property(nonatomic, strong, nullable) GTLRSheets_ChartData *series;
 
 /**
- *  The minor axis that will specify the range of values for this series.
- *  For example, if charting stocks over time, the "Volume" series
- *  may want to be pinned to the right with the prices pinned to the left,
- *  because the scale of trading volume is different than the scale of
- *  prices.
- *  It is an error to specify an axis that isn't a valid minor axis
- *  for the chart's type.
+ *  The minor axis that will specify the range of values for this series. For
+ *  example, if charting stocks over time, the "Volume" series may want to be
+ *  pinned to the right with the prices pinned to the left, because the scale of
+ *  trading volume is different than the scale of prices. It is an error to
+ *  specify an axis that isn't a valid minor axis for the chart's type.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_BasicChartSeries_TargetAxis_BasicChartAxisPositionUnspecified
  *        Default value, do not use. (Value:
  *        "BASIC_CHART_AXIS_POSITION_UNSPECIFIED")
  *    @arg @c kGTLRSheets_BasicChartSeries_TargetAxis_BottomAxis The axis
- *        rendered at the bottom of a chart.
- *        For most charts, this is the standard major axis.
- *        For bar charts, this is a minor axis. (Value: "BOTTOM_AXIS")
+ *        rendered at the bottom of a chart. For most charts, this is the
+ *        standard major axis. For bar charts, this is a minor axis. (Value:
+ *        "BOTTOM_AXIS")
  *    @arg @c kGTLRSheets_BasicChartSeries_TargetAxis_LeftAxis The axis rendered
- *        at the left of a chart.
- *        For most charts, this is a minor axis.
- *        For bar charts, this is the standard major axis. (Value: "LEFT_AXIS")
+ *        at the left of a chart. For most charts, this is a minor axis. For bar
+ *        charts, this is the standard major axis. (Value: "LEFT_AXIS")
  *    @arg @c kGTLRSheets_BasicChartSeries_TargetAxis_RightAxis The axis
- *        rendered at the right of a chart.
- *        For most charts, this is a minor axis.
- *        For bar charts, this is an unusual major axis. (Value: "RIGHT_AXIS")
+ *        rendered at the right of a chart. For most charts, this is a minor
+ *        axis. For bar charts, this is an unusual major axis. (Value:
+ *        "RIGHT_AXIS")
  */
 @property(nonatomic, copy, nullable) NSString *targetAxis;
 
 /**
- *  The type of this series. Valid only if the
- *  chartType is
- *  COMBO.
- *  Different types will change the way the series is visualized.
- *  Only LINE, AREA,
- *  and COLUMN are supported.
+ *  The type of this series. Valid only if the chartType is COMBO. Different
+ *  types will change the way the series is visualized. Only LINE, AREA, and
+ *  COLUMN are supported.
  *
  *  Likely values:
- *    @arg @c kGTLRSheets_BasicChartSeries_Type_Area An <a
- *        href="/chart/interactive/docs/gallery/areachart">area chart</a>.
- *        (Value: "AREA")
- *    @arg @c kGTLRSheets_BasicChartSeries_Type_Bar A <a
- *        href="/chart/interactive/docs/gallery/barchart">bar chart</a>. (Value:
- *        "BAR")
+ *    @arg @c kGTLRSheets_BasicChartSeries_Type_Area An area chart. (Value:
+ *        "AREA")
+ *    @arg @c kGTLRSheets_BasicChartSeries_Type_Bar A bar chart. (Value: "BAR")
  *    @arg @c kGTLRSheets_BasicChartSeries_Type_BasicChartTypeUnspecified
  *        Default value, do not use. (Value: "BASIC_CHART_TYPE_UNSPECIFIED")
- *    @arg @c kGTLRSheets_BasicChartSeries_Type_Column A <a
- *        href="/chart/interactive/docs/gallery/columnchart">column chart</a>.
- *        (Value: "COLUMN")
- *    @arg @c kGTLRSheets_BasicChartSeries_Type_Combo A <a
- *        href="/chart/interactive/docs/gallery/combochart">combo chart</a>.
- *        (Value: "COMBO")
- *    @arg @c kGTLRSheets_BasicChartSeries_Type_Line A <a
- *        href="/chart/interactive/docs/gallery/linechart">line chart</a>.
- *        (Value: "LINE")
- *    @arg @c kGTLRSheets_BasicChartSeries_Type_Scatter A <a
- *        href="/chart/interactive/docs/gallery/scatterchart">scatter chart</a>.
- *        (Value: "SCATTER")
+ *    @arg @c kGTLRSheets_BasicChartSeries_Type_Column A column chart. (Value:
+ *        "COLUMN")
+ *    @arg @c kGTLRSheets_BasicChartSeries_Type_Combo A combo chart. (Value:
+ *        "COMBO")
+ *    @arg @c kGTLRSheets_BasicChartSeries_Type_Line A line chart. (Value:
+ *        "LINE")
+ *    @arg @c kGTLRSheets_BasicChartSeries_Type_Scatter A scatter chart. (Value:
+ *        "SCATTER")
+ *    @arg @c kGTLRSheets_BasicChartSeries_Type_SteppedArea A stepped area
+ *        chart. (Value: "STEPPED_AREA")
  */
 @property(nonatomic, copy, nullable) NSString *type;
 
@@ -2258,8 +3977,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  The specification for a basic chart. See BasicChartType for the list
- *  of charts this supports.
+ *  The specification for a basic chart. See BasicChartType for the list of
+ *  charts this supports.
  */
 @interface GTLRSheets_BasicChartSpec : GTLRObject
 
@@ -2270,45 +3989,62 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *  The type of the chart.
  *
  *  Likely values:
- *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Area An <a
- *        href="/chart/interactive/docs/gallery/areachart">area chart</a>.
- *        (Value: "AREA")
- *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Bar A <a
- *        href="/chart/interactive/docs/gallery/barchart">bar chart</a>. (Value:
+ *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Area An area chart. (Value:
+ *        "AREA")
+ *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Bar A bar chart. (Value:
  *        "BAR")
  *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_BasicChartTypeUnspecified
  *        Default value, do not use. (Value: "BASIC_CHART_TYPE_UNSPECIFIED")
- *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Column A <a
- *        href="/chart/interactive/docs/gallery/columnchart">column chart</a>.
+ *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Column A column chart.
  *        (Value: "COLUMN")
- *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Combo A <a
- *        href="/chart/interactive/docs/gallery/combochart">combo chart</a>.
- *        (Value: "COMBO")
- *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Line A <a
- *        href="/chart/interactive/docs/gallery/linechart">line chart</a>.
- *        (Value: "LINE")
- *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Scatter A <a
- *        href="/chart/interactive/docs/gallery/scatterchart">scatter chart</a>.
+ *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Combo A combo chart. (Value:
+ *        "COMBO")
+ *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Line A line chart. (Value:
+ *        "LINE")
+ *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_Scatter A scatter chart.
  *        (Value: "SCATTER")
+ *    @arg @c kGTLRSheets_BasicChartSpec_ChartType_SteppedArea A stepped area
+ *        chart. (Value: "STEPPED_AREA")
  */
 @property(nonatomic, copy, nullable) NSString *chartType;
 
 /**
- *  The domain of data this is charting.
- *  Only a single domain is currently supported.
+ *  The behavior of tooltips and data highlighting when hovering on data and
+ *  chart area.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BasicChartSpec_CompareMode_BasicChartCompareModeUnspecified
+ *        Default value, do not use. (Value:
+ *        "BASIC_CHART_COMPARE_MODE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_BasicChartSpec_CompareMode_Category All data elements
+ *        with the same category (e.g., domain value) are highlighted and shown
+ *        in the tooltip. (Value: "CATEGORY")
+ *    @arg @c kGTLRSheets_BasicChartSpec_CompareMode_Datum Only the focused data
+ *        element is highlighted and shown in the tooltip. (Value: "DATUM")
  */
+@property(nonatomic, copy, nullable) NSString *compareMode;
+
+/** The domain of data this is charting. Only a single domain is supported. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_BasicChartDomain *> *domains;
 
 /**
- *  The number of rows or columns in the data that are "headers".
- *  If not set, Google Sheets will guess how many rows are headers based
- *  on the data.
- *  (Note that BasicChartAxis.title may override the axis title
- *  inferred from the header values.)
+ *  The number of rows or columns in the data that are "headers". If not set,
+ *  Google Sheets will guess how many rows are headers based on the data. (Note
+ *  that BasicChartAxis.title may override the axis title inferred from the
+ *  header values.)
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *headerCount;
+
+/**
+ *  If some values in a series are missing, gaps may appear in the chart (e.g,
+ *  segments of lines in a line chart will be missing). To eliminate these gaps
+ *  set this to true. Applies to Line, Area, and Combo charts.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *interpolateNulls;
 
 /**
  *  The position of the chart legend.
@@ -2330,8 +4066,42 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @property(nonatomic, copy, nullable) NSString *legendPosition;
 
+/**
+ *  Gets whether all lines should be rendered smooth or straight by default.
+ *  Applies to Line charts.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *lineSmoothing;
+
 /** The data this chart is visualizing. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_BasicChartSeries *> *series;
+
+/**
+ *  The stacked type for charts that support vertical stacking. Applies to Area,
+ *  Bar, Column, Combo, and Stepped Area charts.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BasicChartSpec_StackedType_BasicChartStackedTypeUnspecified
+ *        Default value, do not use. (Value:
+ *        "BASIC_CHART_STACKED_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_BasicChartSpec_StackedType_NotStacked Series are not
+ *        stacked. (Value: "NOT_STACKED")
+ *    @arg @c kGTLRSheets_BasicChartSpec_StackedType_PercentStacked Vertical
+ *        stacks are stretched to reach the top of the chart, with values laid
+ *        out as percentages of each other. (Value: "PERCENT_STACKED")
+ *    @arg @c kGTLRSheets_BasicChartSpec_StackedType_Stacked Series values are
+ *        stacked, each value is rendered vertically beginning from the top of
+ *        the value below it. (Value: "STACKED")
+ */
+@property(nonatomic, copy, nullable) NSString *stackedType;
+
+/**
+ *  True to make the chart 3D. Applies to Bar and Column charts.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *threeDimensional;
 
 @end
 
@@ -2342,18 +4112,24 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_BasicFilter : GTLRObject
 
 /**
- *  The criteria for showing/hiding values per column.
- *  The map's key is the column index, and the value is the criteria for
- *  that column.
+ *  The criteria for showing/hiding values per column. The map's key is the
+ *  column index, and the value is the criteria for that column.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_BasicFilter_Criteria *criteria;
+
+/**
+ *  The filter criteria per column. Both criteria and filter_specs are populated
+ *  in responses. If both fields are specified in an update request, this field
+ *  takes precedence.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_FilterSpec *> *filterSpecs;
 
 /** The range the filter covers. */
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  The sort order per column. Later specifications are used when values
- *  are equal in the earlier specifications.
+ *  The sort order per column. Later specifications are used when values are
+ *  equal in the earlier specifications.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_SortSpec *> *sortSpecs;
 
@@ -2361,9 +4137,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  The criteria for showing/hiding values per column.
- *  The map's key is the column index, and the value is the criteria for
- *  that column.
+ *  The criteria for showing/hiding values per column. The map's key is the
+ *  column index, and the value is the criteria for that column.
  *
  *  @note This class is documented as having more properties of
  *        GTLRSheets_FilterCriteria. Use @c -additionalJSONKeys and @c
@@ -2371,6 +4146,37 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *        fetch them; or @c -additionalProperties to fetch them all at once.
  */
 @interface GTLRSheets_BasicFilter_Criteria : GTLRObject
+@end
+
+
+/**
+ *  The request for clearing more than one range selected by a DataFilter in a
+ *  spreadsheet.
+ */
+@interface GTLRSheets_BatchClearValuesByDataFilterRequest : GTLRObject
+
+/** The DataFilters used to determine which ranges to clear. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilter *> *dataFilters;
+
+@end
+
+
+/**
+ *  The response when clearing a range of values selected with DataFilters in a
+ *  spreadsheet.
+ */
+@interface GTLRSheets_BatchClearValuesByDataFilterResponse : GTLRObject
+
+/**
+ *  The ranges that were cleared, in A1 notation. If the requests are for an
+ *  unbounded range or a ranger larger than the bounds of the sheet, this is the
+ *  actual ranges that were cleared, bounded to the sheet's limits.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *clearedRanges;
+
+/** The spreadsheet the updates were applied to. */
+@property(nonatomic, copy, nullable) NSString *spreadsheetId;
+
 @end
 
 
@@ -2386,20 +4192,111 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  The response when updating a range of values in a spreadsheet.
+ *  The response when clearing a range of values in a spreadsheet.
  */
 @interface GTLRSheets_BatchClearValuesResponse : GTLRObject
 
 /**
- *  The ranges that were cleared, in A1 notation.
- *  (If the requests were for an unbounded range or a ranger larger
- *  than the bounds of the sheet, this will be the actual ranges
- *  that were cleared, bounded to the sheet's limits.)
+ *  The ranges that were cleared, in A1 notation. If the requests are for an
+ *  unbounded range or a ranger larger than the bounds of the sheet, this is the
+ *  actual ranges that were cleared, bounded to the sheet's limits.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *clearedRanges;
 
 /** The spreadsheet the updates were applied to. */
 @property(nonatomic, copy, nullable) NSString *spreadsheetId;
+
+@end
+
+
+/**
+ *  The request for retrieving a range of values in a spreadsheet selected by a
+ *  set of DataFilters.
+ */
+@interface GTLRSheets_BatchGetValuesByDataFilterRequest : GTLRObject
+
+/**
+ *  The data filters used to match the ranges of values to retrieve. Ranges that
+ *  match any of the specified data filters are included in the response.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilter *> *dataFilters;
+
+/**
+ *  How dates, times, and durations should be represented in the output. This is
+ *  ignored if value_render_option is FORMATTED_VALUE. The default dateTime
+ *  render option is [DateTimeRenderOption.SERIAL_NUMBER].
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_DateTimeRenderOption_FormattedString
+ *        Instructs date, time, datetime, and duration fields to be output as
+ *        strings in their given number format (which is dependent on the
+ *        spreadsheet locale). (Value: "FORMATTED_STRING")
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_DateTimeRenderOption_SerialNumber
+ *        Instructs date, time, datetime, and duration fields to be output as
+ *        doubles in "serial number" format, as popularized by Lotus 1-2-3. The
+ *        whole number portion of the value (left of the decimal) counts the
+ *        days since December 30th 1899. The fractional portion (right of the
+ *        decimal) counts the time as a fraction of the day. For example,
+ *        January 1st 1900 at noon would be 2.5, 2 because it's 2 days after
+ *        December 30st 1899, and .5 because noon is half a day. February 1st
+ *        1900 at 3pm would be 33.625. This correctly treats the year 1900 as
+ *        not a leap year. (Value: "SERIAL_NUMBER")
+ */
+@property(nonatomic, copy, nullable) NSString *dateTimeRenderOption;
+
+/**
+ *  The major dimension that results should use. For example, if the spreadsheet
+ *  data is: `A1=1,B1=2,A2=3,B2=4`, then a request that selects that range and
+ *  sets `majorDimension=ROWS` returns `[[1,2],[3,4]]`, whereas a request that
+ *  sets `majorDimension=COLUMNS` returns `[[1,3],[2,4]]`.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_MajorDimension_Columns
+ *        Operates on the columns of a sheet. (Value: "COLUMNS")
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_MajorDimension_DimensionUnspecified
+ *        The default value, do not use. (Value: "DIMENSION_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_MajorDimension_Rows
+ *        Operates on the rows of a sheet. (Value: "ROWS")
+ */
+@property(nonatomic, copy, nullable) NSString *majorDimension;
+
+/**
+ *  How values should be represented in the output. The default render option is
+ *  ValueRenderOption.FORMATTED_VALUE.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_ValueRenderOption_FormattedValue
+ *        Values will be calculated & formatted in the reply according to the
+ *        cell's formatting. Formatting is based on the spreadsheet's locale,
+ *        not the requesting user's locale. For example, if `A1` is `1.23` and
+ *        `A2` is `=A1` and formatted as currency, then `A2` would return
+ *        `"$1.23"`. (Value: "FORMATTED_VALUE")
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_ValueRenderOption_Formula
+ *        Values will not be calculated. The reply will include the formulas.
+ *        For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
+ *        currency, then A2 would return `"=A1"`. (Value: "FORMULA")
+ *    @arg @c kGTLRSheets_BatchGetValuesByDataFilterRequest_ValueRenderOption_UnformattedValue
+ *        Values will be calculated, but not formatted in the reply. For
+ *        example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
+ *        currency, then `A2` would return the number `1.23`. (Value:
+ *        "UNFORMATTED_VALUE")
+ */
+@property(nonatomic, copy, nullable) NSString *valueRenderOption;
+
+@end
+
+
+/**
+ *  The response when retrieving more than one range of values in a spreadsheet
+ *  selected by DataFilters.
+ */
+@interface GTLRSheets_BatchGetValuesByDataFilterResponse : GTLRObject
+
+/** The ID of the spreadsheet the data was retrieved from. */
+@property(nonatomic, copy, nullable) NSString *spreadsheetId;
+
+/** The requested values with the list of data filters that matched them. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_MatchedValueRange *> *valueRanges;
 
 @end
 
@@ -2413,8 +4310,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *spreadsheetId;
 
 /**
- *  The requested values. The order of the ValueRanges is the same as the
- *  order of the requested ranges.
+ *  The requested values. The order of the ValueRanges is the same as the order
+ *  of the requested ranges.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_ValueRange *> *valueRanges;
 
@@ -2427,28 +4324,31 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_BatchUpdateSpreadsheetRequest : GTLRObject
 
 /**
- *  Determines if the update response should include the spreadsheet
- *  resource.
+ *  Determines if the update response should include the spreadsheet resource.
  *
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *includeSpreadsheetInResponse;
 
-/** A list of updates to apply to the spreadsheet. */
+/**
+ *  A list of updates to apply to the spreadsheet. Requests will be applied in
+ *  the order they are specified. If any request is not valid, no requests will
+ *  be applied.
+ */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_Request *> *requests;
 
 /**
  *  True if grid data should be returned. Meaningful only if
- *  if include_spreadsheet_response is 'true'.
- *  This parameter is ignored if a field mask was set in the request.
+ *  include_spreadsheet_in_response is 'true'. This parameter is ignored if a
+ *  field mask was set in the request.
  *
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *responseIncludeGridData;
 
 /**
- *  Limits the ranges included in the response spreadsheet.
- *  Meaningful only if include_spreadsheet_response is 'true'.
+ *  Limits the ranges included in the response spreadsheet. Meaningful only if
+ *  include_spreadsheet_in_response is 'true'.
  */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *responseRanges;
 
@@ -2461,8 +4361,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_BatchUpdateSpreadsheetResponse : GTLRObject
 
 /**
- *  The reply of the updates. This maps 1:1 with the updates, although
- *  replies to some requests may be empty.
+ *  The reply of the updates. This maps 1:1 with the updates, although replies
+ *  to some requests may be empty.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_Response *> *replies;
 
@@ -2481,19 +4381,23 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /**
  *  The request for updating more than one range of values in a spreadsheet.
  */
-@interface GTLRSheets_BatchUpdateValuesRequest : GTLRObject
-
-/** The new values to apply to the spreadsheet. */
-@property(nonatomic, strong, nullable) NSArray<GTLRSheets_ValueRange *> *data;
+@interface GTLRSheets_BatchUpdateValuesByDataFilterRequest : GTLRObject
 
 /**
- *  Determines if the update response should include the values
- *  of the cells that were updated. By default, responses
- *  do not include the updated values. The `updatedData` field within
- *  each of the BatchUpdateValuesResponse.responses will contain
- *  the updated values. If the range to write was larger than than the range
- *  actually written, the response will include all values in the requested
- *  range (excluding trailing empty rows and columns).
+ *  The new values to apply to the spreadsheet. If more than one range is
+ *  matched by the specified DataFilter the specified values are applied to all
+ *  of those ranges.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilterValueRange *> *data;
+
+/**
+ *  Determines if the update response should include the values of the cells
+ *  that were updated. By default, responses do not include the updated values.
+ *  The `updatedData` field within each of the
+ *  BatchUpdateValuesResponse.responses contains the updated values. If the
+ *  range to write was larger than the range actually written, the response
+ *  includes all values in the requested range (excluding trailing empty rows
+ *  and columns).
  *
  *  Uses NSNumber of boolValue.
  */
@@ -2502,49 +4406,179 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /**
  *  Determines how dates, times, and durations in the response should be
  *  rendered. This is ignored if response_value_render_option is
- *  FORMATTED_VALUE.
- *  The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+ *  FORMATTED_VALUE. The default dateTime render option is
+ *  DateTimeRenderOption.SERIAL_NUMBER.
  *
  *  Likely values:
- *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_FormattedString
- *        Instructs date, time, datetime, and duration fields to be output
- *        as strings in their given number format (which is dependent
- *        on the spreadsheet locale). (Value: "FORMATTED_STRING")
- *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_SerialNumber
- *        Instructs date, time, datetime, and duration fields to be output
- *        as doubles in "serial number" format, as popularized by Lotus 1-2-3.
- *        Days are counted from December 31st 1899 and are incremented by 1,
- *        and times are fractions of a day. For example, January 1st 1900 at
- *        noon
- *        would be 1.5, 1 because it's 1 day offset from December 31st 1899,
- *        and .5 because noon is half a day. February 1st 1900 at 3pm would
- *        be 32.625. This correctly treats the year 1900 as not a leap year.
- *        (Value: "SERIAL_NUMBER")
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseDateTimeRenderOption_FormattedString
+ *        Instructs date, time, datetime, and duration fields to be output as
+ *        strings in their given number format (which is dependent on the
+ *        spreadsheet locale). (Value: "FORMATTED_STRING")
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseDateTimeRenderOption_SerialNumber
+ *        Instructs date, time, datetime, and duration fields to be output as
+ *        doubles in "serial number" format, as popularized by Lotus 1-2-3. The
+ *        whole number portion of the value (left of the decimal) counts the
+ *        days since December 30th 1899. The fractional portion (right of the
+ *        decimal) counts the time as a fraction of the day. For example,
+ *        January 1st 1900 at noon would be 2.5, 2 because it's 2 days after
+ *        December 30st 1899, and .5 because noon is half a day. February 1st
+ *        1900 at 3pm would be 33.625. This correctly treats the year 1900 as
+ *        not a leap year. (Value: "SERIAL_NUMBER")
  */
 @property(nonatomic, copy, nullable) NSString *responseDateTimeRenderOption;
 
 /**
- *  Determines how values in the response should be rendered.
- *  The default render option is ValueRenderOption.FORMATTED_VALUE.
+ *  Determines how values in the response should be rendered. The default render
+ *  option is ValueRenderOption.FORMATTED_VALUE.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_FormattedValue
+ *        Values will be calculated & formatted in the reply according to the
+ *        cell's formatting. Formatting is based on the spreadsheet's locale,
+ *        not the requesting user's locale. For example, if `A1` is `1.23` and
+ *        `A2` is `=A1` and formatted as currency, then `A2` would return
+ *        `"$1.23"`. (Value: "FORMATTED_VALUE")
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_Formula
+ *        Values will not be calculated. The reply will include the formulas.
+ *        For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
+ *        currency, then A2 would return `"=A1"`. (Value: "FORMULA")
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_UnformattedValue
+ *        Values will be calculated, but not formatted in the reply. For
+ *        example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
+ *        currency, then `A2` would return the number `1.23`. (Value:
+ *        "UNFORMATTED_VALUE")
+ */
+@property(nonatomic, copy, nullable) NSString *responseValueRenderOption;
+
+/**
+ *  How the input data should be interpreted.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ValueInputOption_InputValueOptionUnspecified
+ *        Default input value. This value must not be used. (Value:
+ *        "INPUT_VALUE_OPTION_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ValueInputOption_Raw
+ *        The values the user has entered will not be parsed and will be stored
+ *        as-is. (Value: "RAW")
+ *    @arg @c kGTLRSheets_BatchUpdateValuesByDataFilterRequest_ValueInputOption_UserEntered
+ *        The values will be parsed as if the user typed them into the UI.
+ *        Numbers will stay as numbers, but strings may be converted to numbers,
+ *        dates, etc. following the same rules that are applied when entering
+ *        text into a cell via the Google Sheets UI. (Value: "USER_ENTERED")
+ */
+@property(nonatomic, copy, nullable) NSString *valueInputOption;
+
+@end
+
+
+/**
+ *  The response when updating a range of values in a spreadsheet.
+ */
+@interface GTLRSheets_BatchUpdateValuesByDataFilterResponse : GTLRObject
+
+/** The response for each range updated. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_UpdateValuesByDataFilterResponse *> *responses;
+
+/** The spreadsheet the updates were applied to. */
+@property(nonatomic, copy, nullable) NSString *spreadsheetId;
+
+/**
+ *  The total number of cells updated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *totalUpdatedCells;
+
+/**
+ *  The total number of columns where at least one cell in the column was
+ *  updated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *totalUpdatedColumns;
+
+/**
+ *  The total number of rows where at least one cell in the row was updated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *totalUpdatedRows;
+
+/**
+ *  The total number of sheets where at least one cell in the sheet was updated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *totalUpdatedSheets;
+
+@end
+
+
+/**
+ *  The request for updating more than one range of values in a spreadsheet.
+ */
+@interface GTLRSheets_BatchUpdateValuesRequest : GTLRObject
+
+/** The new values to apply to the spreadsheet. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_ValueRange *> *data;
+
+/**
+ *  Determines if the update response should include the values of the cells
+ *  that were updated. By default, responses do not include the updated values.
+ *  The `updatedData` field within each of the
+ *  BatchUpdateValuesResponse.responses contains the updated values. If the
+ *  range to write was larger than the range actually written, the response
+ *  includes all values in the requested range (excluding trailing empty rows
+ *  and columns).
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *includeValuesInResponse;
+
+/**
+ *  Determines how dates, times, and durations in the response should be
+ *  rendered. This is ignored if response_value_render_option is
+ *  FORMATTED_VALUE. The default dateTime render option is
+ *  DateTimeRenderOption.SERIAL_NUMBER.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_FormattedString
+ *        Instructs date, time, datetime, and duration fields to be output as
+ *        strings in their given number format (which is dependent on the
+ *        spreadsheet locale). (Value: "FORMATTED_STRING")
+ *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseDateTimeRenderOption_SerialNumber
+ *        Instructs date, time, datetime, and duration fields to be output as
+ *        doubles in "serial number" format, as popularized by Lotus 1-2-3. The
+ *        whole number portion of the value (left of the decimal) counts the
+ *        days since December 30th 1899. The fractional portion (right of the
+ *        decimal) counts the time as a fraction of the day. For example,
+ *        January 1st 1900 at noon would be 2.5, 2 because it's 2 days after
+ *        December 30st 1899, and .5 because noon is half a day. February 1st
+ *        1900 at 3pm would be 33.625. This correctly treats the year 1900 as
+ *        not a leap year. (Value: "SERIAL_NUMBER")
+ */
+@property(nonatomic, copy, nullable) NSString *responseDateTimeRenderOption;
+
+/**
+ *  Determines how values in the response should be rendered. The default render
+ *  option is ValueRenderOption.FORMATTED_VALUE.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_FormattedValue
  *        Values will be calculated & formatted in the reply according to the
  *        cell's formatting. Formatting is based on the spreadsheet's locale,
- *        not the requesting user's locale.
- *        For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
- *        currency,
- *        then `A2` would return `"$1.23"`. (Value: "FORMATTED_VALUE")
+ *        not the requesting user's locale. For example, if `A1` is `1.23` and
+ *        `A2` is `=A1` and formatted as currency, then `A2` would return
+ *        `"$1.23"`. (Value: "FORMATTED_VALUE")
  *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_Formula
  *        Values will not be calculated. The reply will include the formulas.
  *        For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
- *        currency,
- *        then A2 would return `"=A1"`. (Value: "FORMULA")
+ *        currency, then A2 would return `"=A1"`. (Value: "FORMULA")
  *    @arg @c kGTLRSheets_BatchUpdateValuesRequest_ResponseValueRenderOption_UnformattedValue
- *        Values will be calculated, but not formatted in the reply.
- *        For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
- *        currency,
- *        then `A2` would return the number `1.23`. (Value: "UNFORMATTED_VALUE")
+ *        Values will be calculated, but not formatted in the reply. For
+ *        example, if `A1` is `1.23` and `A2` is `=A1` and formatted as
+ *        currency, then `A2` would return the number `1.23`. (Value:
+ *        "UNFORMATTED_VALUE")
  */
 @property(nonatomic, copy, nullable) NSString *responseValueRenderOption;
 
@@ -2575,8 +4609,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_BatchUpdateValuesResponse : GTLRObject
 
 /**
- *  One UpdateValuesResponse per requested range, in the same order as
- *  the requests appeared.
+ *  One UpdateValuesResponse per requested range, in the same order as the
+ *  requests appeared.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_UpdateValuesResponse *> *responses;
 
@@ -2606,8 +4640,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *totalUpdatedRows;
 
 /**
- *  The total number of sheets where at least one cell in the sheet was
- *  updated.
+ *  The total number of sheets where at least one cell in the sheet was updated.
  *
  *  Uses NSNumber of intValue.
  */
@@ -2617,9 +4650,59 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  A condition that can evaluate to true or false.
- *  BooleanConditions are used by conditional formatting,
- *  data validation, and the criteria in filters.
+ *  The specification of a BigQuery data source.
+ */
+@interface GTLRSheets_BigQueryDataSourceSpec : GTLRObject
+
+/**
+ *  The ID of a BigQuery enabled GCP project with a billing account attached.
+ *  For any queries executed against the data source, the project is charged.
+ */
+@property(nonatomic, copy, nullable) NSString *projectId;
+
+/** A BigQueryQuerySpec. */
+@property(nonatomic, strong, nullable) GTLRSheets_BigQueryQuerySpec *querySpec;
+
+/** A BigQueryTableSpec. */
+@property(nonatomic, strong, nullable) GTLRSheets_BigQueryTableSpec *tableSpec;
+
+@end
+
+
+/**
+ *  Specifies a custom BigQuery query.
+ */
+@interface GTLRSheets_BigQueryQuerySpec : GTLRObject
+
+/** The raw query string. */
+@property(nonatomic, copy, nullable) NSString *rawQuery;
+
+@end
+
+
+/**
+ *  Specifies a BigQuery table definition. Only native tables is allowed.
+ */
+@interface GTLRSheets_BigQueryTableSpec : GTLRObject
+
+/** The BigQuery dataset id. */
+@property(nonatomic, copy, nullable) NSString *datasetId;
+
+/** The BigQuery table id. */
+@property(nonatomic, copy, nullable) NSString *tableId;
+
+/**
+ *  The ID of a BigQuery project the table belongs to. If not specified, the
+ *  project_id is assumed.
+ */
+@property(nonatomic, copy, nullable) NSString *tableProjectId;
+
+@end
+
+
+/**
+ *  A condition that can evaluate to true or false. BooleanConditions are used
+ *  by conditional formatting, data validation, and the criteria in filters.
  */
 @interface GTLRSheets_BooleanCondition : GTLRObject
 
@@ -2628,135 +4711,141 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_BooleanCondition_Type_Blank The cell's value must be
- *        empty.
- *        Supported by conditional formatting and filters.
- *        Requires no ConditionValues. (Value: "BLANK")
+ *        empty. Supported by conditional formatting and filters. Requires no
+ *        ConditionValues. (Value: "BLANK")
+ *    @arg @c kGTLRSheets_BooleanCondition_Type_Boolean The cell's value must be
+ *        TRUE/FALSE or in the list of condition values. Supported by data
+ *        validation. Renders as a cell checkbox. Supports zero, one or two
+ *        ConditionValues. No values indicates the cell must be TRUE or FALSE,
+ *        where TRUE renders as checked and FALSE renders as unchecked. One
+ *        value indicates the cell will render as checked when it contains that
+ *        value and unchecked when it is blank. Two values indicate that the
+ *        cell will render as checked when it contains the first value and
+ *        unchecked when it contains the second value. For example, ["Yes","No"]
+ *        indicates that the cell will render a checked box when it has the
+ *        value "Yes" and an unchecked box when it has the value "No". (Value:
+ *        "BOOLEAN")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_ConditionTypeUnspecified The
  *        default value, do not use. (Value: "CONDITION_TYPE_UNSPECIFIED")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_CustomFormula The condition's
- *        formula must evaluate to true.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "CUSTOM_FORMULA")
+ *        formula must evaluate to true. Supported by data validation,
+ *        conditional formatting and filters. Requires a single ConditionValue.
+ *        (Value: "CUSTOM_FORMULA")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateAfter The cell's value must
- *        be after the date of the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue
- *        that may be a relative date. (Value: "DATE_AFTER")
+ *        be after the date of the condition's value. Supported by data
+ *        validation, conditional formatting and filters. Requires a single
+ *        ConditionValue that may be a relative date. (Value: "DATE_AFTER")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateBefore The cell's value must
- *        be before the date of the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue
- *        that may be a relative date. (Value: "DATE_BEFORE")
+ *        be before the date of the condition's value. Supported by data
+ *        validation, conditional formatting and filters. Requires a single
+ *        ConditionValue that may be a relative date. (Value: "DATE_BEFORE")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateBetween The cell's value
- *        must be between the dates of the two condition values.
- *        Supported by data validation.
- *        Requires exactly two ConditionValues. (Value: "DATE_BETWEEN")
+ *        must be between the dates of the two condition values. Supported by
+ *        data validation. Requires exactly two ConditionValues. (Value:
+ *        "DATE_BETWEEN")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateEq The cell's value must be
- *        the same date as the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "DATE_EQ")
+ *        the same date as the condition's value. Supported by data validation,
+ *        conditional formatting and filters. Requires a single ConditionValue.
+ *        (Value: "DATE_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateIsValid The cell's value
- *        must be a date.
- *        Supported by data validation.
- *        Requires no ConditionValues. (Value: "DATE_IS_VALID")
+ *        must be a date. Supported by data validation. Requires no
+ *        ConditionValues. (Value: "DATE_IS_VALID")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateNotBetween The cell's value
- *        must be outside the dates of the two condition values.
- *        Supported by data validation.
- *        Requires exactly two ConditionValues. (Value: "DATE_NOT_BETWEEN")
+ *        must be outside the dates of the two condition values. Supported by
+ *        data validation. Requires exactly two ConditionValues. (Value:
+ *        "DATE_NOT_BETWEEN")
+ *    @arg @c kGTLRSheets_BooleanCondition_Type_DateNotEq The cell's value must
+ *        be exactly not the condition's value. Supported by filters on data
+ *        source objects. Requires at least one ConditionValue. (Value:
+ *        "DATE_NOT_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateOnOrAfter The cell's value
- *        must be on or after the date of the condition's value.
- *        Supported by data validation.
- *        Requires a single ConditionValue
- *        that may be a relative date. (Value: "DATE_ON_OR_AFTER")
+ *        must be on or after the date of the condition's value. Supported by
+ *        data validation. Requires a single ConditionValue that may be a
+ *        relative date. (Value: "DATE_ON_OR_AFTER")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_DateOnOrBefore The cell's value
- *        must be on or before the date of the condition's value.
- *        Supported by data validation.
- *        Requires a single ConditionValue
- *        that may be a relative date. (Value: "DATE_ON_OR_BEFORE")
+ *        must be on or before the date of the condition's value. Supported by
+ *        data validation. Requires a single ConditionValue that may be a
+ *        relative date. (Value: "DATE_ON_OR_BEFORE")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NotBlank The cell's value must
- *        not be empty.
- *        Supported by conditional formatting and filters.
+ *        not be empty. Supported by conditional formatting and filters.
  *        Requires no ConditionValues. (Value: "NOT_BLANK")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberBetween The cell's value
- *        must be between the two condition values.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires exactly two ConditionValues. (Value: "NUMBER_BETWEEN")
+ *        must be between the two condition values. Supported by data
+ *        validation, conditional formatting and filters. Requires exactly two
+ *        ConditionValues. (Value: "NUMBER_BETWEEN")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberEq The cell's value must
- *        be equal to the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "NUMBER_EQ")
+ *        be equal to the condition's value. Supported by data validation,
+ *        conditional formatting and filters. Requires a single ConditionValue.
+ *        (Value: "NUMBER_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberGreater The cell's value
- *        must be greater than the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "NUMBER_GREATER")
+ *        must be greater than the condition's value. Supported by data
+ *        validation, conditional formatting and filters. Requires a single
+ *        ConditionValue. (Value: "NUMBER_GREATER")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberGreaterThanEq The cell's
  *        value must be greater than or equal to the condition's value.
  *        Supported by data validation, conditional formatting and filters.
  *        Requires a single ConditionValue. (Value: "NUMBER_GREATER_THAN_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberLess The cell's value must
- *        be less than the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "NUMBER_LESS")
+ *        be less than the condition's value. Supported by data validation,
+ *        conditional formatting and filters. Requires a single ConditionValue.
+ *        (Value: "NUMBER_LESS")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberLessThanEq The cell's
- *        value must be less than or equal to the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "NUMBER_LESS_THAN_EQ")
+ *        value must be less than or equal to the condition's value. Supported
+ *        by data validation, conditional formatting and filters. Requires a
+ *        single ConditionValue. (Value: "NUMBER_LESS_THAN_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberNotBetween The cell's
- *        value must not be between the two condition values.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires exactly two ConditionValues. (Value: "NUMBER_NOT_BETWEEN")
+ *        value must not be between the two condition values. Supported by data
+ *        validation, conditional formatting and filters. Requires exactly two
+ *        ConditionValues. (Value: "NUMBER_NOT_BETWEEN")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_NumberNotEq The cell's value
- *        must be not equal to the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "NUMBER_NOT_EQ")
+ *        must be not equal to the condition's value. Supported by data
+ *        validation, conditional formatting and filters. Requires a single
+ *        ConditionValue. (Value: "NUMBER_NOT_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_OneOfList The cell's value must
- *        in the list of condition values.
- *        Supported by data validation.
- *        Supports any number of condition values,
- *        one per item in the list.
+ *        be in the list of condition values. Supported by data validation.
+ *        Supports any number of condition values, one per item in the list.
  *        Formulas are not supported in the values. (Value: "ONE_OF_LIST")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_OneOfRange The cell's value must
- *        be listed in the grid in condition value's range.
- *        Supported by data validation.
- *        Requires a single ConditionValue,
- *        and the value must be a valid range in A1 notation. (Value:
- *        "ONE_OF_RANGE")
+ *        be listed in the grid in condition value's range. Supported by data
+ *        validation. Requires a single ConditionValue, and the value must be a
+ *        valid range in A1 notation. (Value: "ONE_OF_RANGE")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_TextContains The cell's value
- *        must contain the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "TEXT_CONTAINS")
+ *        must contain the condition's value. Supported by data validation,
+ *        conditional formatting and filters. Requires a single ConditionValue.
+ *        (Value: "TEXT_CONTAINS")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_TextEndsWith The cell's value
- *        must end with the condition's value.
- *        Supported by conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "TEXT_ENDS_WITH")
+ *        must end with the condition's value. Supported by conditional
+ *        formatting and filters. Requires a single ConditionValue. (Value:
+ *        "TEXT_ENDS_WITH")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_TextEq The cell's value must be
- *        exactly the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "TEXT_EQ")
+ *        exactly the condition's value. Supported by data validation,
+ *        conditional formatting and filters. Requires a single ConditionValue.
+ *        (Value: "TEXT_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_TextIsEmail The cell's value
- *        must be a valid email address.
- *        Supported by data validation.
- *        Requires no ConditionValues. (Value: "TEXT_IS_EMAIL")
+ *        must be a valid email address. Supported by data validation. Requires
+ *        no ConditionValues. (Value: "TEXT_IS_EMAIL")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_TextIsUrl The cell's value must
- *        be a valid URL.
- *        Supported by data validation.
- *        Requires no ConditionValues. (Value: "TEXT_IS_URL")
+ *        be a valid URL. Supported by data validation. Requires no
+ *        ConditionValues. (Value: "TEXT_IS_URL")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_TextNotContains The cell's value
- *        must not contain the condition's value.
- *        Supported by data validation, conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "TEXT_NOT_CONTAINS")
+ *        must not contain the condition's value. Supported by data validation,
+ *        conditional formatting and filters. Requires a single ConditionValue.
+ *        (Value: "TEXT_NOT_CONTAINS")
+ *    @arg @c kGTLRSheets_BooleanCondition_Type_TextNotEq The cell's value must
+ *        be exactly not the condition's value. Supported by filters on data
+ *        source objects. Requires at least one ConditionValue. (Value:
+ *        "TEXT_NOT_EQ")
  *    @arg @c kGTLRSheets_BooleanCondition_Type_TextStartsWith The cell's value
- *        must start with the condition's value.
- *        Supported by conditional formatting and filters.
- *        Requires a single ConditionValue. (Value: "TEXT_STARTS_WITH")
+ *        must start with the condition's value. Supported by conditional
+ *        formatting and filters. Requires a single ConditionValue. (Value:
+ *        "TEXT_STARTS_WITH")
  */
 @property(nonatomic, copy, nullable) NSString *type;
 
 /**
- *  The values of the condition. The number of supported values depends
- *  on the condition type. Some support zero values,
- *  others one or two values,
- *  and ConditionType.ONE_OF_LIST supports an arbitrary number of values.
+ *  The values of the condition. The number of supported values depends on the
+ *  condition type. Some support zero values, others one or two values, and
+ *  ConditionType.ONE_OF_LIST supports an arbitrary number of values.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_ConditionValue *> *values;
 
@@ -2769,18 +4858,15 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_BooleanRule : GTLRObject
 
 /**
- *  The condition of the rule. If the condition evaluates to true,
- *  the format will be applied.
+ *  The condition of the rule. If the condition evaluates to true, the format is
+ *  applied.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_BooleanCondition *condition;
 
 /**
- *  The format to apply.
- *  Conditional formatting can only apply a subset of formatting:
- *  bold, italic,
- *  strikethrough,
- *  foreground color &
- *  background color.
+ *  The format to apply. Conditional formatting can only apply a subset of
+ *  formatting: bold, italic, strikethrough, foreground color & background
+ *  color.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_CellFormat *format;
 
@@ -2796,6 +4882,11 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_Color *color;
 
 /**
+ *  The color of the border. If color is also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *colorStyle;
+
+/**
  *  The style of the border.
  *
  *  Likely values:
@@ -2805,8 +4896,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *        "DOTTED")
  *    @arg @c kGTLRSheets_Border_Style_Double The border is two solid lines.
  *        (Value: "DOUBLE")
- *    @arg @c kGTLRSheets_Border_Style_None No border.
- *        Used only when updating a border in order to erase it. (Value: "NONE")
+ *    @arg @c kGTLRSheets_Border_Style_None No border. Used only when updating a
+ *        border in order to erase it. (Value: "NONE")
  *    @arg @c kGTLRSheets_Border_Style_Solid The border is a thin solid line.
  *        (Value: "SOLID")
  *    @arg @c kGTLRSheets_Border_Style_SolidMedium The border is a medium solid
@@ -2819,8 +4910,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *style;
 
 /**
- *  The width of the border, in pixels.
- *  Deprecated; the width is determined by the "style" field.
+ *  The width of the border, in pixels. Deprecated; the width is determined by
+ *  the "style" field.
  *
  *  Uses NSNumber of intValue.
  */
@@ -2850,44 +4941,236 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  A bubble chart.
+ */
+@interface GTLRSheets_BubbleChartSpec : GTLRObject
+
+/** The bubble border color. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *bubbleBorderColor;
+
+/**
+ *  The bubble border color. If bubble_border_color is also set, this field
+ *  takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *bubbleBorderColorStyle;
+
+/** The data containing the bubble labels. These do not need to be unique. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *bubbleLabels;
+
+/**
+ *  The max radius size of the bubbles, in pixels. If specified, the field must
+ *  be a positive value.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *bubbleMaxRadiusSize;
+
+/**
+ *  The minimum radius size of the bubbles, in pixels. If specific, the field
+ *  must be a positive value.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *bubbleMinRadiusSize;
+
+/**
+ *  The opacity of the bubbles between 0 and 1.0. 0 is fully transparent and 1
+ *  is fully opaque.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *bubbleOpacity;
+
+/**
+ *  The data contianing the bubble sizes. Bubble sizes are used to draw the
+ *  bubbles at different sizes relative to each other. If specified, group_ids
+ *  must also be specified. This field is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *bubbleSizes;
+
+/**
+ *  The format of the text inside the bubbles. Underline and Strikethrough are
+ *  not supported.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TextFormat *bubbleTextStyle;
+
+/**
+ *  The data containing the bubble x-values. These values locate the bubbles in
+ *  the chart horizontally.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *domain;
+
+/**
+ *  The data containing the bubble group IDs. All bubbles with the same group ID
+ *  are drawn in the same color. If bubble_sizes is specified then this field
+ *  must also be specified but may contain blank values. This field is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *groupIds;
+
+/**
+ *  Where the legend of the chart should be drawn.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_BubbleChartSpec_LegendPosition_BottomLegend The legend
+ *        is rendered on the bottom of the chart. (Value: "BOTTOM_LEGEND")
+ *    @arg @c kGTLRSheets_BubbleChartSpec_LegendPosition_BubbleChartLegendPositionUnspecified
+ *        Default value, do not use. (Value:
+ *        "BUBBLE_CHART_LEGEND_POSITION_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_BubbleChartSpec_LegendPosition_InsideLegend The legend
+ *        is rendered inside the chart area. (Value: "INSIDE_LEGEND")
+ *    @arg @c kGTLRSheets_BubbleChartSpec_LegendPosition_LeftLegend The legend
+ *        is rendered on the left of the chart. (Value: "LEFT_LEGEND")
+ *    @arg @c kGTLRSheets_BubbleChartSpec_LegendPosition_NoLegend No legend is
+ *        rendered. (Value: "NO_LEGEND")
+ *    @arg @c kGTLRSheets_BubbleChartSpec_LegendPosition_RightLegend The legend
+ *        is rendered on the right of the chart. (Value: "RIGHT_LEGEND")
+ *    @arg @c kGTLRSheets_BubbleChartSpec_LegendPosition_TopLegend The legend is
+ *        rendered on the top of the chart. (Value: "TOP_LEGEND")
+ */
+@property(nonatomic, copy, nullable) NSString *legendPosition;
+
+/**
+ *  The data contianing the bubble y-values. These values locate the bubbles in
+ *  the chart vertically.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *series;
+
+@end
+
+
+/**
+ *  A candlestick chart.
+ */
+@interface GTLRSheets_CandlestickChartSpec : GTLRObject
+
+/** The Candlestick chart data. Only one CandlestickData is supported. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_CandlestickData *> *data;
+
+/**
+ *  The domain data (horizontal axis) for the candlestick chart. String data
+ *  will be treated as discrete labels, other data will be treated as continuous
+ *  values.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_CandlestickDomain *domain;
+
+@end
+
+
+/**
+ *  The Candlestick chart data, each containing the low, open, close, and high
+ *  values for a series.
+ */
+@interface GTLRSheets_CandlestickData : GTLRObject
+
+/**
+ *  The range data (vertical axis) for the close/final value for each candle.
+ *  This is the top of the candle body. If greater than the open value the
+ *  candle will be filled. Otherwise the candle will be hollow.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_CandlestickSeries *closeSeries;
+
+/**
+ *  The range data (vertical axis) for the high/maximum value for each candle.
+ *  This is the top of the candle's center line.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_CandlestickSeries *highSeries;
+
+/**
+ *  The range data (vertical axis) for the low/minimum value for each candle.
+ *  This is the bottom of the candle's center line.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_CandlestickSeries *lowSeries;
+
+/**
+ *  The range data (vertical axis) for the open/initial value for each candle.
+ *  This is the bottom of the candle body. If less than the close value the
+ *  candle will be filled. Otherwise the candle will be hollow.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_CandlestickSeries *openSeries;
+
+@end
+
+
+/**
+ *  The domain of a CandlestickChart.
+ */
+@interface GTLRSheets_CandlestickDomain : GTLRObject
+
+/** The data of the CandlestickDomain. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *data;
+
+/**
+ *  True to reverse the order of the domain values (horizontal axis).
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *reversed;
+
+@end
+
+
+/**
+ *  The series of a CandlestickData.
+ */
+@interface GTLRSheets_CandlestickSeries : GTLRObject
+
+/** The data of the CandlestickSeries. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *data;
+
+@end
+
+
+/**
  *  Data about a specific cell.
  */
 @interface GTLRSheets_CellData : GTLRObject
 
 /**
- *  A data validation rule on the cell, if any.
- *  When writing, the new data validation rule will overwrite any prior rule.
+ *  Output only. Information about a data source formula on the cell. The field
+ *  is set if user_entered_value is a formula referencing some
+ *  [SheetType.DATA_SOURCE] sheet, e.g `=SUM(DataSheet!Column)`.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceFormula *dataSourceFormula;
+
+/**
+ *  A data source table anchored at this cell. The size of data source table
+ *  itself is computed dynamically based on its configuration. Only the first
+ *  cell of the data source table contains the data source table definition. The
+ *  other cells will contain the display values of the data source table result
+ *  in their effective_value fields.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceTable *dataSourceTable;
+
+/**
+ *  A data validation rule on the cell, if any. When writing, the new data
+ *  validation rule will overwrite any prior rule.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_DataValidationRule *dataValidation;
 
 /**
- *  The effective format being used by the cell.
- *  This includes the results of applying any conditional formatting and,
- *  if the cell contains a formula, the computed number format.
- *  If the effective format is the default format, effective format will
- *  not be written.
- *  This field is read-only.
+ *  The effective format being used by the cell. This includes the results of
+ *  applying any conditional formatting and, if the cell contains a formula, the
+ *  computed number format. If the effective format is the default format,
+ *  effective format will not be written. This field is read-only.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_CellFormat *effectiveFormat;
 
 /**
- *  The effective value of the cell. For cells with formulas, this will be
- *  the calculated value. For cells with literals, this will be
- *  the same as the user_entered_value.
- *  This field is read-only.
+ *  The effective value of the cell. For cells with formulas, this is the
+ *  calculated value. For cells with literals, this is the same as the
+ *  user_entered_value. This field is read-only.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ExtendedValue *effectiveValue;
 
 /**
- *  The formatted value of the cell.
- *  This is the value as it's shown to the user.
- *  This field is read-only.
+ *  The formatted value of the cell. This is the value as it's shown to the
+ *  user. This field is read-only.
  */
 @property(nonatomic, copy, nullable) NSString *formattedValue;
 
 /**
- *  A hyperlink this cell points to, if any.
- *  This field is read-only. (To set it, use a `=HYPERLINK` formula.)
+ *  A hyperlink this cell points to, if any. This field is read-only. (To set
+ *  it, use a `=HYPERLINK` formula in the userEnteredValue.formulaValue field.)
  */
 @property(nonatomic, copy, nullable) NSString *hyperlink;
 
@@ -2895,36 +5178,35 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *note;
 
 /**
- *  A pivot table anchored at this cell. The size of pivot table itself
- *  is computed dynamically based on its data, grouping, filters, values,
- *  etc. Only the top-left cell of the pivot table contains the pivot table
- *  definition. The other cells will contain the calculated values of the
- *  results of the pivot in their effective_value fields.
+ *  A pivot table anchored at this cell. The size of pivot table itself is
+ *  computed dynamically based on its data, grouping, filters, values, etc. Only
+ *  the top-left cell of the pivot table contains the pivot table definition.
+ *  The other cells will contain the calculated values of the results of the
+ *  pivot in their effective_value fields.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_PivotTable *pivotTable;
 
 /**
- *  Runs of rich text applied to subsections of the cell. Runs are only valid
- *  on user entered strings, not formulas, bools, or numbers.
- *  Runs start at specific indexes in the text and continue until the next
- *  run. Properties of a run will continue unless explicitly changed
- *  in a subsequent run (and properties of the first run will continue
- *  the properties of the cell unless explicitly changed).
- *  When writing, the new runs will overwrite any prior runs. When writing a
- *  new user_entered_value, previous runs will be erased.
+ *  Runs of rich text applied to subsections of the cell. Runs are only valid on
+ *  user entered strings, not formulas, bools, or numbers. Runs start at
+ *  specific indexes in the text and continue until the next run. Properties of
+ *  a run will continue unless explicitly changed in a subsequent run (and
+ *  properties of the first run will continue the properties of the cell unless
+ *  explicitly changed). When writing, the new runs will overwrite any prior
+ *  runs. When writing a new user_entered_value, previous runs are erased.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_TextFormatRun *> *textFormatRuns;
 
 /**
- *  The format the user entered for the cell.
- *  When writing, the new format will be merged with the existing format.
+ *  The format the user entered for the cell. When writing, the new format will
+ *  be merged with the existing format.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_CellFormat *userEnteredFormat;
 
 /**
  *  The value the user entered in the cell. e.g, `1234`, `'Hello'`, or `=NOW()`
- *  Note: Dates, Times and DateTimes are represented as doubles in
- *  serial number format.
+ *  Note: Dates, Times and DateTimes are represented as doubles in serial number
+ *  format.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ExtendedValue *userEnteredValue;
 
@@ -2938,6 +5220,12 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /** The background color of the cell. */
 @property(nonatomic, strong, nullable) GTLRSheets_Color *backgroundColor;
+
+/**
+ *  The background color of the cell. If background_color is also set, this
+ *  field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *backgroundColorStyle;
 
 /** The borders of the cell. */
 @property(nonatomic, strong, nullable) GTLRSheets_Borders *borders;
@@ -3023,37 +5311,27 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_CellFormat_WrapStrategy_Clip Lines that are longer
- *        than the cell width will be clipped.
- *        The text will never wrap to the next line unless the user manually
- *        inserts a new line.
- *        Example:
- *        | First sentence. |
- *        | Manual newline t| <- Text is clipped
- *        | Next newline. | (Value: "CLIP")
+ *        than the cell width will be clipped. The text will never wrap to the
+ *        next line unless the user manually inserts a new line. Example: |
+ *        First sentence. | | Manual newline t| <- Text is clipped | Next
+ *        newline. | (Value: "CLIP")
  *    @arg @c kGTLRSheets_CellFormat_WrapStrategy_LegacyWrap This wrap strategy
- *        represents the old Google Sheets wrap strategy where
- *        words that are longer than a line are clipped rather than broken. This
- *        strategy is not supported on all platforms and is being phased out.
- *        Example:
- *        | Cell has a |
- *        | loooooooooo| <- Word is clipped.
- *        | word. | (Value: "LEGACY_WRAP")
+ *        represents the old Google Sheets wrap strategy where words that are
+ *        longer than a line are clipped rather than broken. This strategy is
+ *        not supported on all platforms and is being phased out. Example: |
+ *        Cell has a | | loooooooooo| <- Word is clipped. | word. | (Value:
+ *        "LEGACY_WRAP")
  *    @arg @c kGTLRSheets_CellFormat_WrapStrategy_OverflowCell Lines that are
- *        longer than the cell width will be written in the next
- *        cell over, so long as that cell is empty. If the next cell over is
- *        non-empty, this behaves the same as CLIP. The text will never wrap
- *        to the next line unless the user manually inserts a new line.
- *        Example:
- *        | First sentence. |
- *        | Manual newline that is very long. <- Text continues into next cell
- *        | Next newline. | (Value: "OVERFLOW_CELL")
+ *        longer than the cell width will be written in the next cell over, so
+ *        long as that cell is empty. If the next cell over is non-empty, this
+ *        behaves the same as CLIP. The text will never wrap to the next line
+ *        unless the user manually inserts a new line. Example: | First
+ *        sentence. | | Manual newline that is very long. <- Text continues into
+ *        next cell | Next newline. | (Value: "OVERFLOW_CELL")
  *    @arg @c kGTLRSheets_CellFormat_WrapStrategy_Wrap Words that are longer
- *        than a line are wrapped at the character level
- *        rather than clipped.
- *        Example:
- *        | Cell has a |
- *        | loooooooooo| <- Word is broken.
- *        | ong word. | (Value: "WRAP")
+ *        than a line are wrapped at the character level rather than clipped.
+ *        Example: | Cell has a | | loooooooooo| <- Word is broken. | ong word.
+ *        | (Value: "WRAP")
  *    @arg @c kGTLRSheets_CellFormat_WrapStrategy_WrapStrategyUnspecified The
  *        default value, do not use. (Value: "WRAP_STRATEGY_UNSPECIFIED")
  */
@@ -3063,12 +5341,219 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  The options that define a "view window" for a chart (such as the visible
+ *  values in an axis).
+ */
+@interface GTLRSheets_ChartAxisViewWindowOptions : GTLRObject
+
+/**
+ *  The maximum numeric value to be shown in this view window. If unset, will
+ *  automatically determine a maximum value that looks good for the data.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *viewWindowMax;
+
+/**
+ *  The minimum numeric value to be shown in this view window. If unset, will
+ *  automatically determine a minimum value that looks good for the data.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *viewWindowMin;
+
+/**
+ *  The view window's mode.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_DefaultViewWindowMode
+ *        The default view window mode used in the Sheets editor for this chart
+ *        type. In most cases, if set, the default mode is equivalent to
+ *        `PRETTY`. (Value: "DEFAULT_VIEW_WINDOW_MODE")
+ *    @arg @c kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_Explicit
+ *        Follows the min and max exactly if specified. If a value is
+ *        unspecified, it will fall back to the `PRETTY` value. (Value:
+ *        "EXPLICIT")
+ *    @arg @c kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_Pretty
+ *        Chooses a min and max that make the chart look good. Both min and max
+ *        are ignored in this mode. (Value: "PRETTY")
+ *    @arg @c kGTLRSheets_ChartAxisViewWindowOptions_ViewWindowMode_ViewWindowModeUnsupported
+ *        Do not use. Represents that the currently set mode is not supported by
+ *        the API. (Value: "VIEW_WINDOW_MODE_UNSUPPORTED")
+ */
+@property(nonatomic, copy, nullable) NSString *viewWindowMode;
+
+@end
+
+
+/**
+ *  Custom number formatting options for chart attributes.
+ */
+@interface GTLRSheets_ChartCustomNumberFormatOptions : GTLRObject
+
+/**
+ *  Custom prefix to be prepended to the chart attribute. This field is
+ *  optional.
+ */
+@property(nonatomic, copy, nullable) NSString *prefix;
+
+/**
+ *  Custom suffix to be appended to the chart attribute. This field is optional.
+ */
+@property(nonatomic, copy, nullable) NSString *suffix;
+
+@end
+
+
+/**
  *  The data included in a domain or series.
  */
 @interface GTLRSheets_ChartData : GTLRObject
 
+/**
+ *  The aggregation type for the series of a data source chart. Not supported
+ *  for regular charts.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_ChartData_AggregateType_Average Average aggregate
+ *        function. (Value: "AVERAGE")
+ *    @arg @c kGTLRSheets_ChartData_AggregateType_ChartAggregateTypeUnspecified
+ *        Default value, do not use. (Value: "CHART_AGGREGATE_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_ChartData_AggregateType_Count Count aggregate
+ *        function. (Value: "COUNT")
+ *    @arg @c kGTLRSheets_ChartData_AggregateType_Max Maximum aggregate
+ *        function. (Value: "MAX")
+ *    @arg @c kGTLRSheets_ChartData_AggregateType_Median Median aggregate
+ *        function. (Value: "MEDIAN")
+ *    @arg @c kGTLRSheets_ChartData_AggregateType_Min Minimum aggregate
+ *        function. (Value: "MIN")
+ *    @arg @c kGTLRSheets_ChartData_AggregateType_Sum Sum aggregate function.
+ *        (Value: "SUM")
+ */
+@property(nonatomic, copy, nullable) NSString *aggregateType;
+
+/** The reference to the data source column that the data reads from. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *columnReference;
+
+/**
+ *  The rule to group the data by if the ChartData backs the domain of a data
+ *  source chart. Not supported for regular charts.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartGroupRule *groupRule;
+
 /** The source ranges of the data. */
 @property(nonatomic, strong, nullable) GTLRSheets_ChartSourceRange *sourceRange;
+
+@end
+
+
+/**
+ *  Allows you to organize the date-time values in a source data column into
+ *  buckets based on selected parts of their date or time values.
+ */
+@interface GTLRSheets_ChartDateTimeRule : GTLRObject
+
+/**
+ *  The type of date-time grouping to apply.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_ChartDateTimeRuleTypeUnspecified
+ *        The default type, do not use. (Value:
+ *        "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_DayMonth Group dates by day and
+ *        month, for example 22-Nov. The month is translated based on the
+ *        spreadsheet locale. (Value: "DAY_MONTH")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_DayOfMonth Group dates by day
+ *        of month, from 1 to 31. (Value: "DAY_OF_MONTH")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_DayOfWeek Group dates by day of
+ *        week, for example Sunday. The days of the week will be translated
+ *        based on the spreadsheet locale. (Value: "DAY_OF_WEEK")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_DayOfYear Group dates by day of
+ *        year, from 1 to 366. Note that dates after Feb. 29 fall in different
+ *        buckets in leap years than in non-leap years. (Value: "DAY_OF_YEAR")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_Hour Group dates by hour using
+ *        a 24-hour system, from 0 to 23. (Value: "HOUR")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_HourMinute Group dates by hour
+ *        and minute using a 24-hour system, for example 19:45. (Value:
+ *        "HOUR_MINUTE")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_HourMinuteAmpm Group dates by
+ *        hour and minute using a 12-hour system, for example 7:45 PM. The AM/PM
+ *        designation is translated based on the spreadsheet locale. (Value:
+ *        "HOUR_MINUTE_AMPM")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_Minute Group dates by minute,
+ *        from 0 to 59. (Value: "MINUTE")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_Month Group dates by month, for
+ *        example Nov. The month is translated based on the spreadsheet locale.
+ *        (Value: "MONTH")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_Quarter Group dates by quarter,
+ *        for example Q1 (which represents Jan-Mar). (Value: "QUARTER")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_Second Group dates by second,
+ *        from 0 to 59. (Value: "SECOND")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_Year Group dates by year, for
+ *        example 2008. (Value: "YEAR")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_YearMonth Group dates by year
+ *        and month, for example 2008-Nov. The month is translated based on the
+ *        spreadsheet locale. (Value: "YEAR_MONTH")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_YearMonthDay Group dates by
+ *        year, month, and day, for example 2008-11-22. (Value:
+ *        "YEAR_MONTH_DAY")
+ *    @arg @c kGTLRSheets_ChartDateTimeRule_Type_YearQuarter Group dates by year
+ *        and quarter, for example 2008 Q4. (Value: "YEAR_QUARTER")
+ */
+@property(nonatomic, copy, nullable) NSString *type;
+
+@end
+
+
+/**
+ *  An optional setting on the ChartData of the domain of a data source chart
+ *  that defines buckets for the values in the domain rather than breaking out
+ *  each individual value. For example, when plotting a data source chart, you
+ *  can specify a histogram rule on the domain (it should only contain numeric
+ *  values), grouping its values into buckets. Any values of a chart series that
+ *  fall into the same bucket are aggregated based on the aggregate_type.
+ */
+@interface GTLRSheets_ChartGroupRule : GTLRObject
+
+/** A ChartDateTimeRule. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartDateTimeRule *dateTimeRule;
+
+/** A ChartHistogramRule */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartHistogramRule *histogramRule;
+
+@end
+
+
+/**
+ *  Allows you to organize numeric values in a source data column into buckets
+ *  of constant size.
+ */
+@interface GTLRSheets_ChartHistogramRule : GTLRObject
+
+/**
+ *  The size of the buckets that are created. Must be positive.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *intervalSize;
+
+/**
+ *  The maximum value at which items are placed into buckets. Values greater
+ *  than the maximum are grouped into a single bucket. If omitted, it is
+ *  determined by the maximum item value.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *maxValue;
+
+/**
+ *  The minimum value at which items are placed into buckets. Values that are
+ *  less than the minimum are grouped into a single bucket. If omitted, it is
+ *  determined by the minimum item value.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minValue;
 
 @end
 
@@ -3079,20 +5564,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_ChartSourceRange : GTLRObject
 
 /**
- *  The ranges of data for a series or domain.
- *  Exactly one dimension must have a length of 1,
- *  and all sources in the list must have the same dimension
- *  with length 1.
- *  The domain (if it exists) & all series must have the same number
- *  of source ranges. If using more than one source range, then the source
- *  range at a given offset must be contiguous across the domain and series.
- *  For example, these are valid configurations:
- *  domain sources: A1:A5
- *  series1 sources: B1:B5
- *  series2 sources: D6:D10
- *  domain sources: A1:A5, C10:C12
- *  series1 sources: B1:B5, D10:D12
- *  series2 sources: C1:C5, E10:E12
+ *  The ranges of data for a series or domain. Exactly one dimension must have a
+ *  length of 1, and all sources in the list must have the same dimension with
+ *  length 1. The domain (if it exists) & all series must have the same number
+ *  of source ranges. If using more than one source range, then the source range
+ *  at a given offset must be in order and contiguous across the domain and
+ *  series. For example, these are valid configurations: domain sources: A1:A5
+ *  series1 sources: B1:B5 series2 sources: D6:D10 domain sources: A1:A5,
+ *  C10:C12 series1 sources: B1:B5, D10:D12 series2 sources: C1:C5, E10:E12
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_GridRange *> *sources;
 
@@ -3105,11 +5584,47 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_ChartSpec : GTLRObject
 
 /**
- *  A basic chart specification, can be one of many kinds of charts.
- *  See BasicChartType for the list of all
- *  charts this supports.
+ *  The alternative text that describes the chart. This is often used for
+ *  accessibility.
+ */
+@property(nonatomic, copy, nullable) NSString *altText;
+
+/** The background color of the entire chart. Not applicable to Org charts. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *backgroundColor;
+
+/**
+ *  The background color of the entire chart. Not applicable to Org charts. If
+ *  background_color is also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *backgroundColorStyle;
+
+/**
+ *  A basic chart specification, can be one of many kinds of charts. See
+ *  BasicChartType for the list of all charts this supports.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_BasicChartSpec *basicChart;
+
+/** A bubble chart specification. */
+@property(nonatomic, strong, nullable) GTLRSheets_BubbleChartSpec *bubbleChart;
+
+/** A candlestick chart specification. */
+@property(nonatomic, strong, nullable) GTLRSheets_CandlestickChartSpec *candlestickChart;
+
+/** If present, the field contains data source chart specific properties. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceChartProperties *dataSourceChartProperties;
+
+/**
+ *  The filters applied to the source data of the chart. Only supported for data
+ *  source charts.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_FilterSpec *> *filterSpecs;
+
+/**
+ *  The name of the font to use by default for all chart text (e.g. title, axis
+ *  labels, legend). If a font is specified for a specific part of the chart it
+ *  will override this font name.
+ */
+@property(nonatomic, copy, nullable) NSString *fontName;
 
 /**
  *  Determines how the charts will use hidden rows or columns.
@@ -3130,11 +5645,58 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @property(nonatomic, copy, nullable) NSString *hiddenDimensionStrategy;
 
+/** A histogram chart specification. */
+@property(nonatomic, strong, nullable) GTLRSheets_HistogramChartSpec *histogramChart;
+
+/**
+ *  True to make a chart fill the entire space in which it's rendered with
+ *  minimum padding. False to use the default padding. (Not applicable to Geo
+ *  and Org charts.)
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *maximized;
+
+/** An org chart specification. */
+@property(nonatomic, strong, nullable) GTLRSheets_OrgChartSpec *orgChart;
+
 /** A pie chart specification. */
 @property(nonatomic, strong, nullable) GTLRSheets_PieChartSpec *pieChart;
 
+/** A scorecard chart specification. */
+@property(nonatomic, strong, nullable) GTLRSheets_ScorecardChartSpec *scorecardChart;
+
+/**
+ *  The order to sort the chart data by. Only a single sort spec is supported.
+ *  Only supported for data source charts.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_SortSpec *> *sortSpecs;
+
+/** The subtitle of the chart. */
+@property(nonatomic, copy, nullable) NSString *subtitle;
+
+/**
+ *  The subtitle text format. Strikethrough and underline are not supported.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TextFormat *subtitleTextFormat;
+
+/** The subtitle text position. This field is optional. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextPosition *subtitleTextPosition;
+
 /** The title of the chart. */
 @property(nonatomic, copy, nullable) NSString *title;
+
+/** The title text format. Strikethrough and underline are not supported. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextFormat *titleTextFormat;
+
+/** The title text position. This field is optional. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextPosition *titleTextPosition;
+
+/** A treemap chart specification. */
+@property(nonatomic, strong, nullable) GTLRSheets_TreemapChartSpec *treemapChart;
+
+/** A waterfall chart specification. */
+@property(nonatomic, strong, nullable) GTLRSheets_WaterfallChartSpec *waterfallChart;
 
 @end
 
@@ -3167,10 +5729,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_ClearValuesResponse : GTLRObject
 
 /**
- *  The range (in A1 notation) that was cleared.
- *  (If the request was for an unbounded range or a ranger larger
- *  than the bounds of the sheet, this will be the actual range
- *  that was cleared, bounded to the sheet's limits.)
+ *  The range (in A1 notation) that was cleared. (If the request was for an
+ *  unbounded range or a ranger larger than the bounds of the sheet, this will
+ *  be the actual range that was cleared, bounded to the sheet's limits.)
  */
 @property(nonatomic, copy, nullable) NSString *clearedRange;
 
@@ -3187,112 +5748,61 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *  can be trivially provided to the constructor of "java.awt.Color" in Java; it
  *  can also be trivially provided to UIColor's "+colorWithRed:green:blue:alpha"
  *  method in iOS; and, with just a little work, it can be easily formatted into
- *  a CSS "rgba()" string in JavaScript, as well. Here are some examples:
- *  Example (Java):
- *  import com.google.type.Color;
- *  // ...
- *  public static java.awt.Color fromProto(Color protocolor) {
- *  float alpha = protocolor.hasAlpha()
- *  ? protocolor.getAlpha().getValue()
- *  : 1.0;
- *  return new java.awt.Color(
- *  protocolor.getRed(),
- *  protocolor.getGreen(),
- *  protocolor.getBlue(),
- *  alpha);
- *  }
- *  public static Color toProto(java.awt.Color color) {
- *  float red = (float) color.getRed();
- *  float green = (float) color.getGreen();
- *  float blue = (float) color.getBlue();
- *  float denominator = 255.0;
- *  Color.Builder resultBuilder =
- *  Color
- *  .newBuilder()
- *  .setRed(red / denominator)
- *  .setGreen(green / denominator)
- *  .setBlue(blue / denominator);
- *  int alpha = color.getAlpha();
- *  if (alpha != 255) {
- *  result.setAlpha(
- *  FloatValue
- *  .newBuilder()
- *  .setValue(((float) alpha) / denominator)
- *  .build());
- *  }
- *  return resultBuilder.build();
- *  }
- *  // ...
- *  Example (iOS / Obj-C):
- *  // ...
- *  static UIColor* fromProto(Color* protocolor) {
- *  float red = [protocolor red];
- *  float green = [protocolor green];
- *  float blue = [protocolor blue];
- *  FloatValue* alpha_wrapper = [protocolor alpha];
- *  float alpha = 1.0;
- *  if (alpha_wrapper != nil) {
- *  alpha = [alpha_wrapper value];
- *  }
- *  return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
- *  }
- *  static Color* toProto(UIColor* color) {
- *  CGFloat red, green, blue, alpha;
- *  if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) {
- *  return nil;
- *  }
- *  Color* result = [Color alloc] init];
- *  [result setRed:red];
- *  [result setGreen:green];
- *  [result setBlue:blue];
- *  if (alpha <= 0.9999) {
- *  [result setAlpha:floatWrapperWithValue(alpha)];
- *  }
- *  [result autorelease];
- *  return result;
- *  }
- *  // ...
- *  Example (JavaScript):
- *  // ...
- *  var protoToCssColor = function(rgb_color) {
- *  var redFrac = rgb_color.red || 0.0;
- *  var greenFrac = rgb_color.green || 0.0;
- *  var blueFrac = rgb_color.blue || 0.0;
- *  var red = Math.floor(redFrac * 255);
- *  var green = Math.floor(greenFrac * 255);
- *  var blue = Math.floor(blueFrac * 255);
- *  if (!('alpha' in rgb_color)) {
- *  return rgbToCssColor_(red, green, blue);
- *  }
- *  var alphaFrac = rgb_color.alpha.value || 0.0;
- *  var rgbParams = [red, green, blue].join(',');
- *  return ['rgba(', rgbParams, ',', alphaFrac, ')'].join('');
- *  };
- *  var rgbToCssColor_ = function(red, green, blue) {
- *  var rgbNumber = new Number((red << 16) | (green << 8) | blue);
- *  var hexString = rgbNumber.toString(16);
- *  var missingZeros = 6 - hexString.length;
- *  var resultBuilder = ['#'];
- *  for (var i = 0; i < missingZeros; i++) {
- *  resultBuilder.push('0');
- *  }
- *  resultBuilder.push(hexString);
- *  return resultBuilder.join('');
- *  };
- *  // ...
+ *  a CSS "rgba()" string in JavaScript, as well. Note: this proto does not
+ *  carry information about the absolute color space that should be used to
+ *  interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By
+ *  default, applications SHOULD assume the sRGB color space. Note: when color
+ *  equality needs to be decided, implementations, unless documented otherwise,
+ *  will treat two colors to be equal if all their red, green, blue and alpha
+ *  values each differ by at most 1e-5. Example (Java): import
+ *  com.google.type.Color; // ... public static java.awt.Color fromProto(Color
+ *  protocolor) { float alpha = protocolor.hasAlpha() ?
+ *  protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color(
+ *  protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); }
+ *  public static Color toProto(java.awt.Color color) { float red = (float)
+ *  color.getRed(); float green = (float) color.getGreen(); float blue = (float)
+ *  color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder =
+ *  Color .newBuilder() .setRed(red / denominator) .setGreen(green /
+ *  denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if
+ *  (alpha != 255) { result.setAlpha( FloatValue .newBuilder()
+ *  .setValue(((float) alpha) / denominator) .build()); } return
+ *  resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static
+ *  UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float
+ *  green = [protocolor green]; float blue = [protocolor blue]; FloatValue*
+ *  alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper !=
+ *  nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red
+ *  green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color)
+ *  { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green
+ *  blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc]
+ *  init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue];
+ *  if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; }
+ *  [result autorelease]; return result; } // ... Example (JavaScript): // ...
+ *  var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red ||
+ *  0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue
+ *  || 0.0; var red = Math.floor(redFrac * 255); var green =
+ *  Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if
+ *  (!('alpha' in rgb_color)) { return rgbToCssColor_(red, green, blue); } var
+ *  alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green,
+ *  blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join('');
+ *  }; var rgbToCssColor_ = function(red, green, blue) { var rgbNumber = new
+ *  Number((red << 16) | (green << 8) | blue); var hexString =
+ *  rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var
+ *  resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) {
+ *  resultBuilder.push('0'); } resultBuilder.push(hexString); return
+ *  resultBuilder.join(''); }; // ...
  */
 @interface GTLRSheets_Color : GTLRObject
 
 /**
- *  The fraction of this color that should be applied to the pixel. That is,
- *  the final pixel color is defined by the equation:
- *  pixel color = alpha * (this color) + (1.0 - alpha) * (background color)
- *  This means that a value of 1.0 corresponds to a solid color, whereas
- *  a value of 0.0 corresponds to a completely transparent color. This
- *  uses a wrapper message rather than a simple float scalar so that it is
- *  possible to distinguish between a default value and the value being unset.
- *  If omitted, this color object is to be rendered as a solid color
- *  (as if the alpha value had been explicitly given with a value of 1.0).
+ *  The fraction of this color that should be applied to the pixel. That is, the
+ *  final pixel color is defined by the equation: pixel color = alpha * (this
+ *  color) + (1.0 - alpha) * (background color) This means that a value of 1.0
+ *  corresponds to a solid color, whereas a value of 0.0 corresponds to a
+ *  completely transparent color. This uses a wrapper message rather than a
+ *  simple float scalar so that it is possible to distinguish between a default
+ *  value and the value being unset. If omitted, this color object is to be
+ *  rendered as a solid color (as if the alpha value had been explicitly given
+ *  with a value of 1.0).
  *
  *  Uses NSNumber of floatValue.
  */
@@ -3323,6 +5833,44 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  A color value.
+ */
+@interface GTLRSheets_ColorStyle : GTLRObject
+
+/** RGB color. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *rgbColor;
+
+/**
+ *  Theme color.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Accent1 Represents the first
+ *        accent color (Value: "ACCENT1")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Accent2 Represents the second
+ *        accent color (Value: "ACCENT2")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Accent3 Represents the third
+ *        accent color (Value: "ACCENT3")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Accent4 Represents the fourth
+ *        accent color (Value: "ACCENT4")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Accent5 Represents the fifth
+ *        accent color (Value: "ACCENT5")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Accent6 Represents the sixth
+ *        accent color (Value: "ACCENT6")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Background Represents the
+ *        primary background color (Value: "BACKGROUND")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Link Represents the color to use
+ *        for hyperlinks (Value: "LINK")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_Text Represents the primary text
+ *        color (Value: "TEXT")
+ *    @arg @c kGTLRSheets_ColorStyle_ThemeColor_ThemeColorTypeUnspecified
+ *        Unspecified theme color (Value: "THEME_COLOR_TYPE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *themeColor;
+
+@end
+
+
+/**
  *  A rule describing a conditional format.
  */
 @interface GTLRSheets_ConditionalFormatRule : GTLRObject
@@ -3334,8 +5882,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GradientRule *gradientRule;
 
 /**
- *  The ranges that will be formatted if the condition is true.
- *  All the ranges must be on the same grid.
+ *  The ranges that are formatted if the condition is true. All the ranges must
+ *  be on the same grid.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_GridRange *> *ranges;
 
@@ -3348,15 +5896,10 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_ConditionValue : GTLRObject
 
 /**
- *  A relative date (based on the current date).
- *  Valid only if the type is
- *  DATE_BEFORE,
- *  DATE_AFTER,
- *  DATE_ON_OR_BEFORE or
- *  DATE_ON_OR_AFTER.
- *  Relative dates are not supported in data validation.
- *  They are supported only in conditional formatting and
- *  conditional filters.
+ *  A relative date (based on the current date). Valid only if the type is
+ *  DATE_BEFORE, DATE_AFTER, DATE_ON_OR_BEFORE or DATE_ON_OR_AFTER. Relative
+ *  dates are not supported in data validation. They are supported only in
+ *  conditional formatting and conditional filters.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_ConditionValue_RelativeDate_PastMonth The value is one
@@ -3377,9 +5920,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *relativeDate;
 
 /**
- *  A value the condition is based on.
- *  The value will be parsed as if the user typed into a cell.
- *  Formulas are supported (and must begin with an `=`).
+ *  A value the condition is based on. The value is parsed as if the user typed
+ *  into a cell. Formulas are supported (and must begin with an `=` or a '+').
  */
 @property(nonatomic, copy, nullable) NSString *userEnteredValue;
 
@@ -3392,10 +5934,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_CopyPasteRequest : GTLRObject
 
 /**
- *  The location to paste to. If the range covers a span that's
- *  a multiple of the source's height or width, then the
- *  data will be repeated to fill in the destination range.
- *  If the range is smaller than the source range, the entire
+ *  The location to paste to. If the range covers a span that's a multiple of
+ *  the source's height or width, then the data will be repeated to fill in the
+ *  destination range. If the range is smaller than the source range, the entire
  *  source data will still be copied (beyond the end of the destination range).
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *destination;
@@ -3453,6 +5994,28 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  A request to create developer metadata.
+ */
+@interface GTLRSheets_CreateDeveloperMetadataRequest : GTLRObject
+
+/** The developer metadata to create. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeveloperMetadata *developerMetadata;
+
+@end
+
+
+/**
+ *  The response from creating developer metadata.
+ */
+@interface GTLRSheets_CreateDeveloperMetadataResponse : GTLRObject
+
+/** The developer metadata that was created. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeveloperMetadata *developerMetadata;
+
+@end
+
+
+/**
  *  Moves data from the source to the destination.
  */
 @interface GTLRSheets_CutPasteRequest : GTLRObject
@@ -3461,8 +6024,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GridCoordinate *destination;
 
 /**
- *  What kind of data to paste. All the source data will be cut, regardless
- *  of what is pasted.
+ *  What kind of data to paste. All the source data will be cut, regardless of
+ *  what is pasted.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_CutPasteRequest_PasteType_PasteConditionalFormatting
@@ -3490,6 +6053,498 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  The data execution status.
+ */
+@interface GTLRSheets_DataExecutionStatus : GTLRObject
+
+/**
+ *  The error code.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_ConcurrentQuery The data
+ *        execution is currently in progress, can not be refreshed until it
+ *        completes. (Value: "CONCURRENT_QUERY")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_DataExecutionErrorCodeUnspecified
+ *        Default value, do not use. (Value:
+ *        "DATA_EXECUTION_ERROR_CODE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_DataNotFound The
+ *        database referenced by the data source is not found. * / (Value:
+ *        "DATA_NOT_FOUND")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_DuplicateColumnNames The
+ *        data execution returns duplicate column names or aliases. (Value:
+ *        "DUPLICATE_COLUMN_NAMES")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_Engine Error is received
+ *        from the backend data execution engine (e.g. BigQuery). Check
+ *        error_message for details. (Value: "ENGINE")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_Interrupted The data
+ *        execution is interrupted. Please refresh later. (Value: "INTERRUPTED")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_MissingColumnAlias The
+ *        data execution returns columns with missing aliases. (Value:
+ *        "MISSING_COLUMN_ALIAS")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_ObjectInErrorState The
+ *        data source object is currently in error state. To force refresh, set
+ *        force in RefreshDataSourceRequest. (Value: "OBJECT_IN_ERROR_STATE")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_ObjectNotFound The data
+ *        source object does not exist. (Value: "OBJECT_NOT_FOUND")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_ObjectSpecInvalid The
+ *        data source object specification is invalid. (Value:
+ *        "OBJECT_SPEC_INVALID")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_Other Other errors.
+ *        (Value: "OTHER")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_ParameterInvalid One or
+ *        some of the provided data source parameters are invalid. (Value:
+ *        "PARAMETER_INVALID")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_PermissionDenied The
+ *        user does not have access to the database referenced by the data
+ *        source. (Value: "PERMISSION_DENIED")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_TimedOut The data
+ *        execution timed out. (Value: "TIMED_OUT")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_TooManyCells The data
+ *        execution returns more cells than the limit. (Value: "TOO_MANY_CELLS")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_TooManyCharsPerCell The
+ *        data execution returns values that exceed the maximum characters
+ *        allowed in a single cell. (Value: "TOO_MANY_CHARS_PER_CELL")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_TooManyRows The data
+ *        execution returns more rows than the limit. (Value: "TOO_MANY_ROWS")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_ErrorCode_UnsupportedDataType The
+ *        data execution returns an unsupported data type. (Value:
+ *        "UNSUPPORTED_DATA_TYPE")
+ */
+@property(nonatomic, copy, nullable) NSString *errorCode;
+
+/** The error message, which may be empty. */
+@property(nonatomic, copy, nullable) NSString *errorMessage;
+
+/** Gets the time the data last successfully refreshed. */
+@property(nonatomic, strong, nullable) GTLRDateTime *lastRefreshTime;
+
+/**
+ *  The state of the data execution.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DataExecutionStatus_State_DataExecutionStateUnspecified
+ *        Default value, do not use. (Value: "DATA_EXECUTION_STATE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_State_Failed The data execution
+ *        has completed with errors. (Value: "FAILED")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_State_NotStarted The data
+ *        execution has not started. (Value: "NOT_STARTED")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_State_Running The data execution
+ *        has started and is running. (Value: "RUNNING")
+ *    @arg @c kGTLRSheets_DataExecutionStatus_State_Succeeded The data execution
+ *        has completed successfully. (Value: "SUCCEEDED")
+ */
+@property(nonatomic, copy, nullable) NSString *state;
+
+@end
+
+
+/**
+ *  Filter that describes what data should be selected or returned from a
+ *  request.
+ */
+@interface GTLRSheets_DataFilter : GTLRObject
+
+/** Selects data that matches the specified A1 range. */
+@property(nonatomic, copy, nullable) NSString *a1Range;
+
+/**
+ *  Selects data associated with the developer metadata matching the criteria
+ *  described by this DeveloperMetadataLookup.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DeveloperMetadataLookup *developerMetadataLookup;
+
+/** Selects data that matches the range described by the GridRange. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *gridRange;
+
+@end
+
+
+/**
+ *  A range of values whose location is specified by a DataFilter.
+ */
+@interface GTLRSheets_DataFilterValueRange : GTLRObject
+
+/**
+ *  The data filter describing the location of the values in the spreadsheet.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DataFilter *dataFilter;
+
+/**
+ *  The major dimension of the values.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DataFilterValueRange_MajorDimension_Columns Operates
+ *        on the columns of a sheet. (Value: "COLUMNS")
+ *    @arg @c kGTLRSheets_DataFilterValueRange_MajorDimension_DimensionUnspecified
+ *        The default value, do not use. (Value: "DIMENSION_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DataFilterValueRange_MajorDimension_Rows Operates on
+ *        the rows of a sheet. (Value: "ROWS")
+ */
+@property(nonatomic, copy, nullable) NSString *majorDimension;
+
+/**
+ *  The data to be written. If the provided values exceed any of the ranges
+ *  matched by the data filter then the request fails. If the provided values
+ *  are less than the matched ranges only the specified values are written,
+ *  existing values in the matched ranges remain unaffected.
+ *
+ *  Can be any valid JSON type.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSArray *> *values;
+
+@end
+
+
+/**
+ *  Information about an external data source in the spreadsheet.
+ */
+@interface GTLRSheets_DataSource : GTLRObject
+
+/** All calculated columns in the data source. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSourceColumn *> *calculatedColumns;
+
+/** The spreadsheet-scoped unique ID that identifies the data source. */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+/**
+ *  The ID of the Sheet connected with the data source. The field cannot be
+ *  changed once set. When creating a data source, an associated
+ *  SheetType.DATA_SOURCE sheet is also created, if the field is not specified,
+ *  the ID of the created sheet will be randomly generated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *sheetId;
+
+/** The DataSourceSpec. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceSpec *spec;
+
+@end
+
+
+/**
+ *  Properties of a data source chart.
+ */
+@interface GTLRSheets_DataSourceChartProperties : GTLRObject
+
+/** Output only. The data execution status. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** ID of the data source that the chart is associated with. */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+@end
+
+
+/**
+ *  A data source column.
+ */
+@interface GTLRSheets_DataSourceColumn : GTLRObject
+
+/** The formula of the calculated column. */
+@property(nonatomic, copy, nullable) NSString *formula;
+
+/** The column reference. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *reference;
+
+@end
+
+
+/**
+ *  An unique identifier that references to a data source column.
+ */
+@interface GTLRSheets_DataSourceColumnReference : GTLRObject
+
+/**
+ *  The display name of the column. It should be unique within a data source.
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+@end
+
+
+/**
+ *  A data source formula.
+ */
+@interface GTLRSheets_DataSourceFormula : GTLRObject
+
+/** Output only. The data execution status. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** The ID of the data source the formula is associated with. */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+@end
+
+
+/**
+ *  Reference to a data source object.
+ */
+@interface GTLRSheets_DataSourceObjectReference : GTLRObject
+
+/**
+ *  References to a DataSourceChart.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *chartId;
+
+/** References to a cell containing DataSourceFormula. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridCoordinate *dataSourceFormulaCell;
+
+/** References to a data source PivotTable anchored at the cell. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridCoordinate *dataSourcePivotTableAnchorCell;
+
+/** References to a DataSourceTable anchored at the cell. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridCoordinate *dataSourceTableAnchorCell;
+
+/** References to a SheetType.DATA_SOURCE sheet. */
+@property(nonatomic, copy, nullable) NSString *sheetId;
+
+@end
+
+
+/**
+ *  A list of references to data source objects.
+ */
+@interface GTLRSheets_DataSourceObjectReferences : GTLRObject
+
+/** The references. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSourceObjectReference *> *references;
+
+@end
+
+
+/**
+ *  A parameter in a data source's query. The parameter allows user to pass in
+ *  values from the spreadsheet into a query.
+ */
+@interface GTLRSheets_DataSourceParameter : GTLRObject
+
+/**
+ *  Named parameter. Must be a legitimate identifier for the DataSource that
+ *  supports it. For example, BigQuery identifier
+ */
+@property(nonatomic, copy, nullable) NSString *name;
+
+/** ID of a NamedRange. Its size must be 1x1. */
+@property(nonatomic, copy, nullable) NSString *namedRangeId;
+
+/** A range that contains the value of the parameter. Its size must be 1x1. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
+
+@end
+
+
+/**
+ *  Schedule refreshes in a time interval everyday.
+ */
+@interface GTLRSheets_DataSourceRefreshDailySchedule : GTLRObject
+
+/**
+ *  The start time of a time interval in which a data source refresh is
+ *  scheduled. Only `hours` part is used. The time interval size defaults to
+ *  that in the Sheets editor.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TimeOfDay *startTime;
+
+@end
+
+
+/**
+ *  Schedule refreshes in a time interval on specified days in a month and
+ *  repeats monthly.
+ */
+@interface GTLRSheets_DataSourceRefreshMonthlySchedule : GTLRObject
+
+/**
+ *  Days of the month to refresh. Only 1-28 are supported, mapping to the 1st to
+ *  the 28th day. At lesat one day must be specified.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSArray<NSNumber *> *daysOfMonth;
+
+/**
+ *  The start time of a time interval in which a data source refresh is
+ *  scheduled. Only `hours` part is used. The time interval size defaults to
+ *  that in the Sheets editor.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TimeOfDay *startTime;
+
+@end
+
+
+/**
+ *  The data source refresh schedule. All data sources in the spreadsheet are
+ *  scheduled to refresh in a future time interval. The time interval size
+ *  defaults to the one defined in the Sheets editor. For example, if a daily
+ *  schedule at start time of 8am is scheduled, and the time interval is 4
+ *  hours, the scheduled refresh will happen between 8am and 12pm every day.
+ */
+@interface GTLRSheets_DataSourceRefreshSchedule : GTLRObject
+
+/** Daily refresh schedule. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceRefreshDailySchedule *dailySchedule;
+
+/**
+ *  True if the refresh schedule is enabled, or false otherwise.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *enabled;
+
+/** Monthly refresh schedule. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceRefreshMonthlySchedule *monthlySchedule;
+
+/** Output only. The time interval of the next run. */
+@property(nonatomic, strong, nullable) GTLRSheets_Interval *nextRun;
+
+/**
+ *  The scope of the refresh.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DataSourceRefreshSchedule_RefreshScope_AllDataSources
+ *        Refreshes all data sources and their associated data source objects in
+ *        the spreadsheet. (Value: "ALL_DATA_SOURCES")
+ *    @arg @c kGTLRSheets_DataSourceRefreshSchedule_RefreshScope_DataSourceRefreshScopeUnspecified
+ *        Default value; Do not use. (Value:
+ *        "DATA_SOURCE_REFRESH_SCOPE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *refreshScope;
+
+/** Weekly refresh schedule. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceRefreshWeeklySchedule *weeklySchedule;
+
+@end
+
+
+/**
+ *  Schedule refreshes in a time interval on specified days in a week and
+ *  repeats weekly.
+ */
+@interface GTLRSheets_DataSourceRefreshWeeklySchedule : GTLRObject
+
+/** Days of the week to refresh. At least one day must be specified. */
+@property(nonatomic, strong, nullable) NSArray<NSString *> *daysOfWeek;
+
+/**
+ *  The start time of a time interval in which a data source refresh is
+ *  scheduled. Only `hours` part is used. The time interval size defaults to
+ *  that in the Sheets editor.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TimeOfDay *startTime;
+
+@end
+
+
+/**
+ *  A range along a single dimension on a DataSource sheet.
+ */
+@interface GTLRSheets_DataSourceSheetDimensionRange : GTLRObject
+
+/** The columns on the data source sheet. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSourceColumnReference *> *columnReferences;
+
+/**
+ *  The ID of the data source sheet the range is on.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *sheetId;
+
+@end
+
+
+/**
+ *  Additional properties of a SheetType.DATA_SOURCE sheet.
+ */
+@interface GTLRSheets_DataSourceSheetProperties : GTLRObject
+
+/**
+ *  The columns displayed on the sheet, corresponding to the values in RowData.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSourceColumn *> *columns;
+
+/** The data execution status. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** ID of the DataSource the sheet connected with. */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+@end
+
+
+/**
+ *  The specification of a data source.
+ */
+@interface GTLRSheets_DataSourceSpec : GTLRObject
+
+/** A BigQueryDataSourceSpec. */
+@property(nonatomic, strong, nullable) GTLRSheets_BigQueryDataSourceSpec *bigQuery;
+
+/** The parameters of the data source. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSourceParameter *> *parameters;
+
+@end
+
+
+/**
+ *  A data source table, allowing to import a static table of data from the
+ *  DataSource into Sheets. This is also known as "Extract" in the Sheets
+ *  editor.
+ */
+@interface GTLRSheets_DataSourceTable : GTLRObject
+
+/**
+ *  Columns selected for the data source table. The column_selection_type must
+ *  be SELECTED.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSourceColumnReference *> *columns;
+
+/**
+ *  The type to select columns for the data source table. Defaults to SELECTED.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DataSourceTable_ColumnSelectionType_DataSourceTableColumnSelectionTypeUnspecified
+ *        The default column selection type, do not use. (Value:
+ *        "DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DataSourceTable_ColumnSelectionType_Selected Select
+ *        columns specified by columns field. (Value: "SELECTED")
+ *    @arg @c kGTLRSheets_DataSourceTable_ColumnSelectionType_SyncAll Sync all
+ *        current and future columns in the data source. If set, the data source
+ *        table fetches all the columns in the data source at the time of
+ *        refresh. (Value: "SYNC_ALL")
+ */
+@property(nonatomic, copy, nullable) NSString *columnSelectionType;
+
+/** Output only. The data execution status. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** The ID of the data source the data source table is associated with. */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+/** Filter specifications in the data source table. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_FilterSpec *> *filterSpecs;
+
+/**
+ *  The limit of rows to return. If not set, a default limit is applied. Please
+ *  refer to the Sheets editor for the default and max limit.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *rowLimit;
+
+/**
+ *  Sort specifications in the data source table. The result of the data source
+ *  table is sorted based on the sort specifications in order.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_SortSpec *> *sortSpecs;
+
+@end
+
+
+/**
  *  A data validation rule.
  */
 @interface GTLRSheets_DataValidationRule : GTLRObject
@@ -3501,8 +6556,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *inputMessage;
 
 /**
- *  True if the UI should be customized based on the kind of condition.
- *  If true, "List" conditions will show a dropdown.
+ *  True if the UI should be customized based on the kind of condition. If true,
+ *  "List" conditions will show a dropdown.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -3514,6 +6569,70 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *strict;
+
+@end
+
+
+/**
+ *  Allows you to organize the date-time values in a source data column into
+ *  buckets based on selected parts of their date or time values. For example,
+ *  consider a pivot table showing sales transactions by date:
+ *  +----------+--------------+ | Date | SUM of Sales |
+ *  +----------+--------------+ | 1/1/2017 | $621.14 | | 2/3/2017 | $708.84 | |
+ *  5/8/2017 | $326.84 | ... +----------+--------------+ Applying a date-time
+ *  group rule with a DateTimeRuleType of YEAR_MONTH results in the following
+ *  pivot table. +--------------+--------------+ | Grouped Date | SUM of Sales |
+ *  +--------------+--------------+ | 2017-Jan | $53,731.78 | | 2017-Feb |
+ *  $83,475.32 | | 2017-Mar | $94,385.05 | ... +--------------+--------------+
+ */
+@interface GTLRSheets_DateTimeRule : GTLRObject
+
+/**
+ *  The type of date-time grouping to apply.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_DateTimeRuleTypeUnspecified The
+ *        default type, do not use. (Value: "DATE_TIME_RULE_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_DayMonth Group dates by day and
+ *        month, for example 22-Nov. The month is translated based on the
+ *        spreadsheet locale. (Value: "DAY_MONTH")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_DayOfMonth Group dates by day of
+ *        month, from 1 to 31. (Value: "DAY_OF_MONTH")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_DayOfWeek Group dates by day of
+ *        week, for example Sunday. The days of the week will be translated
+ *        based on the spreadsheet locale. (Value: "DAY_OF_WEEK")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_DayOfYear Group dates by day of
+ *        year, from 1 to 366. Note that dates after Feb. 29 fall in different
+ *        buckets in leap years than in non-leap years. (Value: "DAY_OF_YEAR")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_Hour Group dates by hour using a
+ *        24-hour system, from 0 to 23. (Value: "HOUR")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_HourMinute Group dates by hour and
+ *        minute using a 24-hour system, for example 19:45. (Value:
+ *        "HOUR_MINUTE")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_HourMinuteAmpm Group dates by hour
+ *        and minute using a 12-hour system, for example 7:45 PM. The AM/PM
+ *        designation is translated based on the spreadsheet locale. (Value:
+ *        "HOUR_MINUTE_AMPM")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_Minute Group dates by minute, from 0
+ *        to 59. (Value: "MINUTE")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_Month Group dates by month, for
+ *        example Nov. The month is translated based on the spreadsheet locale.
+ *        (Value: "MONTH")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_Quarter Group dates by quarter, for
+ *        example Q1 (which represents Jan-Mar). (Value: "QUARTER")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_Second Group dates by second, from 0
+ *        to 59. (Value: "SECOND")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_Year Group dates by year, for
+ *        example 2008. (Value: "YEAR")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_YearMonth Group dates by year and
+ *        month, for example 2008-Nov. The month is translated based on the
+ *        spreadsheet locale. (Value: "YEAR_MONTH")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_YearMonthDay Group dates by year,
+ *        month, and day, for example 2008-11-22. (Value: "YEAR_MONTH_DAY")
+ *    @arg @c kGTLRSheets_DateTimeRule_Type_YearQuarter Group dates by year and
+ *        quarter, for example 2008 Q4. (Value: "YEAR_QUARTER")
+ */
+@property(nonatomic, copy, nullable) NSString *type;
 
 @end
 
@@ -3534,8 +6653,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Deletes a conditional format rule at the given index.
- *  All subsequent rules' indexes are decremented.
+ *  Deletes a conditional format rule at the given index. All subsequent rules'
+ *  indexes are decremented.
  */
 @interface GTLRSheets_DeleteConditionalFormatRuleRequest : GTLRObject
 
@@ -3568,12 +6687,114 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  Deletes a data source. The request also deletes the associated data source
+ *  sheet, and unlinks all associated data source objects.
+ */
+@interface GTLRSheets_DeleteDataSourceRequest : GTLRObject
+
+/** The ID of the data source to delete. */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+@end
+
+
+/**
+ *  A request to delete developer metadata.
+ */
+@interface GTLRSheets_DeleteDeveloperMetadataRequest : GTLRObject
+
+/**
+ *  The data filter describing the criteria used to select which developer
+ *  metadata entry to delete.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DataFilter *dataFilter;
+
+@end
+
+
+/**
+ *  The response from deleting developer metadata.
+ */
+@interface GTLRSheets_DeleteDeveloperMetadataResponse : GTLRObject
+
+/** The metadata that was deleted. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DeveloperMetadata *> *deletedDeveloperMetadata;
+
+@end
+
+
+/**
+ *  Deletes a group over the specified range by decrementing the depth of the
+ *  dimensions in the range. For example, assume the sheet has a depth-1 group
+ *  over B:E and a depth-2 group over C:D. Deleting a group over D:E leaves the
+ *  sheet with a depth-1 group over B:D and a depth-2 group over C:C.
+ */
+@interface GTLRSheets_DeleteDimensionGroupRequest : GTLRObject
+
+/** The range of the group to be deleted. */
+@property(nonatomic, strong, nullable) GTLRSheets_DimensionRange *range;
+
+@end
+
+
+/**
+ *  The result of deleting a group.
+ */
+@interface GTLRSheets_DeleteDimensionGroupResponse : GTLRObject
+
+/** All groups of a dimension after deleting a group from that dimension. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DimensionGroup *> *dimensionGroups;
+
+@end
+
+
+/**
  *  Deletes the dimensions from the sheet.
  */
 @interface GTLRSheets_DeleteDimensionRequest : GTLRObject
 
 /** The dimensions to delete from the sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_DimensionRange *range;
+
+@end
+
+
+/**
+ *  Removes rows within this range that contain values in the specified columns
+ *  that are duplicates of values in any previous row. Rows with identical
+ *  values but different letter cases, formatting, or formulas are considered to
+ *  be duplicates. This request also removes duplicate rows hidden from view
+ *  (for example, due to a filter). When removing duplicates, the first instance
+ *  of each duplicate row scanning from the top downwards is kept in the
+ *  resulting range. Content outside of the specified range isn't removed, and
+ *  rows considered duplicates do not have to be adjacent to each other in the
+ *  range.
+ */
+@interface GTLRSheets_DeleteDuplicatesRequest : GTLRObject
+
+/**
+ *  The columns in the range to analyze for duplicate values. If no columns are
+ *  selected then all columns are analyzed for duplicates.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DimensionRange *> *comparisonColumns;
+
+/** The range to remove duplicates rows from. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
+
+@end
+
+
+/**
+ *  The result of removing duplicates in a range.
+ */
+@interface GTLRSheets_DeleteDuplicatesResponse : GTLRObject
+
+/**
+ *  The number of duplicate rows removed.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *duplicatesRemovedCount;
 
 @end
 
@@ -3643,10 +6864,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  The dimension from which deleted cells will be replaced with.
- *  If ROWS, existing cells will be shifted upward to
- *  replace the deleted cells. If COLUMNS, existing cells
- *  will be shifted left to replace the deleted cells.
+ *  The dimension from which deleted cells will be replaced with. If ROWS,
+ *  existing cells will be shifted upward to replace the deleted cells. If
+ *  COLUMNS, existing cells will be shifted left to replace the deleted cells.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_DeleteRangeRequest_ShiftDimension_Columns Operates on
@@ -3677,13 +6897,268 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  Developer metadata associated with a location or object in a spreadsheet.
+ *  Developer metadata may be used to associate arbitrary data with various
+ *  parts of a spreadsheet and will remain associated at those locations as they
+ *  move around and the spreadsheet is edited. For example, if developer
+ *  metadata is associated with row 5 and another row is then subsequently
+ *  inserted above row 5, that original metadata will still be associated with
+ *  the row it was first associated with (what is now row 6). If the associated
+ *  object is deleted its metadata is deleted too.
+ */
+@interface GTLRSheets_DeveloperMetadata : GTLRObject
+
+/** The location where the metadata is associated. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeveloperMetadataLocation *location;
+
+/**
+ *  The spreadsheet-scoped unique ID that identifies the metadata. IDs may be
+ *  specified when metadata is created, otherwise one will be randomly generated
+ *  and assigned. Must be positive.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *metadataId;
+
+/**
+ *  The metadata key. There may be multiple metadata in a spreadsheet with the
+ *  same key. Developer metadata must always have a key specified.
+ */
+@property(nonatomic, copy, nullable) NSString *metadataKey;
+
+/** Data associated with the metadata's key. */
+@property(nonatomic, copy, nullable) NSString *metadataValue;
+
+/**
+ *  The metadata visibility. Developer metadata must always have a visibility
+ *  specified.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DeveloperMetadata_Visibility_DeveloperMetadataVisibilityUnspecified
+ *        Default value. (Value: "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DeveloperMetadata_Visibility_Document Document-visible
+ *        metadata is accessible from any developer project with access to the
+ *        document. (Value: "DOCUMENT")
+ *    @arg @c kGTLRSheets_DeveloperMetadata_Visibility_Project Project-visible
+ *        metadata is only visible to and accessible by the developer project
+ *        that created the metadata. (Value: "PROJECT")
+ */
+@property(nonatomic, copy, nullable) NSString *visibility;
+
+@end
+
+
+/**
+ *  A location where metadata may be associated in a spreadsheet.
+ */
+@interface GTLRSheets_DeveloperMetadataLocation : GTLRObject
+
+/**
+ *  Represents the row or column when metadata is associated with a dimension.
+ *  The specified DimensionRange must represent a single row or column; it
+ *  cannot be unbounded or span multiple rows or columns.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DimensionRange *dimensionRange;
+
+/**
+ *  The type of location this object represents. This field is read-only.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DeveloperMetadataLocation_LocationType_Column
+ *        Developer metadata associated on an entire column dimension. (Value:
+ *        "COLUMN")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLocation_LocationType_DeveloperMetadataLocationTypeUnspecified
+ *        Default value. (Value: "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLocation_LocationType_Row Developer
+ *        metadata associated on an entire row dimension. (Value: "ROW")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLocation_LocationType_Sheet Developer
+ *        metadata associated on an entire sheet. (Value: "SHEET")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLocation_LocationType_Spreadsheet
+ *        Developer metadata associated on the entire spreadsheet. (Value:
+ *        "SPREADSHEET")
+ */
+@property(nonatomic, copy, nullable) NSString *locationType;
+
+/**
+ *  The ID of the sheet when metadata is associated with an entire sheet.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *sheetId;
+
+/**
+ *  True when metadata is associated with an entire spreadsheet.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *spreadsheet;
+
+@end
+
+
+/**
+ *  Selects DeveloperMetadata that matches all of the specified fields. For
+ *  example, if only a metadata ID is specified this considers the
+ *  DeveloperMetadata with that particular unique ID. If a metadata key is
+ *  specified, this considers all developer metadata with that key. If a key,
+ *  visibility, and location type are all specified, this considers all
+ *  developer metadata with that key and visibility that are associated with a
+ *  location of that type. In general, this selects all DeveloperMetadata that
+ *  matches the intersection of all the specified fields; any field or
+ *  combination of fields may be specified.
+ */
+@interface GTLRSheets_DeveloperMetadataLookup : GTLRObject
+
+/**
+ *  Determines how this lookup matches the location. If this field is specified
+ *  as EXACT, only developer metadata associated on the exact location specified
+ *  is matched. If this field is specified to INTERSECTING, developer metadata
+ *  associated on intersecting locations is also matched. If left unspecified,
+ *  this field assumes a default value of INTERSECTING. If this field is
+ *  specified, a metadataLocation must also be specified.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationMatchingStrategy_DeveloperMetadataLocationMatchingStrategyUnspecified
+ *        Default value. This value must not be used. (Value:
+ *        "DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationMatchingStrategy_ExactLocation
+ *        Indicates that a specified location should be matched exactly. For
+ *        example, if row three were specified as a location this matching
+ *        strategy would only match developer metadata also associated on row
+ *        three. Metadata associated on other locations would not be considered.
+ *        (Value: "EXACT_LOCATION")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationMatchingStrategy_IntersectingLocation
+ *        Indicates that a specified location should match that exact location
+ *        as well as any intersecting locations. For example, if row three were
+ *        specified as a location this matching strategy would match developer
+ *        metadata associated on row three as well as metadata associated on
+ *        locations that intersect row three. If, for instance, there was
+ *        developer metadata associated on column B, this matching strategy
+ *        would also match that location because column B intersects row three.
+ *        (Value: "INTERSECTING_LOCATION")
+ */
+@property(nonatomic, copy, nullable) NSString *locationMatchingStrategy;
+
+/**
+ *  Limits the selected developer metadata to those entries which are associated
+ *  with locations of the specified type. For example, when this field is
+ *  specified as ROW this lookup only considers developer metadata associated on
+ *  rows. If the field is left unspecified, all location types are considered.
+ *  This field cannot be specified as SPREADSHEET when the
+ *  locationMatchingStrategy is specified as INTERSECTING or when the
+ *  metadataLocation is specified as a non-spreadsheet location: spreadsheet
+ *  metadata cannot intersect any other developer metadata location. This field
+ *  also must be left unspecified when the locationMatchingStrategy is specified
+ *  as EXACT.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationType_Column Developer
+ *        metadata associated on an entire column dimension. (Value: "COLUMN")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationType_DeveloperMetadataLocationTypeUnspecified
+ *        Default value. (Value: "DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationType_Row Developer
+ *        metadata associated on an entire row dimension. (Value: "ROW")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationType_Sheet Developer
+ *        metadata associated on an entire sheet. (Value: "SHEET")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_LocationType_Spreadsheet
+ *        Developer metadata associated on the entire spreadsheet. (Value:
+ *        "SPREADSHEET")
+ */
+@property(nonatomic, copy, nullable) NSString *locationType;
+
+/**
+ *  Limits the selected developer metadata to that which has a matching
+ *  DeveloperMetadata.metadata_id.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *metadataId;
+
+/**
+ *  Limits the selected developer metadata to that which has a matching
+ *  DeveloperMetadata.metadata_key.
+ */
+@property(nonatomic, copy, nullable) NSString *metadataKey;
+
+/**
+ *  Limits the selected developer metadata to those entries associated with the
+ *  specified location. This field either matches exact locations or all
+ *  intersecting locations according the specified locationMatchingStrategy.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DeveloperMetadataLocation *metadataLocation;
+
+/**
+ *  Limits the selected developer metadata to that which has a matching
+ *  DeveloperMetadata.metadata_value.
+ */
+@property(nonatomic, copy, nullable) NSString *metadataValue;
+
+/**
+ *  Limits the selected developer metadata to that which has a matching
+ *  DeveloperMetadata.visibility. If left unspecified, all developer metadata
+ *  visibile to the requesting project is considered.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_Visibility_DeveloperMetadataVisibilityUnspecified
+ *        Default value. (Value: "DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_Visibility_Document
+ *        Document-visible metadata is accessible from any developer project
+ *        with access to the document. (Value: "DOCUMENT")
+ *    @arg @c kGTLRSheets_DeveloperMetadataLookup_Visibility_Project
+ *        Project-visible metadata is only visible to and accessible by the
+ *        developer project that created the metadata. (Value: "PROJECT")
+ */
+@property(nonatomic, copy, nullable) NSString *visibility;
+
+@end
+
+
+/**
+ *  A group over an interval of rows or columns on a sheet, which can contain or
+ *  be contained within other groups. A group can be collapsed or expanded as a
+ *  unit on the sheet.
+ */
+@interface GTLRSheets_DimensionGroup : GTLRObject
+
+/**
+ *  This field is true if this group is collapsed. A collapsed group remains
+ *  collapsed if an overlapping group at a shallower depth is expanded. A true
+ *  value does not imply that all dimensions within the group are hidden, since
+ *  a dimension's visibility can change independently from this group property.
+ *  However, when this property is updated, all dimensions within it are set to
+ *  hidden if this field is true, or set to visible if this field is false.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *collapsed;
+
+/**
+ *  The depth of the group, representing how many groups have a range that
+ *  wholly contains the range of this group.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *depth;
+
+/** The range over which this group exists. */
+@property(nonatomic, strong, nullable) GTLRSheets_DimensionRange *range;
+
+@end
+
+
+/**
  *  Properties about a dimension.
  */
 @interface GTLRSheets_DimensionProperties : GTLRObject
 
+/** Output only. If set, this is a column in a data source sheet. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *dataSourceColumnReference;
+
+/** The developer metadata associated with a single row or column. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DeveloperMetadata *> *developerMetadata;
+
 /**
- *  True if this dimension is being filtered.
- *  This field is read-only.
+ *  True if this dimension is being filtered. This field is read-only.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -3707,11 +7182,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  A range along a single dimension on a sheet.
- *  All indexes are zero-based.
- *  Indexes are half open: the start index is inclusive
- *  and the end index is exclusive.
- *  Missing indexes indicate the range is unbounded on that side.
+ *  A range along a single dimension on a sheet. All indexes are zero-based.
+ *  Indexes are half open: the start index is inclusive and the end index is
+ *  exclusive. Missing indexes indicate the range is unbounded on that side.
  */
 @interface GTLRSheets_DimensionRange : GTLRObject
 
@@ -3784,17 +7257,17 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_DuplicateSheetRequest : GTLRObject
 
 /**
- *  The zero-based index where the new sheet should be inserted.
- *  The index of all sheets after this are incremented.
+ *  The zero-based index where the new sheet should be inserted. The index of
+ *  all sheets after this are incremented.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *insertSheetIndex;
 
 /**
- *  If set, the ID of the new sheet. If not set, an ID is chosen.
- *  If set, the ID must not conflict with any existing sheet ID.
- *  If set, it must be non-negative.
+ *  If set, the ID of the new sheet. If not set, an ID is chosen. If set, the ID
+ *  must not conflict with any existing sheet ID. If set, it must be
+ *  non-negative.
  *
  *  Uses NSNumber of intValue.
  */
@@ -3873,8 +7346,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_EmbeddedObjectPosition : GTLRObject
 
 /**
- *  If true, the embedded object will be put on a new sheet whose ID
- *  is chosen for you. Used only when writing.
+ *  If true, the embedded object is put on a new sheet whose ID is chosen for
+ *  you. Used only when writing.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -3884,8 +7357,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_OverlayPosition *overlayPosition;
 
 /**
- *  The sheet this is on. Set only if the embedded object
- *  is on its own sheet. Must be non-negative.
+ *  The sheet this is on. Set only if the embedded object is on its own sheet.
+ *  Must be non-negative.
  *
  *  Uses NSNumber of intValue.
  */
@@ -3900,8 +7373,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_ErrorValue : GTLRObject
 
 /**
- *  A message with more information about the error
- *  (in the spreadsheet's locale).
+ *  A message with more information about the error (in the spreadsheet's
+ *  locale).
  */
 @property(nonatomic, copy, nullable) NSString *message;
 
@@ -3923,7 +7396,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *        error. (Value: "NAME")
  *    @arg @c kGTLRSheets_ErrorValue_Type_NullValue Corresponds to the `#NULL!`
  *        error. (Value: "NULL_VALUE")
- *    @arg @c kGTLRSheets_ErrorValue_Type_Num Corresponds to the `#NUM`! error.
+ *    @arg @c kGTLRSheets_ErrorValue_Type_Num Corresponds to the `#NUM!` error.
  *        (Value: "NUM")
  *    @arg @c kGTLRSheets_ErrorValue_Type_Ref Corresponds to the `#REF!` error.
  *        (Value: "REF")
@@ -3947,29 +7420,24 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @property(nonatomic, strong, nullable) NSNumber *boolValue;
 
-/**
- *  Represents an error.
- *  This field is read-only.
- */
+/** Represents an error. This field is read-only. */
 @property(nonatomic, strong, nullable) GTLRSheets_ErrorValue *errorValue;
 
 /** Represents a formula. */
 @property(nonatomic, copy, nullable) NSString *formulaValue;
 
 /**
- *  Represents a double value.
- *  Note: Dates, Times and DateTimes are represented as doubles in
- *  "serial number" format.
+ *  Represents a double value. Note: Dates, Times and DateTimes are represented
+ *  as doubles in "serial number" format.
  *
  *  Uses NSNumber of doubleValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *numberValue;
 
 /**
- *  Represents a string value.
- *  Leading single quotes are not included. For example, if the user typed
- *  `'123` into the UI, this would be represented as a `stringValue` of
- *  `"123"`.
+ *  Represents a string value. Leading single quotes are not included. For
+ *  example, if the user typed `'123` into the UI, this would be represented as
+ *  a `stringValue` of `"123"`.
  */
 @property(nonatomic, copy, nullable) NSString *stringValue;
 
@@ -3982,14 +7450,63 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_FilterCriteria : GTLRObject
 
 /**
- *  A condition that must be true for values to be shown.
- *  (This does not override hiddenValues -- if a value is listed there,
- *  it will still be hidden.)
+ *  A condition that must be true for values to be shown. (This does not
+ *  override hidden_values -- if a value is listed there, it will still be
+ *  hidden.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_BooleanCondition *condition;
 
 /** Values that should be hidden. */
 @property(nonatomic, strong, nullable) NSArray<NSString *> *hiddenValues;
+
+/**
+ *  The background fill color to filter by; only cells with this fill color are
+ *  shown. Mutually exclusive with visible_foreground_color.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *visibleBackgroundColor;
+
+/**
+ *  The background fill color to filter by; only cells with this fill color are
+ *  shown. This field is mutually exclusive with visible_foreground_color, and
+ *  must be set to an RGB-type color. If visible_background_color is also set,
+ *  this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *visibleBackgroundColorStyle;
+
+/**
+ *  The foreground color to filter by; only cells with this foreground color are
+ *  shown. Mutually exclusive with visible_background_color.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *visibleForegroundColor;
+
+/**
+ *  The foreground color to filter by; only cells with this foreground color are
+ *  shown. This field is mutually exclusive with visible_background_color, and
+ *  must be set to an RGB-type color. If visible_foreground_color is also set,
+ *  this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *visibleForegroundColorStyle;
+
+@end
+
+
+/**
+ *  The filter criteria associated with a specific column.
+ */
+@interface GTLRSheets_FilterSpec : GTLRObject
+
+/**
+ *  The column index.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *columnIndex;
+
+/** Reference to a data source column. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *dataSourceColumnReference;
+
+/** The criteria for the column. */
+@property(nonatomic, strong, nullable) GTLRSheets_FilterCriteria *filterCriteria;
 
 @end
 
@@ -4000,11 +7517,17 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_FilterView : GTLRObject
 
 /**
- *  The criteria for showing/hiding values per column.
- *  The map's key is the column index, and the value is the criteria for
- *  that column.
+ *  The criteria for showing/hiding values per column. The map's key is the
+ *  column index, and the value is the criteria for that column.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_FilterView_Criteria *criteria;
+
+/**
+ *  The filter criteria for showing/hiding values per column. Both criteria and
+ *  filter_specs are populated in responses. If both fields are specified in an
+ *  update request, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_FilterSpec *> *filterSpecs;
 
 /**
  *  The ID of the filter view.
@@ -4014,22 +7537,20 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *filterViewId;
 
 /**
- *  The named range this filter view is backed by, if any.
- *  When writing, only one of range or named_range_id
- *  may be set.
+ *  The named range this filter view is backed by, if any. When writing, only
+ *  one of range or named_range_id may be set.
  */
 @property(nonatomic, copy, nullable) NSString *namedRangeId;
 
 /**
- *  The range this filter view covers.
- *  When writing, only one of range or named_range_id
- *  may be set.
+ *  The range this filter view covers. When writing, only one of range or
+ *  named_range_id may be set.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  The sort order per column. Later specifications are used when values
- *  are equal in the earlier specifications.
+ *  The sort order per column. Later specifications are used when values are
+ *  equal in the earlier specifications.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_SortSpec *> *sortSpecs;
 
@@ -4040,9 +7561,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  The criteria for showing/hiding values per column.
- *  The map's key is the column index, and the value is the criteria for
- *  that column.
+ *  The criteria for showing/hiding values per column. The map's key is the
+ *  column index, and the value is the criteria for that column.
  *
  *  @note This class is documented as having more properties of
  *        GTLRSheets_FilterCriteria. Use @c -additionalJSONKeys and @c
@@ -4069,8 +7589,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *find;
 
 /**
- *  True if the search should include cells with formulas.
- *  False to skip cells with formulas.
+ *  True if the search should include cells with formulas. False to skip cells
+ *  with formulas.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -4097,14 +7617,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *replacement;
 
 /**
- *  True if the find value is a regex.
- *  The regular expression and replacement should follow Java regex rules
- *  at https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html.
- *  The replacement string is allowed to refer to capturing groups.
- *  For example, if one cell has the contents `"Google Sheets"` and another
- *  has `"Google Docs"`, then searching for `"o.* (.*)"` with a replacement of
- *  `"$1 Rocks"` would change the contents of the cells to
- *  `"GSheets Rocks"` and `"GDocs Rocks"` respectively.
+ *  True if the find value is a regex. The regular expression and replacement
+ *  should follow Java regex rules at
+ *  https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html. The
+ *  replacement string is allowed to refer to capturing groups. For example, if
+ *  one cell has the contents `"Google Sheets"` and another has `"Google Docs"`,
+ *  then searching for `"o.* (.*)"` with a replacement of `"$1 Rocks"` would
+ *  change the contents of the cells to `"GSheets Rocks"` and `"GDocs Rocks"`
+ *  respectively.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -4133,9 +7653,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *formulasChanged;
 
 /**
- *  The number of occurrences (possibly multiple within a cell) changed.
- *  For example, if replacing `"e"` with `"o"` in `"Google Sheets"`, this would
- *  be `"3"` because `"Google Sheets"` -> `"Googlo Shoots"`.
+ *  The number of occurrences (possibly multiple within a cell) changed. For
+ *  example, if replacing `"e"` with `"o"` in `"Google Sheets"`, this would be
+ *  `"3"` because `"Google Sheets"` -> `"Googlo Shoots"`.
  *
  *  Uses NSNumber of intValue.
  */
@@ -4166,10 +7686,31 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  A rule that applies a gradient color scale format, based on
- *  the interpolation points listed. The format of a cell will vary
- *  based on its contents as compared to the values of the interpolation
- *  points.
+ *  The request for retrieving a Spreadsheet.
+ */
+@interface GTLRSheets_GetSpreadsheetByDataFilterRequest : GTLRObject
+
+/**
+ *  The DataFilters used to select which ranges to retrieve from the
+ *  spreadsheet.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilter *> *dataFilters;
+
+/**
+ *  True if grid data should be returned. This parameter is ignored if a field
+ *  mask was set in the request.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *includeGridData;
+
+@end
+
+
+/**
+ *  A rule that applies a gradient color scale format, based on the
+ *  interpolation points listed. The format of a cell will vary based on its
+ *  contents as compared to the values of the interpolation points.
  */
 @interface GTLRSheets_GradientRule : GTLRObject
 
@@ -4186,8 +7727,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  A coordinate in a sheet.
- *  All indexes are zero-based.
+ *  A coordinate in a sheet. All indexes are zero-based.
  */
 @interface GTLRSheets_GridCoordinate : GTLRObject
 
@@ -4227,16 +7767,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_DimensionProperties *> *columnMetadata;
 
 /**
- *  The data in the grid, one entry per row,
- *  starting with the row in startRow.
- *  The values in RowData will correspond to columns starting
- *  at start_column.
+ *  The data in the grid, one entry per row, starting with the row in startRow.
+ *  The values in RowData will correspond to columns starting at start_column.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_RowData *> *rowData;
 
 /**
- *  Metadata about the requested rows in the grid, starting with the row
- *  in start_row.
+ *  Metadata about the requested rows in the grid, starting with the row in
+ *  start_row.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_DimensionProperties *> *rowMetadata;
 
@@ -4270,6 +7808,13 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *columnCount;
 
 /**
+ *  True if the column grouping control toggle is shown after the group.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *columnGroupControlAfter;
+
+/**
  *  The number of columns that are frozen in the grid.
  *
  *  Uses NSNumber of intValue.
@@ -4297,32 +7842,30 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @property(nonatomic, strong, nullable) NSNumber *rowCount;
 
+/**
+ *  True if the row grouping control toggle is shown after the group.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *rowGroupControlAfter;
+
 @end
 
 
 /**
- *  A range on a sheet.
- *  All indexes are zero-based.
- *  Indexes are half open, e.g the start index is inclusive
- *  and the end index is exclusive -- [start_index, end_index).
- *  Missing indexes indicate the range is unbounded on that side.
- *  For example, if `"Sheet1"` is sheet ID 0, then:
- *  `Sheet1!A1:A1 == sheet_id: 0,
- *  start_row_index: 0, end_row_index: 1,
- *  start_column_index: 0, end_column_index: 1`
- *  `Sheet1!A3:B4 == sheet_id: 0,
- *  start_row_index: 2, end_row_index: 4,
- *  start_column_index: 0, end_column_index: 2`
- *  `Sheet1!A:B == sheet_id: 0,
- *  start_column_index: 0, end_column_index: 2`
- *  `Sheet1!A5:B == sheet_id: 0,
- *  start_row_index: 4,
- *  start_column_index: 0, end_column_index: 2`
- *  `Sheet1 == sheet_id:0`
- *  The start index must always be less than or equal to the end index.
- *  If the start index equals the end index, then the range is empty.
- *  Empty ranges are typically not meaningful and are usually rendered in the
- *  UI as `#REF!`.
+ *  A range on a sheet. All indexes are zero-based. Indexes are half open, i.e.
+ *  the start index is inclusive and the end index is exclusive -- [start_index,
+ *  end_index). Missing indexes indicate the range is unbounded on that side.
+ *  For example, if `"Sheet1"` is sheet ID 0, then: `Sheet1!A1:A1 == sheet_id:
+ *  0, start_row_index: 0, end_row_index: 1, start_column_index: 0,
+ *  end_column_index: 1` `Sheet1!A3:B4 == sheet_id: 0, start_row_index: 2,
+ *  end_row_index: 4, start_column_index: 0, end_column_index: 2` `Sheet1!A:B ==
+ *  sheet_id: 0, start_column_index: 0, end_column_index: 2` `Sheet1!A5:B ==
+ *  sheet_id: 0, start_row_index: 4, start_column_index: 0, end_column_index: 2`
+ *  `Sheet1 == sheet_id:0` The start index must always be less than or equal to
+ *  the end index. If the start index equals the end index, then the range is
+ *  empty. Empty ranges are typically not meaningful and are usually rendered in
+ *  the UI as `#REF!`.
  */
 @interface GTLRSheets_GridRange : GTLRObject
 
@@ -4365,22 +7908,164 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  A histogram chart. A histogram chart groups data items into bins, displaying
+ *  each bin as a column of stacked items. Histograms are used to display the
+ *  distribution of a dataset. Each column of items represents a range into
+ *  which those items fall. The number of bins can be chosen automatically or
+ *  specified explicitly.
+ */
+@interface GTLRSheets_HistogramChartSpec : GTLRObject
+
+/**
+ *  By default the bucket size (the range of values stacked in a single column)
+ *  is chosen automatically, but it may be overridden here. E.g., A bucket size
+ *  of 1.5 results in buckets from 0 - 1.5, 1.5 - 3.0, etc. Cannot be negative.
+ *  This field is optional.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *bucketSize;
+
+/**
+ *  The position of the chart legend.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_HistogramChartSpec_LegendPosition_BottomLegend The
+ *        legend is rendered on the bottom of the chart. (Value:
+ *        "BOTTOM_LEGEND")
+ *    @arg @c kGTLRSheets_HistogramChartSpec_LegendPosition_HistogramChartLegendPositionUnspecified
+ *        Default value, do not use. (Value:
+ *        "HISTOGRAM_CHART_LEGEND_POSITION_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_HistogramChartSpec_LegendPosition_InsideLegend The
+ *        legend is rendered inside the chart area. (Value: "INSIDE_LEGEND")
+ *    @arg @c kGTLRSheets_HistogramChartSpec_LegendPosition_LeftLegend The
+ *        legend is rendered on the left of the chart. (Value: "LEFT_LEGEND")
+ *    @arg @c kGTLRSheets_HistogramChartSpec_LegendPosition_NoLegend No legend
+ *        is rendered. (Value: "NO_LEGEND")
+ *    @arg @c kGTLRSheets_HistogramChartSpec_LegendPosition_RightLegend The
+ *        legend is rendered on the right of the chart. (Value: "RIGHT_LEGEND")
+ *    @arg @c kGTLRSheets_HistogramChartSpec_LegendPosition_TopLegend The legend
+ *        is rendered on the top of the chart. (Value: "TOP_LEGEND")
+ */
+@property(nonatomic, copy, nullable) NSString *legendPosition;
+
+/**
+ *  The outlier percentile is used to ensure that outliers do not adversely
+ *  affect the calculation of bucket sizes. For example, setting an outlier
+ *  percentile of 0.05 indicates that the top and bottom 5% of values when
+ *  calculating buckets. The values are still included in the chart, they will
+ *  be added to the first or last buckets instead of their own buckets. Must be
+ *  between 0.0 and 0.5.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *outlierPercentile;
+
+/**
+ *  The series for a histogram may be either a single series of values to be
+ *  bucketed or multiple series, each of the same length, containing the name of
+ *  the series followed by the values to be bucketed for that series.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_HistogramSeries *> *series;
+
+/**
+ *  Whether horizontal divider lines should be displayed between items in each
+ *  column.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *showItemDividers;
+
+@end
+
+
+/**
+ *  Allows you to organize the numeric values in a source data column into
+ *  buckets of a constant size. All values from HistogramRule.start to
+ *  HistogramRule.end are placed into groups of size HistogramRule.interval. In
+ *  addition, all values below HistogramRule.start are placed in one group, and
+ *  all values above HistogramRule.end are placed in another. Only
+ *  HistogramRule.interval is required, though if HistogramRule.start and
+ *  HistogramRule.end are both provided, HistogramRule.start must be less than
+ *  HistogramRule.end. For example, a pivot table showing average purchase
+ *  amount by age that has 50+ rows: +-----+-------------------+ | Age | AVERAGE
+ *  of Amount | +-----+-------------------+ | 16 | $27.13 | | 17 | $5.24 | | 18
+ *  | $20.15 | ... +-----+-------------------+ could be turned into a pivot
+ *  table that looks like the one below by applying a histogram group rule with
+ *  a HistogramRule.start of 25, an HistogramRule.interval of 20, and an
+ *  HistogramRule.end of 65. +-------------+-------------------+ | Grouped Age |
+ *  AVERAGE of Amount | +-------------+-------------------+ | < 25 | $19.34 | |
+ *  25-45 | $31.43 | | 45-65 | $35.87 | | > 65 | $27.55 |
+ *  +-------------+-------------------+ | Grand Total | $29.12 |
+ *  +-------------+-------------------+
+ */
+@interface GTLRSheets_HistogramRule : GTLRObject
+
+/**
+ *  The maximum value at which items are placed into buckets of constant size.
+ *  Values above end are lumped into a single bucket. This field is optional.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *end;
+
+/**
+ *  The size of the buckets that are created. Must be positive.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *interval;
+
+/**
+ *  The minimum value at which items are placed into buckets of constant size.
+ *  Values below start are lumped into a single bucket. This field is optional.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *start;
+
+@end
+
+
+/**
+ *  A histogram series containing the series color and data.
+ */
+@interface GTLRSheets_HistogramSeries : GTLRObject
+
+/**
+ *  The color of the column representing this series in each bucket. This field
+ *  is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *barColor;
+
+/**
+ *  The color of the column representing this series in each bucket. This field
+ *  is optional. If bar_color is also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *barColorStyle;
+
+/** The data for this histogram series. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *data;
+
+@end
+
+
+/**
  *  Inserts rows or columns in a sheet at a particular index.
  */
 @interface GTLRSheets_InsertDimensionRequest : GTLRObject
 
 /**
- *  Whether dimension properties should be extended from the dimensions
- *  before or after the newly inserted dimensions.
- *  True to inherit from the dimensions before (in which case the start
- *  index must be greater than 0), and false to inherit from the dimensions
- *  after.
- *  For example, if row index 0 has red background and row index 1
- *  has a green background, then inserting 2 rows at index 1 can inherit
- *  either the green or red background. If `inheritFromBefore` is true,
- *  the two new rows will be red (because the row before the insertion point
- *  was red), whereas if `inheritFromBefore` is false, the two new rows will
- *  be green (because the row after the insertion point was green).
+ *  Whether dimension properties should be extended from the dimensions before
+ *  or after the newly inserted dimensions. True to inherit from the dimensions
+ *  before (in which case the start index must be greater than 0), and false to
+ *  inherit from the dimensions after. For example, if row index 0 has red
+ *  background and row index 1 has a green background, then inserting 2 rows at
+ *  index 1 can inherit either the green or red background. If
+ *  `inheritFromBefore` is true, the two new rows will be red (because the row
+ *  before the insertion point was red), whereas if `inheritFromBefore` is
+ *  false, the two new rows will be green (because the row after the insertion
+ *  point was green).
  *
  *  Uses NSNumber of boolValue.
  */
@@ -4403,9 +8088,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  The dimension which will be shifted when inserting cells.
- *  If ROWS, existing cells will be shifted down.
- *  If COLUMNS, existing cells will be shifted right.
+ *  The dimension which will be shifted when inserting cells. If ROWS, existing
+ *  cells will be shifted down. If COLUMNS, existing cells will be shifted
+ *  right.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_InsertRangeRequest_ShiftDimension_Columns Operates on
@@ -4421,14 +8106,19 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  A single interpolation point on a gradient conditional format.
- *  These pin the gradient color scale according to the color,
- *  type and value chosen.
+ *  A single interpolation point on a gradient conditional format. These pin the
+ *  gradient color scale according to the color, type and value chosen.
  */
 @interface GTLRSheets_InterpolationPoint : GTLRObject
 
 /** The color this interpolation point should use. */
 @property(nonatomic, strong, nullable) GTLRSheets_Color *color;
+
+/**
+ *  The color this interpolation point should use. If color is also set, this
+ *  field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *colorStyle;
 
 /**
  *  How the value should be interpreted.
@@ -4438,38 +8128,55 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *        The default value, do not use. (Value:
  *        "INTERPOLATION_POINT_TYPE_UNSPECIFIED")
  *    @arg @c kGTLRSheets_InterpolationPoint_Type_Max The interpolation point
- *        will use the maximum value in the
- *        cells over the range of the conditional format. (Value: "MAX")
+ *        uses the maximum value in the cells over the range of the conditional
+ *        format. (Value: "MAX")
  *    @arg @c kGTLRSheets_InterpolationPoint_Type_Min The interpolation point
- *        will use the minimum value in the
- *        cells over the range of the conditional format. (Value: "MIN")
+ *        uses the minimum value in the cells over the range of the conditional
+ *        format. (Value: "MIN")
  *    @arg @c kGTLRSheets_InterpolationPoint_Type_Number The interpolation point
- *        will use exactly the value in
- *        InterpolationPoint.value. (Value: "NUMBER")
+ *        uses exactly the value in InterpolationPoint.value. (Value: "NUMBER")
  *    @arg @c kGTLRSheets_InterpolationPoint_Type_Percent The interpolation
- *        point will be the given percentage over
- *        all the cells in the range of the conditional format.
- *        This is equivalent to NUMBER if the value was:
- *        `=(MAX(FLATTEN(range)) * (value / 100))
- *        + (MIN(FLATTEN(range)) * (1 - (value / 100)))`
- *        (where errors in the range are ignored when flattening). (Value:
- *        "PERCENT")
+ *        point is the given percentage over all the cells in the range of the
+ *        conditional format. This is equivalent to NUMBER if the value was:
+ *        `=(MAX(FLATTEN(range)) * (value / 100)) + (MIN(FLATTEN(range)) * (1 -
+ *        (value / 100)))` (where errors in the range are ignored when
+ *        flattening). (Value: "PERCENT")
  *    @arg @c kGTLRSheets_InterpolationPoint_Type_Percentile The interpolation
- *        point will be the given percentile
- *        over all the cells in the range of the conditional format.
- *        This is equivalent to NUMBER if the value was:
- *        `=PERCENTILE(FLATTEN(range), value / 100)`
- *        (where errors in the range are ignored when flattening). (Value:
- *        "PERCENTILE")
+ *        point is the given percentile over all the cells in the range of the
+ *        conditional format. This is equivalent to NUMBER if the value was:
+ *        `=PERCENTILE(FLATTEN(range), value / 100)` (where errors in the range
+ *        are ignored when flattening). (Value: "PERCENTILE")
  */
 @property(nonatomic, copy, nullable) NSString *type;
 
 /**
- *  The value this interpolation point uses. May be a formula.
- *  Unused if type is MIN or
- *  MAX.
+ *  The value this interpolation point uses. May be a formula. Unused if type is
+ *  MIN or MAX.
  */
 @property(nonatomic, copy, nullable) NSString *value;
+
+@end
+
+
+/**
+ *  Represents a time interval, encoded as a Timestamp start (inclusive) and a
+ *  Timestamp end (exclusive). The start must be less than or equal to the end.
+ *  When the start equals the end, the interval is empty (matches no time). When
+ *  both start and end are unspecified, the interval matches any time.
+ */
+@interface GTLRSheets_Interval : GTLRObject
+
+/**
+ *  Optional. Exclusive end of the interval. If specified, a Timestamp matching
+ *  this interval will have to be before the end.
+ */
+@property(nonatomic, strong, nullable) GTLRDateTime *endTime;
+
+/**
+ *  Optional. Inclusive start of the interval. If specified, a Timestamp
+ *  matching this interval will have to be the same or after the start.
+ */
+@property(nonatomic, strong, nullable) GTLRDateTime *startTime;
 
 @end
 
@@ -4481,8 +8188,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_IterativeCalculationSettings : GTLRObject
 
 /**
- *  When iterative calculation is enabled and successive results differ by
- *  less than this threshold value, the calculation rounds stop.
+ *  When iterative calculation is enabled and successive results differ by less
+ *  than this threshold value, the calculation rounds stop.
  *
  *  Uses NSNumber of doubleValue.
  */
@@ -4495,6 +8202,146 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *maxIterations;
+
+@end
+
+
+/**
+ *  Formatting options for key value.
+ */
+@interface GTLRSheets_KeyValueFormat : GTLRObject
+
+/**
+ *  Specifies the horizontal text positioning of key value. This field is
+ *  optional. If not specified, default positioning is used.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TextPosition *position;
+
+/** Text formatting options for key value. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextFormat *textFormat;
+
+@end
+
+
+/**
+ *  Properties that describe the style of a line.
+ */
+@interface GTLRSheets_LineStyle : GTLRObject
+
+/**
+ *  The dash type of the line.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_LineStyle_Type_Custom A custom dash for a line.
+ *        Modifying the exact custom dash style is currently unsupported.
+ *        (Value: "CUSTOM")
+ *    @arg @c kGTLRSheets_LineStyle_Type_Dotted A dotted line. (Value: "DOTTED")
+ *    @arg @c kGTLRSheets_LineStyle_Type_Invisible No dash type, which is
+ *        equivalent to a non-visible line. (Value: "INVISIBLE")
+ *    @arg @c kGTLRSheets_LineStyle_Type_LineDashTypeUnspecified Default value,
+ *        do not use. (Value: "LINE_DASH_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_LineStyle_Type_LongDashed A dashed line where the
+ *        dashes have "long" length. (Value: "LONG_DASHED")
+ *    @arg @c kGTLRSheets_LineStyle_Type_LongDashedDotted A line that alternates
+ *        between a "long" dash and a dot. (Value: "LONG_DASHED_DOTTED")
+ *    @arg @c kGTLRSheets_LineStyle_Type_MediumDashed A dashed line where the
+ *        dashes have "medium" length. (Value: "MEDIUM_DASHED")
+ *    @arg @c kGTLRSheets_LineStyle_Type_MediumDashedDotted A line that
+ *        alternates between a "medium" dash and a dot. (Value:
+ *        "MEDIUM_DASHED_DOTTED")
+ *    @arg @c kGTLRSheets_LineStyle_Type_Solid A solid line. (Value: "SOLID")
+ */
+@property(nonatomic, copy, nullable) NSString *type;
+
+/**
+ *  The thickness of the line, in px.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *width;
+
+@end
+
+
+/**
+ *  Allows you to manually organize the values in a source data column into
+ *  buckets with names of your choosing. For example, a pivot table that
+ *  aggregates population by state: +-------+-------------------+ | State | SUM
+ *  of Population | +-------+-------------------+ | AK | 0.7 | | AL | 4.8 | | AR
+ *  | 2.9 | ... +-------+-------------------+ could be turned into a pivot table
+ *  that aggregates population by time zone by providing a list of groups (for
+ *  example, groupName = 'Central', items = ['AL', 'AR', 'IA', ...]) to a manual
+ *  group rule. Note that a similar effect could be achieved by adding a time
+ *  zone column to the source data and adjusting the pivot table.
+ *  +-----------+-------------------+ | Time Zone | SUM of Population |
+ *  +-----------+-------------------+ | Central | 106.3 | | Eastern | 151.9 | |
+ *  Mountain | 17.4 | ... +-----------+-------------------+
+ */
+@interface GTLRSheets_ManualRule : GTLRObject
+
+/**
+ *  The list of group names and the corresponding items from the source data
+ *  that map to each group name.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_ManualRuleGroup *> *groups;
+
+@end
+
+
+/**
+ *  A group name and a list of items from the source data that should be placed
+ *  in the group with this name.
+ *
+ *  @note This class supports NSFastEnumeration and indexed subscripting over
+ *        its "items" property.
+ */
+@interface GTLRSheets_ManualRuleGroup : GTLRCollectionObject
+
+/**
+ *  The group name, which must be a string. Each group in a given ManualRule
+ *  must have a unique group name.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ExtendedValue *groupName;
+
+/**
+ *  The items in the source data that should be placed into this group. Each
+ *  item may be a string, number, or boolean. Items may appear in at most one
+ *  group within a given ManualRule. Items that do not appear in any group will
+ *  appear on their own.
+ *
+ *  @note This property is used to support NSFastEnumeration and indexed
+ *        subscripting on this class.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_ExtendedValue *> *items;
+
+@end
+
+
+/**
+ *  A developer metadata entry and the data filters specified in the original
+ *  request that matched it.
+ */
+@interface GTLRSheets_MatchedDeveloperMetadata : GTLRObject
+
+/** All filters matching the returned developer metadata. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilter *> *dataFilters;
+
+/** The developer metadata matching the specified filters. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeveloperMetadata *developerMetadata;
+
+@end
+
+
+/**
+ *  A value range that was matched by one or more data filers.
+ */
+@interface GTLRSheets_MatchedValueRange : GTLRObject
+
+/** The DataFilters from the request that matched the range of values. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilter *> *dataFilters;
+
+/** The values matched by the DataFilter. */
+@property(nonatomic, strong, nullable) GTLRSheets_ValueRange *valueRange;
 
 @end
 
@@ -4529,17 +8376,15 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_MoveDimensionRequest : GTLRObject
 
 /**
- *  The zero-based start index of where to move the source data to,
- *  based on the coordinates *before* the source data is removed
- *  from the grid. Existing data will be shifted down or right
- *  (depending on the dimension) to make room for the moved dimensions.
- *  The source dimensions are removed from the grid, so the
- *  the data may end up in a different index than specified.
- *  For example, given `A1..A5` of `0, 1, 2, 3, 4` and wanting to move
- *  `"1"` and `"2"` to between `"3"` and `"4"`, the source would be
- *  `ROWS [1..3)`,and the destination index would be `"4"`
- *  (the zero-based index of row 5).
- *  The end result would be `A1..A5` of `0, 3, 1, 2, 4`.
+ *  The zero-based start index of where to move the source data to, based on the
+ *  coordinates *before* the source data is removed from the grid. Existing data
+ *  will be shifted down or right (depending on the dimension) to make room for
+ *  the moved dimensions. The source dimensions are removed from the grid, so
+ *  the the data may end up in a different index than specified. For example,
+ *  given `A1..A5` of `0, 1, 2, 3, 4` and wanting to move `"1"` and `"2"` to
+ *  between `"3"` and `"4"`, the source would be `ROWS [1..3)`,and the
+ *  destination index would be `"4"` (the zero-based index of row 5). The end
+ *  result would be `A1..A5` of `0, 3, 1, 2, 4`.
  *
  *  Uses NSNumber of intValue.
  */
@@ -4575,15 +8420,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /**
  *  Pattern string used for formatting. If not set, a default pattern based on
- *  the user's locale will be used if necessary for the given type.
- *  See the [Date and Number Formats guide](/sheets/api/guides/formats) for more
+ *  the user's locale will be used if necessary for the given type. See the
+ *  [Date and Number Formats guide](/sheets/api/guides/formats) for more
  *  information about the supported patterns.
  */
 @property(nonatomic, copy, nullable) NSString *pattern;
 
 /**
- *  The type of the number format.
- *  When writing, this field must be set.
+ *  The type of the number format. When writing, this field must be set.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_NumberFormat_Type_Currency Currency formatting, e.g
@@ -4595,9 +8439,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *    @arg @c kGTLRSheets_NumberFormat_Type_Number Number formatting, e.g,
  *        `1,000.12` (Value: "NUMBER")
  *    @arg @c kGTLRSheets_NumberFormat_Type_NumberFormatTypeUnspecified The
- *        number format is not specified
- *        and is based on the contents of the cell.
- *        Do not explicitly use this. (Value: "NUMBER_FORMAT_TYPE_UNSPECIFIED")
+ *        number format is not specified and is based on the contents of the
+ *        cell. Do not explicitly use this. (Value:
+ *        "NUMBER_FORMAT_TYPE_UNSPECIFIED")
  *    @arg @c kGTLRSheets_NumberFormat_Type_Percent Percent formatting, e.g
  *        `10.12%` (Value: "PERCENT")
  *    @arg @c kGTLRSheets_NumberFormat_Type_Scientific Scientific number
@@ -4608,6 +8452,73 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *        PM` (Value: "TIME")
  */
 @property(nonatomic, copy, nullable) NSString *type;
+
+@end
+
+
+/**
+ *  An org chart. Org charts require a unique set of labels in labels and may
+ *  optionally include parent_labels and tooltips. parent_labels contain, for
+ *  each node, the label identifying the parent node. tooltips contain, for each
+ *  node, an optional tooltip. For example, to describe an OrgChart with Alice
+ *  as the CEO, Bob as the President (reporting to Alice) and Cathy as VP of
+ *  Sales (also reporting to Alice), have labels contain "Alice", "Bob",
+ *  "Cathy", parent_labels contain "", "Alice", "Alice" and tooltips contain
+ *  "CEO", "President", "VP Sales".
+ */
+@interface GTLRSheets_OrgChartSpec : GTLRObject
+
+/**
+ *  The data containing the labels for all the nodes in the chart. Labels must
+ *  be unique.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *labels;
+
+/** The color of the org chart nodes. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *nodeColor;
+
+/**
+ *  The color of the org chart nodes. If node_color is also set, this field
+ *  takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *nodeColorStyle;
+
+/**
+ *  The size of the org chart nodes.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_OrgChartSpec_NodeSize_Large The large org chart node
+ *        size. (Value: "LARGE")
+ *    @arg @c kGTLRSheets_OrgChartSpec_NodeSize_Medium The medium org chart node
+ *        size. (Value: "MEDIUM")
+ *    @arg @c kGTLRSheets_OrgChartSpec_NodeSize_OrgChartLabelSizeUnspecified
+ *        Default value, do not use. (Value: "ORG_CHART_LABEL_SIZE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_OrgChartSpec_NodeSize_Small The small org chart node
+ *        size. (Value: "SMALL")
+ */
+@property(nonatomic, copy, nullable) NSString *nodeSize;
+
+/**
+ *  The data containing the label of the parent for the corresponding node. A
+ *  blank value indicates that the node has no parent and is a top-level node.
+ *  This field is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *parentLabels;
+
+/** The color of the selected org chart nodes. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *selectedNodeColor;
+
+/**
+ *  The color of the selected org chart nodes. If selected_node_color is also
+ *  set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *selectedNodeColorStyle;
+
+/**
+ *  The data containing the tooltip for the corresponding node. A blank value
+ *  results in no tooltip being displayed for the node. This field is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *tooltips;
 
 @end
 
@@ -4628,16 +8539,16 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *heightPixels;
 
 /**
- *  The horizontal offset, in pixels, that the object is offset
- *  from the anchor cell.
+ *  The horizontal offset, in pixels, that the object is offset from the anchor
+ *  cell.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *offsetXPixels;
 
 /**
- *  The vertical offset, in pixels, that the object is offset
- *  from the anchor cell.
+ *  The vertical offset, in pixels, that the object is offset from the anchor
+ *  cell.
  *
  *  Uses NSNumber of intValue.
  */
@@ -4654,8 +8565,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  The amount of padding around the cell, in pixels.
- *  When updating padding, every field must be specified.
+ *  The amount of padding around the cell, in pixels. When updating padding,
+ *  every field must be specified.
  */
 @interface GTLRSheets_Padding : GTLRObject
 
@@ -4737,7 +8648,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  A <a href="/chart/interactive/docs/gallery/piechart">pie chart</a>.
+ *  A pie chart.
  */
 @interface GTLRSheets_PieChartSpec : GTLRObject
 
@@ -4798,9 +8709,69 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  The pivot table filter criteria associated with a specific source column
+ *  offset.
+ */
+@interface GTLRSheets_PivotFilterSpec : GTLRObject
+
+/**
+ *  The column offset of the source range.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *columnOffsetIndex;
+
+/** The reference to the data source column. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *dataSourceColumnReference;
+
+/** The criteria for the column. */
+@property(nonatomic, strong, nullable) GTLRSheets_PivotFilterCriteria *filterCriteria;
+
+@end
+
+
+/**
  *  A single grouping (either row or column) in a pivot table.
  */
 @interface GTLRSheets_PivotGroup : GTLRObject
+
+/** The reference to the data source column this grouping is based on. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *dataSourceColumnReference;
+
+/** The count limit on rows or columns to apply to this pivot group. */
+@property(nonatomic, strong, nullable) GTLRSheets_PivotGroupLimit *groupLimit;
+
+/** The group rule to apply to this row/column group. */
+@property(nonatomic, strong, nullable) GTLRSheets_PivotGroupRule *groupRule;
+
+/**
+ *  The labels to use for the row/column groups which can be customized. For
+ *  example, in the following pivot table, the row label is `Region` (which
+ *  could be renamed to `State`) and the column label is `Product` (which could
+ *  be renamed `Item`). Pivot tables created before December 2017 do not have
+ *  header labels. If you'd like to add header labels to an existing pivot
+ *  table, please delete the existing pivot table and then create a new pivot
+ *  table with same parameters. +--------------+---------+-------+ | SUM of
+ *  Units | Product | | | Region | Pen | Paper |
+ *  +--------------+---------+-------+ | New York | 345 | 98 | | Oregon | 234 |
+ *  123 | | Tennessee | 531 | 415 | +--------------+---------+-------+ | Grand
+ *  Total | 1110 | 636 | +--------------+---------+-------+
+ */
+@property(nonatomic, copy, nullable) NSString *label;
+
+/**
+ *  True if the headings in this pivot group should be repeated. This is only
+ *  valid for row groupings and is ignored by columns. By default, we minimize
+ *  repitition of headings by not showing higher level headings where they are
+ *  the same. For example, even though the third row below corresponds to "Q1
+ *  Mar", "Q1" is not shown because it is redundant with previous rows. Setting
+ *  repeat_headings to true would cause "Q1" to be repeated for "Feb" and "Mar".
+ *  +--------------+ | Q1 | Jan | | | Feb | | | Mar | +--------+-----+ | Q1
+ *  Total | +--------------+
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *repeatHeadings;
 
 /**
  *  True if the pivot table should include the totals for this grouping.
@@ -4823,18 +8794,18 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *sortOrder;
 
 /**
- *  The column offset of the source range that this grouping is based on.
- *  For example, if the source was `C10:E15`, a `sourceColumnOffset` of `0`
- *  means this group refers to column `C`, whereas the offset `1` would refer
- *  to column `D`.
+ *  The column offset of the source range that this grouping is based on. For
+ *  example, if the source was `C10:E15`, a `sourceColumnOffset` of `0` means
+ *  this group refers to column `C`, whereas the offset `1` would refer to
+ *  column `D`.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *sourceColumnOffset;
 
 /**
- *  The bucket of the opposite pivot group to sort by.
- *  If not specified, sorting is alphabetical by this group's values.
+ *  The bucket of the opposite pivot group to sort by. If not specified, sorting
+ *  is alphabetical by this group's values.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_PivotGroupSortValueBucket *valueBucket;
 
@@ -4845,25 +8816,73 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  The count limit on rows or columns in the pivot group.
+ */
+@interface GTLRSheets_PivotGroupLimit : GTLRObject
+
+/**
+ *  The order in which the group limit is applied to the pivot table. Pivot
+ *  group limits are applied from lower to higher order number. Order numbers
+ *  are normalized to consecutive integers from 0. For write request, to fully
+ *  customize the applying orders, all pivot group limits should have this field
+ *  set with an unique number. Otherwise, the order is determined by the index
+ *  in the PivotTable.rows list and then the PivotTable.columns list.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *applyOrder;
+
+/**
+ *  The count limit.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *countLimit;
+
+@end
+
+
+/**
+ *  An optional setting on a PivotGroup that defines buckets for the values in
+ *  the source data column rather than breaking out each individual value. Only
+ *  one PivotGroup with a group rule may be added for each column in the source
+ *  data, though on any given column you may add both a PivotGroup that has a
+ *  rule and a PivotGroup that does not.
+ */
+@interface GTLRSheets_PivotGroupRule : GTLRObject
+
+/** A DateTimeRule. */
+@property(nonatomic, strong, nullable) GTLRSheets_DateTimeRule *dateTimeRule;
+
+/** A HistogramRule. */
+@property(nonatomic, strong, nullable) GTLRSheets_HistogramRule *histogramRule;
+
+/** A ManualRule. */
+@property(nonatomic, strong, nullable) GTLRSheets_ManualRule *manualRule;
+
+@end
+
+
+/**
  *  Information about which values in a pivot group should be used for sorting.
  */
 @interface GTLRSheets_PivotGroupSortValueBucket : GTLRObject
 
 /**
- *  Determines the bucket from which values are chosen to sort.
- *  For example, in a pivot table with one row group & two column groups,
- *  the row group can list up to two values. The first value corresponds
- *  to a value within the first column group, and the second value
- *  corresponds to a value in the second column group. If no values
- *  are listed, this would indicate that the row should be sorted according
- *  to the "Grand Total" over the column groups. If a single value is listed,
- *  this would correspond to using the "Total" of that bucket.
+ *  Determines the bucket from which values are chosen to sort. For example, in
+ *  a pivot table with one row group & two column groups, the row group can list
+ *  up to two values. The first value corresponds to a value within the first
+ *  column group, and the second value corresponds to a value in the second
+ *  column group. If no values are listed, this would indicate that the row
+ *  should be sorted according to the "Grand Total" over the column groups. If a
+ *  single value is listed, this would correspond to using the "Total" of that
+ *  bucket.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_ExtendedValue *> *buckets;
 
 /**
- *  The offset in the PivotTable.values list which the values in this
- *  grouping should be sorted by.
+ *  The offset in the PivotTable.values list which the values in this grouping
+ *  should be sorted by.
  *
  *  Uses NSNumber of intValue.
  */
@@ -4885,9 +8904,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *collapsed;
 
 /**
- *  The calculated value the metadata corresponds to.
- *  (Note that formulaValue is not valid,
- *  because the values will be calculated.)
+ *  The calculated value the metadata corresponds to. (Note that formulaValue is
+ *  not valid, because the values will be calculated.)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ExtendedValue *value;
 
@@ -4903,14 +8921,27 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_PivotGroup *> *columns;
 
 /**
- *  An optional mapping of filters per source column offset.
- *  The filters will be applied before aggregating data into the pivot table.
- *  The map's key is the column offset of the source range that you want to
- *  filter, and the value is the criteria for that column.
- *  For example, if the source was `C10:E15`, a key of `0` will have the filter
- *  for column `C`, whereas the key `1` is for column `D`.
+ *  An optional mapping of filters per source column offset. The filters are
+ *  applied before aggregating data into the pivot table. The map's key is the
+ *  column offset of the source range that you want to filter, and the value is
+ *  the criteria for that column. For example, if the source was `C10:E15`, a
+ *  key of `0` will have the filter for column `C`, whereas the key `1` is for
+ *  column `D`.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_PivotTable_Criteria *criteria;
+
+/** Output only. The data execution status for data source pivot tables. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** The ID of the data source the pivot table is reading data from. */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+/**
+ *  The filters applied to the source columns before aggregating data for the
+ *  pivot table. Both criteria and filter_specs are populated in responses. If
+ *  both fields are specified in an update request, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_PivotFilterSpec *> *filterSpecs;
 
 /** Each row grouping in the pivot table. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_PivotGroup *> *rows;
@@ -4919,8 +8950,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *source;
 
 /**
- *  Whether values should be listed horizontally (as columns)
- *  or vertically (as rows).
+ *  Whether values should be listed horizontally (as columns) or vertically (as
+ *  rows).
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_PivotTable_ValueLayout_Horizontal Values are laid out
@@ -4937,12 +8968,12 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  An optional mapping of filters per source column offset.
- *  The filters will be applied before aggregating data into the pivot table.
- *  The map's key is the column offset of the source range that you want to
- *  filter, and the value is the criteria for that column.
- *  For example, if the source was `C10:E15`, a key of `0` will have the filter
- *  for column `C`, whereas the key `1` is for column `D`.
+ *  An optional mapping of filters per source column offset. The filters are
+ *  applied before aggregating data into the pivot table. The map's key is the
+ *  column offset of the source range that you want to filter, and the value is
+ *  the criteria for that column. For example, if the source was `C10:E15`, a
+ *  key of `0` will have the filter for column `C`, whereas the key `1` is for
+ *  column `D`.
  *
  *  @note This class is documented as having more properties of
  *        GTLRSheets_PivotFilterCriteria. Use @c -additionalJSONKeys and @c
@@ -4959,34 +8990,55 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_PivotValue : GTLRObject
 
 /**
- *  A custom formula to calculate the value. The formula must start
- *  with an `=` character.
+ *  If specified, indicates that pivot values should be displayed as the result
+ *  of a calculation with another pivot value. For example, if
+ *  calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the
+ *  pivot values are displayed as the percentage of the grand total. In the
+ *  Sheets editor, this is referred to as "Show As" in the value section of a
+ *  pivot table.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_PivotValue_CalculatedDisplayType_PercentOfColumnTotal
+ *        Shows the pivot values as percentage of the column total values.
+ *        (Value: "PERCENT_OF_COLUMN_TOTAL")
+ *    @arg @c kGTLRSheets_PivotValue_CalculatedDisplayType_PercentOfGrandTotal
+ *        Shows the pivot values as percentage of the grand total values.
+ *        (Value: "PERCENT_OF_GRAND_TOTAL")
+ *    @arg @c kGTLRSheets_PivotValue_CalculatedDisplayType_PercentOfRowTotal
+ *        Shows the pivot values as percentage of the row total values. (Value:
+ *        "PERCENT_OF_ROW_TOTAL")
+ *    @arg @c kGTLRSheets_PivotValue_CalculatedDisplayType_PivotValueCalculatedDisplayTypeUnspecified
+ *        Default value, do not use. (Value:
+ *        "PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *calculatedDisplayType;
+
+/** The reference to the data source column that this value reads from. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *dataSourceColumnReference;
+
+/**
+ *  A custom formula to calculate the value. The formula must start with an `=`
+ *  character.
  */
 @property(nonatomic, copy, nullable) NSString *formula;
 
-/**
- *  A name to use for the value. This is only used if formula was set.
- *  Otherwise, the column name is used.
- */
+/** A name to use for the value. */
 @property(nonatomic, copy, nullable) NSString *name;
 
 /**
- *  The column offset of the source range that this value reads from.
- *  For example, if the source was `C10:E15`, a `sourceColumnOffset` of `0`
- *  means this value refers to column `C`, whereas the offset `1` would
- *  refer to column `D`.
+ *  The column offset of the source range that this value reads from. For
+ *  example, if the source was `C10:E15`, a `sourceColumnOffset` of `0` means
+ *  this value refers to column `C`, whereas the offset `1` would refer to
+ *  column `D`.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *sourceColumnOffset;
 
 /**
- *  A function to summarize the value.
- *  If formula is set, the only supported values are
- *  SUM and
- *  CUSTOM.
- *  If sourceColumnOffset is set, then `CUSTOM`
- *  is not supported.
+ *  A function to summarize the value. If formula is set, the only supported
+ *  values are SUM and CUSTOM. If sourceColumnOffset is set, then `CUSTOM` is
+ *  not supported.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_PivotValue_SummarizeFunction_Average Corresponds to
@@ -4998,8 +9050,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  *    @arg @c kGTLRSheets_PivotValue_SummarizeFunction_Countunique Corresponds
  *        to the `COUNTUNIQUE` function. (Value: "COUNTUNIQUE")
  *    @arg @c kGTLRSheets_PivotValue_SummarizeFunction_Custom Indicates the
- *        formula should be used as-is.
- *        Only valid if PivotValue.formula was set. (Value: "CUSTOM")
+ *        formula should be used as-is. Only valid if PivotValue.formula was
+ *        set. (Value: "CUSTOM")
  *    @arg @c kGTLRSheets_PivotValue_SummarizeFunction_Max Corresponds to the
  *        `MAX` function. (Value: "MAX")
  *    @arg @c kGTLRSheets_PivotValue_SummarizeFunction_Median Corresponds to the
@@ -5040,61 +9092,54 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *descriptionProperty;
 
 /**
- *  The users and groups with edit access to the protected range.
- *  This field is only visible to users with edit access to the protected
- *  range and the document.
- *  Editors are not supported with warning_only protection.
+ *  The users and groups with edit access to the protected range. This field is
+ *  only visible to users with edit access to the protected range and the
+ *  document. Editors are not supported with warning_only protection.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_Editors *editors;
 
 /**
- *  The named range this protected range is backed by, if any.
- *  When writing, only one of range or named_range_id
- *  may be set.
+ *  The named range this protected range is backed by, if any. When writing,
+ *  only one of range or named_range_id may be set.
  */
 @property(nonatomic, copy, nullable) NSString *namedRangeId;
 
 /**
- *  The ID of the protected range.
- *  This field is read-only.
+ *  The ID of the protected range. This field is read-only.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *protectedRangeId;
 
 /**
- *  The range that is being protected.
- *  The range may be fully unbounded, in which case this is considered
- *  a protected sheet.
- *  When writing, only one of range or named_range_id
- *  may be set.
+ *  The range that is being protected. The range may be fully unbounded, in
+ *  which case this is considered a protected sheet. When writing, only one of
+ *  range or named_range_id may be set.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  True if the user who requested this protected range can edit the
- *  protected area.
- *  This field is read-only.
+ *  True if the user who requested this protected range can edit the protected
+ *  area. This field is read-only.
  *
  *  Uses NSNumber of boolValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *requestingUserCanEdit;
 
 /**
- *  The list of unprotected ranges within a protected sheet.
- *  Unprotected ranges are only supported on protected sheets.
+ *  The list of unprotected ranges within a protected sheet. Unprotected ranges
+ *  are only supported on protected sheets.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_GridRange *> *unprotectedRanges;
 
 /**
- *  True if this protected range will show a warning when editing.
- *  Warning-based protection means that every user can edit data in the
- *  protected range, except editing will prompt a warning asking the user
- *  to confirm the edit.
- *  When writing: if this field is true, then editors is ignored.
- *  Additionally, if this field is changed from true to false and the
- *  `editors` field is not set (nor included in the field mask), then
- *  the editors will be set to all the editors in the document.
+ *  True if this protected range will show a warning when editing. Warning-based
+ *  protection means that every user can edit data in the protected range,
+ *  except editing will prompt a warning asking the user to confirm the edit.
+ *  When writing: if this field is true, then editors is ignored. Additionally,
+ *  if this field is changed from true to false and the `editors` field is not
+ *  set (nor included in the field mask), then the editors will be set to all
+ *  the editors in the document.
  *
  *  Uses NSNumber of boolValue.
  */
@@ -5104,17 +9149,92 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Updates all cells in the range to the values in the given Cell object.
- *  Only the fields listed in the fields field are updated; others are
- *  unchanged.
- *  If writing a cell with a formula, the formula's ranges will automatically
- *  increment for each field in the range.
- *  For example, if writing a cell with formula `=A1` into range B2:C4,
- *  B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`,
- *  C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`.
- *  To keep the formula's ranges static, use the `$` indicator.
- *  For example, use the formula `=$A$1` to prevent both the row and the
- *  column from incrementing.
+ *  Randomizes the order of the rows in a range.
+ */
+@interface GTLRSheets_RandomizeRangeRequest : GTLRObject
+
+/** The range to randomize. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
+
+@end
+
+
+/**
+ *  The execution status of refreshing one data source object.
+ */
+@interface GTLRSheets_RefreshDataSourceObjectExecutionStatus : GTLRObject
+
+/** The data execution status. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** Reference to a data source object being refreshed. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceObjectReference *reference;
+
+@end
+
+
+/**
+ *  Refreshes one or multiple data source objects in the spreadsheet by the
+ *  specified references. The request requires an additional bigquery.readonly
+ *  OAuth scope. If there're multiple refresh requests referencing the same data
+ *  source objects in one batch, only the last refresh request is processed, and
+ *  all those requests will have the same response accordingly.
+ */
+@interface GTLRSheets_RefreshDataSourceRequest : GTLRObject
+
+/**
+ *  Reference to a DataSource. If specified, refreshes all associated data
+ *  source objects for the data source.
+ */
+@property(nonatomic, copy, nullable) NSString *dataSourceId;
+
+/**
+ *  Refreshes the data source objects regardless of the current state. If not
+ *  set and a referenced data source object was in error state, the refresh will
+ *  fail immediately.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *force;
+
+/**
+ *  Refreshes all existing data source objects in the spreadsheet.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *isAll;
+
+/** References to data source objects to refresh. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceObjectReferences *references;
+
+@end
+
+
+/**
+ *  The response from refreshing one or multiple data source objects.
+ */
+@interface GTLRSheets_RefreshDataSourceResponse : GTLRObject
+
+/**
+ *  All the refresh status for the data source object references specified in
+ *  the request. If is_all is specified, the field contains only those in
+ *  failure status.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_RefreshDataSourceObjectExecutionStatus *> *statuses;
+
+@end
+
+
+/**
+ *  Updates all cells in the range to the values in the given Cell object. Only
+ *  the fields listed in the fields field are updated; others are unchanged. If
+ *  writing a cell with a formula, the formula's ranges will automatically
+ *  increment for each field in the range. For example, if writing a cell with
+ *  formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4
+ *  would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To
+ *  keep the formula's ranges static, use the `$` indicator. For example, use
+ *  the formula `=$A$1` to prevent both the row and the column from
+ *  incrementing.
  */
 @interface GTLRSheets_RepeatCellRequest : GTLRObject
 
@@ -5122,9 +9242,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_CellData *cell;
 
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root `cell` is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `cell` is implied and should not be specified. A single `"*"` can be
+ *  used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -5150,6 +9270,12 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** Adds a new conditional format rule. */
 @property(nonatomic, strong, nullable) GTLRSheets_AddConditionalFormatRuleRequest *addConditionalFormatRule;
 
+/** Adds a data source. */
+@property(nonatomic, strong, nullable) GTLRSheets_AddDataSourceRequest *addDataSource;
+
+/** Creates a group over the specified range. */
+@property(nonatomic, strong, nullable) GTLRSheets_AddDimensionGroupRequest *addDimensionGroup;
+
 /** Adds a filter view. */
 @property(nonatomic, strong, nullable) GTLRSheets_AddFilterViewRequest *addFilterView;
 
@@ -5162,6 +9288,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** Adds a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_AddSheetRequest *addSheet;
 
+/** Adds a slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_AddSlicerRequest *addSlicer;
+
 /** Appends cells after the last row with data in a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_AppendCellsRequest *appendCells;
 
@@ -5172,8 +9301,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_AutoFillRequest *autoFill;
 
 /**
- *  Automatically resizes one or more dimensions based on the contents
- *  of the cells in that dimension.
+ *  Automatically resizes one or more dimensions based on the contents of the
+ *  cells in that dimension.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_AutoResizeDimensionsRequest *autoResizeDimensions;
 
@@ -5182,6 +9311,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /** Copies data from one area and pastes it to another. */
 @property(nonatomic, strong, nullable) GTLRSheets_CopyPasteRequest *copyPaste NS_RETURNS_NOT_RETAINED;
+
+/** Creates new developer metadata */
+@property(nonatomic, strong, nullable) GTLRSheets_CreateDeveloperMetadataRequest *createDeveloperMetadata;
 
 /** Cuts data from one area and pastes it to another. */
 @property(nonatomic, strong, nullable) GTLRSheets_CutPasteRequest *cutPaste;
@@ -5192,8 +9324,23 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** Deletes an existing conditional format rule. */
 @property(nonatomic, strong, nullable) GTLRSheets_DeleteConditionalFormatRuleRequest *deleteConditionalFormatRule;
 
+/** Deletes a data source. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteDataSourceRequest *deleteDataSource;
+
+/** Deletes developer metadata */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteDeveloperMetadataRequest *deleteDeveloperMetadata;
+
 /** Deletes rows or columns in a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_DeleteDimensionRequest *deleteDimension;
+
+/** Deletes a group over the specified range. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteDimensionGroupRequest *deleteDimensionGroup;
+
+/**
+ *  Removes rows containing duplicate values in specified columns of a cell
+ *  range.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteDuplicatesRequest *deleteDuplicates;
 
 /** Deletes an embedded object (e.g, chart, image) in a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_DeleteEmbeddedObjectRequest *deleteEmbeddedObject;
@@ -5237,6 +9384,12 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** Pastes data (HTML or delimited) into a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_PasteDataRequest *pasteData;
 
+/** Randomizes the order of the rows in a range. */
+@property(nonatomic, strong, nullable) GTLRSheets_RandomizeRangeRequest *randomizeRange;
+
+/** Refreshs one or multiple data sources and associated dbobjects. */
+@property(nonatomic, strong, nullable) GTLRSheets_RefreshDataSourceRequest *refreshDataSource;
+
 /** Repeats a single cell across a range. */
 @property(nonatomic, strong, nullable) GTLRSheets_RepeatCellRequest *repeatCell;
 
@@ -5251,6 +9404,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /** Converts a column of text into many columns of text. */
 @property(nonatomic, strong, nullable) GTLRSheets_TextToColumnsRequest *textToColumns;
+
+/** Trims cells of whitespace (such as spaces, tabs, or new lines). */
+@property(nonatomic, strong, nullable) GTLRSheets_TrimWhitespaceRequest *trimWhitespace;
 
 /** Unmerges merged cells. */
 @property(nonatomic, strong, nullable) GTLRSheets_UnmergeCellsRequest *unmergeCells;
@@ -5270,6 +9426,15 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** Updates an existing conditional format rule. */
 @property(nonatomic, strong, nullable) GTLRSheets_UpdateConditionalFormatRuleRequest *updateConditionalFormatRule;
 
+/** Updates a data source. */
+@property(nonatomic, strong, nullable) GTLRSheets_UpdateDataSourceRequest *updateDataSource;
+
+/** Updates an existing developer metadata entry */
+@property(nonatomic, strong, nullable) GTLRSheets_UpdateDeveloperMetadataRequest *updateDeveloperMetadata;
+
+/** Updates the state of the specified group. */
+@property(nonatomic, strong, nullable) GTLRSheets_UpdateDimensionGroupRequest *updateDimensionGroup;
+
 /** Updates dimensions' properties. */
 @property(nonatomic, strong, nullable) GTLRSheets_UpdateDimensionPropertiesRequest *updateDimensionProperties;
 
@@ -5288,6 +9453,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** Updates a sheet's properties. */
 @property(nonatomic, strong, nullable) GTLRSheets_UpdateSheetPropertiesRequest *updateSheetProperties;
 
+/** Updates a slicer's specifications. */
+@property(nonatomic, strong, nullable) GTLRSheets_UpdateSlicerSpecRequest *updateSlicerSpec;
+
 /** Updates the spreadsheet's properties. */
 @property(nonatomic, strong, nullable) GTLRSheets_UpdateSpreadsheetPropertiesRequest *updateSpreadsheetProperties;
 
@@ -5305,6 +9473,12 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** A reply from adding a chart. */
 @property(nonatomic, strong, nullable) GTLRSheets_AddChartResponse *addChart;
 
+/** A reply from adding a data source. */
+@property(nonatomic, strong, nullable) GTLRSheets_AddDataSourceResponse *addDataSource;
+
+/** A reply from adding a dimension group. */
+@property(nonatomic, strong, nullable) GTLRSheets_AddDimensionGroupResponse *addDimensionGroup;
+
 /** A reply from adding a filter view. */
 @property(nonatomic, strong, nullable) GTLRSheets_AddFilterViewResponse *addFilterView;
 
@@ -5317,8 +9491,23 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** A reply from adding a sheet. */
 @property(nonatomic, strong, nullable) GTLRSheets_AddSheetResponse *addSheet;
 
+/** A reply from adding a slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_AddSlicerResponse *addSlicer;
+
+/** A reply from creating a developer metadata entry. */
+@property(nonatomic, strong, nullable) GTLRSheets_CreateDeveloperMetadataResponse *createDeveloperMetadata;
+
 /** A reply from deleting a conditional format rule. */
 @property(nonatomic, strong, nullable) GTLRSheets_DeleteConditionalFormatRuleResponse *deleteConditionalFormatRule;
+
+/** A reply from deleting a developer metadata entry. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteDeveloperMetadataResponse *deleteDeveloperMetadata;
+
+/** A reply from deleting a dimension group. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteDimensionGroupResponse *deleteDimensionGroup;
+
+/** A reply from removing rows containing duplicate values. */
+@property(nonatomic, strong, nullable) GTLRSheets_DeleteDuplicatesResponse *deleteDuplicates;
 
 /** A reply from duplicating a filter view. */
 @property(nonatomic, strong, nullable) GTLRSheets_DuplicateFilterViewResponse *duplicateFilterView;
@@ -5329,8 +9518,20 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** A reply from doing a find/replace. */
 @property(nonatomic, strong, nullable) GTLRSheets_FindReplaceResponse *findReplace;
 
+/** A reply from refreshing data source objects. */
+@property(nonatomic, strong, nullable) GTLRSheets_RefreshDataSourceResponse *refreshDataSource;
+
+/** A reply from trimming whitespace. */
+@property(nonatomic, strong, nullable) GTLRSheets_TrimWhitespaceResponse *trimWhitespace;
+
 /** A reply from updating a conditional format rule. */
 @property(nonatomic, strong, nullable) GTLRSheets_UpdateConditionalFormatRuleResponse *updateConditionalFormatRule;
+
+/** A reply from updating a data source. */
+@property(nonatomic, strong, nullable) GTLRSheets_UpdateDataSourceResponse *updateDataSource;
+
+/** A reply from updating a developer metadata entry. */
+@property(nonatomic, strong, nullable) GTLRSheets_UpdateDeveloperMetadataResponse *updateDeveloperMetadata;
 
 /** A reply from updating an embedded object's position. */
 @property(nonatomic, strong, nullable) GTLRSheets_UpdateEmbeddedObjectPositionResponse *updateEmbeddedObjectPosition;
@@ -5350,6 +9551,114 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  A scorecard chart. Scorecard charts are used to highlight key performance
+ *  indicators, known as KPIs, on the spreadsheet. A scorecard chart can
+ *  represent things like total sales, average cost, or a top selling item. You
+ *  can specify a single data value, or aggregate over a range of data.
+ *  Percentage or absolute difference from a baseline value can be highlighted,
+ *  like changes over time.
+ */
+@interface GTLRSheets_ScorecardChartSpec : GTLRObject
+
+/**
+ *  The aggregation type for key and baseline chart data in scorecard chart.
+ *  This field is optional.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_AggregateType_Average Average
+ *        aggregate function. (Value: "AVERAGE")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_AggregateType_ChartAggregateTypeUnspecified
+ *        Default value, do not use. (Value: "CHART_AGGREGATE_TYPE_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_AggregateType_Count Count aggregate
+ *        function. (Value: "COUNT")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_AggregateType_Max Maximum aggregate
+ *        function. (Value: "MAX")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_AggregateType_Median Median
+ *        aggregate function. (Value: "MEDIAN")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_AggregateType_Min Minimum aggregate
+ *        function. (Value: "MIN")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_AggregateType_Sum Sum aggregate
+ *        function. (Value: "SUM")
+ */
+@property(nonatomic, copy, nullable) NSString *aggregateType;
+
+/** The data for scorecard baseline value. This field is optional. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *baselineValueData;
+
+/**
+ *  Formatting options for baseline value. This field is needed only if
+ *  baseline_value_data is specified.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_BaselineValueFormat *baselineValueFormat;
+
+/**
+ *  Custom formatting options for numeric key/baseline values in scorecard
+ *  chart. This field is used only when number_format_source is set to CUSTOM.
+ *  This field is optional.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartCustomNumberFormatOptions *customFormatOptions;
+
+/** The data for scorecard key value. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *keyValueData;
+
+/** Formatting options for key value. */
+@property(nonatomic, strong, nullable) GTLRSheets_KeyValueFormat *keyValueFormat;
+
+/**
+ *  The number format source used in the scorecard chart. This field is
+ *  optional.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_NumberFormatSource_ChartNumberFormatSourceUndefined
+ *        Default value, do not use. (Value:
+ *        "CHART_NUMBER_FORMAT_SOURCE_UNDEFINED")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_NumberFormatSource_Custom Apply
+ *        custom formatting as specified by ChartCustomNumberFormatOptions.
+ *        (Value: "CUSTOM")
+ *    @arg @c kGTLRSheets_ScorecardChartSpec_NumberFormatSource_FromData Inherit
+ *        number formatting from data. (Value: "FROM_DATA")
+ */
+@property(nonatomic, copy, nullable) NSString *numberFormatSource;
+
+/**
+ *  Value to scale scorecard key and baseline value. For example, a factor of 10
+ *  can be used to divide all values in the chart by 10. This field is optional.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *scaleFactor;
+
+@end
+
+
+/**
+ *  A request to retrieve all developer metadata matching the set of specified
+ *  criteria.
+ */
+@interface GTLRSheets_SearchDeveloperMetadataRequest : GTLRObject
+
+/**
+ *  The data filters describing the criteria used to determine which
+ *  DeveloperMetadata entries to return. DeveloperMetadata matching any of the
+ *  specified filters are included in the response.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilter *> *dataFilters;
+
+@end
+
+
+/**
+ *  A reply to a developer metadata search request.
+ */
+@interface GTLRSheets_SearchDeveloperMetadataResponse : GTLRObject
+
+/** The metadata matching the criteria of the search request. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_MatchedDeveloperMetadata *> *matchedDeveloperMetadata;
+
+@end
+
+
+/**
  *  Sets the basic filter associated with a sheet.
  */
 @interface GTLRSheets_SetBasicFilterRequest : GTLRObject
@@ -5361,8 +9670,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Sets a data validation rule to every cell in the range.
- *  To clear validation in a range, call this with no rule specified.
+ *  Sets a data validation rule to every cell in the range. To clear validation
+ *  in a range, call this with no rule specified.
  */
 @interface GTLRSheets_SetDataValidationRequest : GTLRObject
 
@@ -5370,8 +9679,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  The data validation rule to set on each cell in the range,
- *  or empty to clear the data validation in the range.
+ *  The data validation rule to set on each cell in the range, or empty to clear
+ *  the data validation in the range.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_DataValidationRule *rule;
 
@@ -5383,7 +9692,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @interface GTLRSheets_Sheet : GTLRObject
 
-/** The banded (i.e. alternating colors) ranges on this sheet. */
+/** The banded (alternating colors) ranges on this sheet. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_BandedRange *> *bandedRanges;
 
 /** The filter on this sheet, if any. */
@@ -5392,20 +9701,28 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** The specifications of every chart on this sheet. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_EmbeddedChart *> *charts;
 
+/**
+ *  All column groups on this sheet, ordered by increasing range start index,
+ *  then by group depth.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DimensionGroup *> *columnGroups;
+
 /** The conditional format rules in this sheet. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_ConditionalFormatRule *> *conditionalFormats;
 
 /**
- *  Data in the grid, if this is a grid sheet.
- *  The number of GridData objects returned is dependent on the number of
- *  ranges requested on this sheet. For example, if this is representing
- *  `Sheet1`, and the spreadsheet was requested with ranges
- *  `Sheet1!A1:C10` and `Sheet1!D15:E20`, then the first GridData will have a
- *  startRow/startColumn of `0`,
- *  while the second one will have `startRow 14` (zero-based row 15),
- *  and `startColumn 3` (zero-based column D).
+ *  Data in the grid, if this is a grid sheet. The number of GridData objects
+ *  returned is dependent on the number of ranges requested on this sheet. For
+ *  example, if this is representing `Sheet1`, and the spreadsheet was requested
+ *  with ranges `Sheet1!A1:C10` and `Sheet1!D15:E20`, then the first GridData
+ *  will have a startRow/startColumn of `0`, while the second one will have
+ *  `startRow 14` (zero-based row 15), and `startColumn 3` (zero-based column
+ *  D).
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_GridData *> *data;
+
+/** The developer metadata associated with a sheet. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DeveloperMetadata *> *developerMetadata;
 
 /** The filter views in this sheet. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_FilterView *> *filterViews;
@@ -5419,6 +9736,15 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** The protected ranges in this sheet. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_ProtectedRange *> *protectedRanges;
 
+/**
+ *  All row groups on this sheet, ordered by increasing range start index, then
+ *  by group depth.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DimensionGroup *> *rowGroups;
+
+/** The slicers on this sheet. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_Slicer *> *slicers;
+
 @end
 
 
@@ -5428,10 +9754,16 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_SheetProperties : GTLRObject
 
 /**
- *  Additional properties of the sheet if this sheet is a grid.
- *  (If the sheet is an object sheet, containing a chart or image, then
- *  this field will be absent.)
- *  When writing it is an error to set any grid properties on non-grid sheets.
+ *  Output only. If present, the field contains SheetType.DATA_SOURCE sheet
+ *  specific properties.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceSheetProperties *dataSourceSheetProperties;
+
+/**
+ *  Additional properties of the sheet if this sheet is a grid. (If the sheet is
+ *  an object sheet, containing a chart or image, then this field will be
+ *  absent.) When writing it is an error to set any grid properties on non-grid
+ *  sheets.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridProperties *gridProperties;
 
@@ -5443,16 +9775,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *hidden;
 
 /**
- *  The index of the sheet within the spreadsheet.
- *  When adding or updating sheet properties, if this field
- *  is excluded then the sheet will be added or moved to the end
- *  of the sheet list. When updating sheet indices or inserting
- *  sheets, movement is considered in "before the move" indexes.
- *  For example, if there were 3 sheets (S1, S2, S3) in order to
- *  move S1 ahead of S2 the index would have to be set to 2. A sheet
- *  index update request will be ignored if the requested index is
- *  identical to the sheets current index or if the requested new
- *  index is equal to the current sheet index + 1.
+ *  The index of the sheet within the spreadsheet. When adding or updating sheet
+ *  properties, if this field is excluded then the sheet is added or moved to
+ *  the end of the sheet list. When updating sheet indices or inserting sheets,
+ *  movement is considered in "before the move" indexes. For example, if there
+ *  were 3 sheets (S1, S2, S3) in order to move S1 ahead of S2 the index would
+ *  have to be set to 2. A sheet index update request is ignored if the
+ *  requested index is identical to the sheets current index or if the requested
+ *  new index is equal to the current sheet index + 1.
  *
  *  Uses NSNumber of intValue.
  */
@@ -5466,18 +9796,20 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *rightToLeft;
 
 /**
- *  The ID of the sheet. Must be non-negative.
- *  This field cannot be changed once set.
+ *  The ID of the sheet. Must be non-negative. This field cannot be changed once
+ *  set.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *sheetId;
 
 /**
- *  The type of sheet. Defaults to GRID.
- *  This field cannot be changed once set.
+ *  The type of sheet. Defaults to GRID. This field cannot be changed once set.
  *
  *  Likely values:
+ *    @arg @c kGTLRSheets_SheetProperties_SheetType_DataSource The sheet
+ *        connects with an external DataSource and shows the preview of data.
+ *        (Value: "DATA_SOURCE")
  *    @arg @c kGTLRSheets_SheetProperties_SheetType_Grid The sheet is a grid.
  *        (Value: "GRID")
  *    @arg @c kGTLRSheets_SheetProperties_SheetType_Object The sheet has no grid
@@ -5490,7 +9822,99 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** The color of the tab in the UI. */
 @property(nonatomic, strong, nullable) GTLRSheets_Color *tabColor;
 
+/**
+ *  The color of the tab in the UI. If tab_color is also set, this field takes
+ *  precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *tabColorStyle;
+
 /** The name of the sheet. */
+@property(nonatomic, copy, nullable) NSString *title;
+
+@end
+
+
+/**
+ *  A slicer in a sheet.
+ */
+@interface GTLRSheets_Slicer : GTLRObject
+
+/**
+ *  The position of the slicer. Note that slicer can be positioned only on
+ *  existing sheet. Also, width and height of slicer can be automatically
+ *  adjusted to keep it within permitted limits.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_EmbeddedObjectPosition *position;
+
+/**
+ *  The ID of the slicer.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *slicerId;
+
+/** The specification of the slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_SlicerSpec *spec;
+
+@end
+
+
+/**
+ *  The specifications of a slicer.
+ */
+@interface GTLRSheets_SlicerSpec : GTLRObject
+
+/**
+ *  True if the filter should apply to pivot tables. If not set, default to
+ *  `True`.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *applyToPivotTables;
+
+/** The background color of the slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *backgroundColor;
+
+/**
+ *  The background color of the slicer. If background_color is also set, this
+ *  field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *backgroundColorStyle;
+
+/**
+ *  The column index in the data table on which the filter is applied to.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *columnIndex;
+
+/** The data range of the slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *dataRange;
+
+/** The filtering criteria of the slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_FilterCriteria *filterCriteria;
+
+/**
+ *  The horizontal alignment of title in the slicer. If unspecified, defaults to
+ *  `LEFT`
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_SlicerSpec_HorizontalAlignment_Center The text is
+ *        explicitly aligned to the center of the cell. (Value: "CENTER")
+ *    @arg @c kGTLRSheets_SlicerSpec_HorizontalAlignment_HorizontalAlignUnspecified
+ *        The horizontal alignment is not specified. Do not use this. (Value:
+ *        "HORIZONTAL_ALIGN_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_SlicerSpec_HorizontalAlignment_Left The text is
+ *        explicitly aligned to the left of the cell. (Value: "LEFT")
+ *    @arg @c kGTLRSheets_SlicerSpec_HorizontalAlignment_Right The text is
+ *        explicitly aligned to the right of the cell. (Value: "RIGHT")
+ */
+@property(nonatomic, copy, nullable) NSString *horizontalAlignment;
+
+/** The text format of title in the slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextFormat *textFormat;
+
+/** The title of the slicer. */
 @property(nonatomic, copy, nullable) NSString *title;
 
 @end
@@ -5505,8 +9929,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
 /**
- *  The sort order per column. Later specifications are used when values
- *  are equal in the earlier specifications.
+ *  The sort order per column. Later specifications are used when values are
+ *  equal in the earlier specifications.
  */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_SortSpec *> *sortSpecs;
 
@@ -5519,11 +9943,42 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_SortSpec : GTLRObject
 
 /**
+ *  The background fill color to sort by; cells with this fill color are sorted
+ *  to the top. Mutually exclusive with foreground_color.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *backgroundColor;
+
+/**
+ *  The background fill color to sort by; cells with this fill color are sorted
+ *  to the top. Mutually exclusive with foreground_color, and must be an
+ *  RGB-type color. If background_color is also set, this field takes
+ *  precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *backgroundColorStyle;
+
+/** Reference to a data source column. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceColumnReference *dataSourceColumnReference;
+
+/**
  *  The dimension the sort should be applied to.
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *dimensionIndex;
+
+/**
+ *  The foreground color to sort by; cells with this foreground color are sorted
+ *  to the top. Mutually exclusive with background_color.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *foregroundColor;
+
+/**
+ *  The foreground color to sort by; cells with this foreground color are sorted
+ *  to the top. Mutually exclusive with background_color, and must be an
+ *  RGB-type color. If foreground_color is also set, this field takes
+ *  precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *foregroundColorStyle;
 
 /**
  *  The order data should be sorted.
@@ -5560,10 +10015,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *dimension;
 
 /**
- *  The number of rows or columns that data should be filled into.
- *  Positive numbers expand beyond the last row or last column
- *  of the source. Negative numbers expand before the first row
- *  or first column of the source.
+ *  The number of rows or columns that data should be filled into. Positive
+ *  numbers expand beyond the last row or last column of the source. Negative
+ *  numbers expand before the first row or first column of the source.
  *
  *  Uses NSNumber of intValue.
  */
@@ -5580,6 +10034,15 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @interface GTLRSheets_Spreadsheet : GTLRObject
 
+/** A list of external data sources connected with the spreadsheet. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSource *> *dataSources;
+
+/** Output only. A list of data source refresh schedules. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataSourceRefreshSchedule *> *dataSourceSchedules;
+
+/** The developer metadata associated with a spreadsheet. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DeveloperMetadata *> *developerMetadata;
+
 /** The named ranges defined in a spreadsheet. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_NamedRange *> *namedRanges;
 
@@ -5589,16 +10052,10 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 /** The sheets that are part of a spreadsheet. */
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_Sheet *> *sheets;
 
-/**
- *  The ID of the spreadsheet.
- *  This field is read-only.
- */
+/** The ID of the spreadsheet. This field is read-only. */
 @property(nonatomic, copy, nullable) NSString *spreadsheetId;
 
-/**
- *  The url of the spreadsheet.
- *  This field is read-only.
- */
+/** The url of the spreadsheet. This field is read-only. */
 @property(nonatomic, copy, nullable) NSString *spreadsheetUrl;
 
 @end
@@ -5627,33 +10084,35 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *autoRecalc;
 
 /**
- *  The default format of all cells in the spreadsheet.
- *  CellData.effectiveFormat will not be set if the
- *  cell's format is equal to this default format.
- *  This field is read-only.
+ *  The default format of all cells in the spreadsheet. CellData.effectiveFormat
+ *  will not be set if the cell's format is equal to this default format. This
+ *  field is read-only.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_CellFormat *defaultFormat;
 
 /**
  *  Determines whether and how circular references are resolved with iterative
- *  calculation. Absence of this field means that circular references will
- *  result in calculation errors.
+ *  calculation. Absence of this field means that circular references result in
+ *  calculation errors.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_IterativeCalculationSettings *iterativeCalculationSettings;
 
 /**
- *  The locale of the spreadsheet in one of the following formats:
- *  * an ISO 639-1 language code such as `en`
- *  * an ISO 639-2 language code such as `fil`, if no 639-1 code exists
- *  * a combination of the ISO language code and country code, such as `en_US`
- *  Note: when updating this field, not all locales/languages are supported.
+ *  The locale of the spreadsheet in one of the following formats: * an ISO
+ *  639-1 language code such as `en` * an ISO 639-2 language code such as `fil`,
+ *  if no 639-1 code exists * a combination of the ISO language code and country
+ *  code, such as `en_US` Note: when updating this field, not all
+ *  locales/languages are supported.
  */
 @property(nonatomic, copy, nullable) NSString *locale;
 
+/** Theme applied to the spreadsheet. */
+@property(nonatomic, strong, nullable) GTLRSheets_SpreadsheetTheme *spreadsheetTheme;
+
 /**
- *  The time zone of the spreadsheet, in CLDR format such as
- *  `America/New_York`. If the time zone isn't recognized, this may
- *  be a custom time zone such as `GMT-07:00`.
+ *  The time zone of the spreadsheet, in CLDR format such as `America/New_York`.
+ *  If the time zone isn't recognized, this may be a custom time zone such as
+ *  `GMT-07:00`.
  */
 @property(nonatomic, copy, nullable) NSString *timeZone;
 
@@ -5664,8 +10123,25 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  The format of a run of text in a cell.
- *  Absent values indicate that the field isn't specified.
+ *  Represents spreadsheet theme
+ */
+@interface GTLRSheets_SpreadsheetTheme : GTLRObject
+
+/** / Name of the primary font family. */
+@property(nonatomic, copy, nullable) NSString *primaryFontFamily;
+
+/**
+ *  The spreadsheet theme color pairs. To update you must provide all theme
+ *  color pairs.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_ThemeColorPair *> *themeColors;
+
+@end
+
+
+/**
+ *  The format of a run of text in a cell. Absent values indicate that the field
+ *  isn't specified.
  */
 @interface GTLRSheets_TextFormat : GTLRObject
 
@@ -5688,6 +10164,12 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /** The foreground color of the text. */
 @property(nonatomic, strong, nullable) GTLRSheets_Color *foregroundColor;
+
+/**
+ *  The foreground color of the text. If foreground_color is also set, this
+ *  field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *foregroundColorStyle;
 
 /**
  *  True if the text is italicized.
@@ -5715,8 +10197,7 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /**
  *  A run of a text format. The format of this run continues until the start
- *  index of the next run.
- *  When updating, all fields must be set.
+ *  index of the next run. When updating, all fields must be set.
  */
 @interface GTLRSheets_TextFormatRun : GTLRObject
 
@@ -5734,16 +10215,40 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  Position settings for text.
+ */
+@interface GTLRSheets_TextPosition : GTLRObject
+
+/**
+ *  Horizontal alignment setting for the piece of text.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_TextPosition_HorizontalAlignment_Center The text is
+ *        explicitly aligned to the center of the cell. (Value: "CENTER")
+ *    @arg @c kGTLRSheets_TextPosition_HorizontalAlignment_HorizontalAlignUnspecified
+ *        The horizontal alignment is not specified. Do not use this. (Value:
+ *        "HORIZONTAL_ALIGN_UNSPECIFIED")
+ *    @arg @c kGTLRSheets_TextPosition_HorizontalAlignment_Left The text is
+ *        explicitly aligned to the left of the cell. (Value: "LEFT")
+ *    @arg @c kGTLRSheets_TextPosition_HorizontalAlignment_Right The text is
+ *        explicitly aligned to the right of the cell. (Value: "RIGHT")
+ */
+@property(nonatomic, copy, nullable) NSString *horizontalAlignment;
+
+@end
+
+
+/**
  *  The rotation applied to text in a cell.
  */
 @interface GTLRSheets_TextRotation : GTLRObject
 
 /**
  *  The angle between the standard orientation and the desired orientation.
- *  Measured in degrees. Valid values are between -90 and 90. Positive
- *  angles are angled upwards, negative are angled downwards.
- *  Note: For LTR text direction positive angles are in the counterclockwise
- *  direction, whereas for RTL they are in the clockwise direction
+ *  Measured in degrees. Valid values are between -90 and 90. Positive angles
+ *  are angled upwards, negative are angled downwards. Note: For LTR text
+ *  direction positive angles are in the counterclockwise direction, whereas for
+ *  RTL they are in the clockwise direction
  *
  *  Uses NSNumber of intValue.
  */
@@ -5751,16 +10256,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /**
  *  If true, text reads top to bottom, but the orientation of individual
- *  characters is unchanged.
- *  For example:
- *  | V |
- *  | e |
- *  | r |
- *  | t |
- *  | i |
- *  | c |
- *  | a |
- *  | l |
+ *  characters is unchanged. For example: | V | | e | | r | | t | | i | | c | |
+ *  a | | l |
  *
  *  Uses NSNumber of boolValue.
  */
@@ -5770,21 +10267,20 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Splits a column of text into multiple columns,
- *  based on a delimiter in each cell.
+ *  Splits a column of text into multiple columns, based on a delimiter in each
+ *  cell.
  */
 @interface GTLRSheets_TextToColumnsRequest : GTLRObject
 
-/**
- *  The delimiter to use. Used only if delimiterType is
- *  CUSTOM.
- */
+/** The delimiter to use. Used only if delimiterType is CUSTOM. */
 @property(nonatomic, copy, nullable) NSString *delimiter;
 
 /**
  *  The delimiter type to use.
  *
  *  Likely values:
+ *    @arg @c kGTLRSheets_TextToColumnsRequest_DelimiterType_Autodetect
+ *        Automatically detect columns. (Value: "AUTODETECT")
  *    @arg @c kGTLRSheets_TextToColumnsRequest_DelimiterType_Comma "," (Value:
  *        "COMMA")
  *    @arg @c kGTLRSheets_TextToColumnsRequest_DelimiterType_Custom A custom
@@ -5808,14 +10304,285 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  A pair mapping a spreadsheet theme color type to the concrete color it
+ *  represents.
+ */
+@interface GTLRSheets_ThemeColorPair : GTLRObject
+
+/** The concrete color corresponding to the theme color type. */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *color;
+
+/**
+ *  The type of the spreadsheet theme color.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Accent1 Represents the first
+ *        accent color (Value: "ACCENT1")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Accent2 Represents the second
+ *        accent color (Value: "ACCENT2")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Accent3 Represents the third
+ *        accent color (Value: "ACCENT3")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Accent4 Represents the fourth
+ *        accent color (Value: "ACCENT4")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Accent5 Represents the fifth
+ *        accent color (Value: "ACCENT5")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Accent6 Represents the sixth
+ *        accent color (Value: "ACCENT6")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Background Represents the
+ *        primary background color (Value: "BACKGROUND")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Link Represents the color to
+ *        use for hyperlinks (Value: "LINK")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_Text Represents the primary
+ *        text color (Value: "TEXT")
+ *    @arg @c kGTLRSheets_ThemeColorPair_ColorType_ThemeColorTypeUnspecified
+ *        Unspecified theme color (Value: "THEME_COLOR_TYPE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *colorType;
+
+@end
+
+
+/**
+ *  Represents a time of day. The date and time zone are either not significant
+ *  or are specified elsewhere. An API may choose to allow leap seconds. Related
+ *  types are google.type.Date and `google.protobuf.Timestamp`.
+ */
+@interface GTLRSheets_TimeOfDay : GTLRObject
+
+/**
+ *  Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to
+ *  allow the value "24:00:00" for scenarios like business closing time.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *hours;
+
+/**
+ *  Minutes of hour of day. Must be from 0 to 59.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minutes;
+
+/**
+ *  Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *nanos;
+
+/**
+ *  Seconds of minutes of the time. Must normally be from 0 to 59. An API may
+ *  allow the value 60 if it allows leap-seconds.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *seconds;
+
+@end
+
+
+/**
+ *  A color scale for a treemap chart.
+ */
+@interface GTLRSheets_TreemapChartColorScale : GTLRObject
+
+/**
+ *  The background color for cells with a color value greater than or equal to
+ *  maxValue. Defaults to #109618 if not specified.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *maxValueColor;
+
+/**
+ *  The background color for cells with a color value greater than or equal to
+ *  maxValue. Defaults to #109618 if not specified. If max_value_color is also
+ *  set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *maxValueColorStyle;
+
+/**
+ *  The background color for cells with a color value at the midpoint between
+ *  minValue and maxValue. Defaults to #efe6dc if not specified.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *midValueColor;
+
+/**
+ *  The background color for cells with a color value at the midpoint between
+ *  minValue and maxValue. Defaults to #efe6dc if not specified. If
+ *  mid_value_color is also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *midValueColorStyle;
+
+/**
+ *  The background color for cells with a color value less than or equal to
+ *  minValue. Defaults to #dc3912 if not specified.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *minValueColor;
+
+/**
+ *  The background color for cells with a color value less than or equal to
+ *  minValue. Defaults to #dc3912 if not specified. If min_value_color is also
+ *  set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *minValueColorStyle;
+
+/**
+ *  The background color for cells that have no color data associated with them.
+ *  Defaults to #000000 if not specified.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *noDataColor;
+
+/**
+ *  The background color for cells that have no color data associated with them.
+ *  Defaults to #000000 if not specified. If no_data_color is also set, this
+ *  field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *noDataColorStyle;
+
+@end
+
+
+/**
+ *  A Treemap chart.
+ */
+@interface GTLRSheets_TreemapChartSpec : GTLRObject
+
+/**
+ *  The data that determines the background color of each treemap data cell.
+ *  This field is optional. If not specified, size_data is used to determine
+ *  background colors. If specified, the data is expected to be numeric.
+ *  color_scale will determine how the values in this data map to data cell
+ *  background colors.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *colorData;
+
+/**
+ *  The color scale for data cells in the treemap chart. Data cells are assigned
+ *  colors based on their color values. These color values come from color_data,
+ *  or from size_data if color_data is not specified. Cells with color values
+ *  less than or equal to min_value will have minValueColor as their background
+ *  color. Cells with color values greater than or equal to max_value will have
+ *  maxValueColor as their background color. Cells with color values between
+ *  min_value and max_value will have background colors on a gradient between
+ *  minValueColor and maxValueColor, the midpoint of the gradient being
+ *  midValueColor. Cells with missing or non-numeric color values will have
+ *  noDataColor as their background color.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_TreemapChartColorScale *colorScale;
+
+/** The background color for header cells. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *headerColor;
+
+/**
+ *  The background color for header cells. If header_color is also set, this
+ *  field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *headerColorStyle;
+
+/**
+ *  True to hide tooltips.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *hideTooltips;
+
+/**
+ *  The number of additional data levels beyond the labeled levels to be shown
+ *  on the treemap chart. These levels are not interactive and are shown without
+ *  their labels. Defaults to 0 if not specified.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *hintedLevels;
+
+/** The data that contains the treemap cell labels. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *labels;
+
+/**
+ *  The number of data levels to show on the treemap chart. These levels are
+ *  interactive and are shown with their labels. Defaults to 2 if not specified.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *levels;
+
+/**
+ *  The maximum possible data value. Cells with values greater than this will
+ *  have the same color as cells with this value. If not specified, defaults to
+ *  the actual maximum value from color_data, or the maximum value from
+ *  size_data if color_data is not specified.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *maxValue;
+
+/**
+ *  The minimum possible data value. Cells with values less than this will have
+ *  the same color as cells with this value. If not specified, defaults to the
+ *  actual minimum value from color_data, or the minimum value from size_data if
+ *  color_data is not specified.
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minValue;
+
+/** The data the contains the treemap cells' parent labels. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *parentLabels;
+
+/**
+ *  The data that determines the size of each treemap data cell. This data is
+ *  expected to be numeric. The cells corresponding to non-numeric or missing
+ *  data will not be rendered. If color_data is not specified, this data is used
+ *  to determine data cell background colors as well.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *sizeData;
+
+/** The text format for all labels on the chart. */
+@property(nonatomic, strong, nullable) GTLRSheets_TextFormat *textFormat;
+
+@end
+
+
+/**
+ *  Trims the whitespace (such as spaces, tabs, or new lines) in every cell in
+ *  the specified range. This request removes all whitespace from the start and
+ *  end of each cell's text, and reduces any subsequence of remaining whitespace
+ *  characters to a single space. If the resulting trimmed text starts with a
+ *  '+' or '=' character, the text remains as a string value and isn't
+ *  interpreted as a formula.
+ */
+@interface GTLRSheets_TrimWhitespaceRequest : GTLRObject
+
+/** The range whose cells to trim. */
+@property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
+
+@end
+
+
+/**
+ *  The result of trimming whitespace in cells.
+ */
+@interface GTLRSheets_TrimWhitespaceResponse : GTLRObject
+
+/**
+ *  The number of cells that were trimmed of whitespace.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *cellsChangedCount;
+
+@end
+
+
+/**
  *  Unmerges cells in the given range.
  */
 @interface GTLRSheets_UnmergeCellsRequest : GTLRObject
 
 /**
- *  The range within which all cells should be unmerged.
- *  If the range spans multiple merges, all will be unmerged.
- *  The range must not partially span any merge.
+ *  The range within which all cells should be unmerged. If the range spans
+ *  multiple merges, all will be unmerged. The range must not partially span any
+ *  merge.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
@@ -5831,9 +10598,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_BandedRange *bandedRange;
 
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root `bandedRange` is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `bandedRange` is implied and should not be specified. A single `"*"`
+ *  can be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -5843,15 +10610,12 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Updates the borders of a range.
- *  If a field is not set in the request, that means the border remains as-is.
- *  For example, with two subsequent UpdateBordersRequest:
- *  1. range: A1:A5 `{ top: RED, bottom: WHITE }`
- *  2. range: A1:A5 `{ left: BLUE }`
- *  That would result in A1:A5 having a borders of
- *  `{ top: RED, bottom: WHITE, left: BLUE }`.
- *  If you want to clear a border, explicitly set the style to
- *  NONE.
+ *  Updates the borders of a range. If a field is not set in the request, that
+ *  means the border remains as-is. For example, with two subsequent
+ *  UpdateBordersRequest: 1. range: A1:A5 `{ top: RED, bottom: WHITE }` 2.
+ *  range: A1:A5 `{ left: BLUE }` That would result in A1:A5 having a borders of
+ *  `{ top: RED, bottom: WHITE, left: BLUE }`. If you want to clear a border,
+ *  explicitly set the style to NONE.
  */
 @interface GTLRSheets_UpdateBordersRequest : GTLRObject
 
@@ -5885,9 +10649,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_UpdateCellsRequest : GTLRObject
 
 /**
- *  The fields of CellData that should be updated.
- *  At least one field must be specified.
- *  The root is the CellData; 'row.values.' should not be specified.
+ *  The fields of CellData that should be updated. At least one field must be
+ *  specified. The root is the CellData; 'row.values.' should not be specified.
  *  A single `"*"` can be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
@@ -5895,9 +10658,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *fields;
 
 /**
- *  The range to write data to.
- *  If the data in rows does not cover the entire requested range,
- *  the fields matching those set in fields will be cleared.
+ *  The range to write data to. If the data in rows does not cover the entire
+ *  requested range, the fields matching those set in fields will be cleared.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridRange *range;
 
@@ -5905,9 +10667,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSArray<GTLRSheets_RowData *> *rows;
 
 /**
- *  The coordinate to start writing data at.
- *  Any number of rows and columns (including a different number of
- *  columns per row) may be written.
+ *  The coordinate to start writing data at. Any number of rows and columns
+ *  (including a different number of columns per row) may be written.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_GridCoordinate *start;
 
@@ -5915,9 +10676,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Updates a chart's specifications.
- *  (This does not move or resize a chart. To move or resize a chart, use
- *  UpdateEmbeddedObjectPositionRequest.)
+ *  Updates a chart's specifications. (This does not move or resize a chart. To
+ *  move or resize a chart, use UpdateEmbeddedObjectPositionRequest.)
  */
 @interface GTLRSheets_UpdateChartSpecRequest : GTLRObject
 
@@ -5935,8 +10695,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Updates a conditional format rule at the given index,
- *  or moves a conditional format rule to another index.
+ *  Updates a conditional format rule at the given index, or moves a conditional
+ *  format rule to another index.
  */
 @interface GTLRSheets_UpdateConditionalFormatRuleRequest : GTLRObject
 
@@ -5958,8 +10718,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) GTLRSheets_ConditionalFormatRule *rule;
 
 /**
- *  The sheet of the rule to move. Required if new_index is set,
- *  unused otherwise.
+ *  The sheet of the rule to move. Required if new_index is set, unused
+ *  otherwise.
  *
  *  Uses NSNumber of intValue.
  */
@@ -5981,24 +10741,124 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *newIndex NS_RETURNS_NOT_RETAINED;
 
 /**
- *  The new rule that replaced the old rule (if replacing),
- *  or the rule that was moved (if moved)
+ *  The new rule that replaced the old rule (if replacing), or the rule that was
+ *  moved (if moved)
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ConditionalFormatRule *newRule NS_RETURNS_NOT_RETAINED;
 
 /**
- *  The old index of the rule. Not set if a rule was replaced
- *  (because it is the same as new_index).
+ *  The old index of the rule. Not set if a rule was replaced (because it is the
+ *  same as new_index).
  *
  *  Uses NSNumber of intValue.
  */
 @property(nonatomic, strong, nullable) NSNumber *oldIndex;
 
 /**
- *  The old (deleted) rule. Not set if a rule was moved
- *  (because it is the same as new_rule).
+ *  The old (deleted) rule. Not set if a rule was moved (because it is the same
+ *  as new_rule).
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ConditionalFormatRule *oldRule;
+
+@end
+
+
+/**
+ *  Updates a data source. After the data source is updated successfully, an
+ *  execution is triggered to refresh the associated DataSource sheet to read
+ *  data from the updated data source. The request requires an additional
+ *  bigquery.readonly OAuth scope.
+ */
+@interface GTLRSheets_UpdateDataSourceRequest : GTLRObject
+
+/** The data source to update. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSource *dataSource;
+
+/**
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root 'dataSource' is implied and should not be specified. A single `"*"` can
+ *  be used as short-hand for listing every field.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *fields;
+
+@end
+
+
+/**
+ *  The response from updating data source.
+ */
+@interface GTLRSheets_UpdateDataSourceResponse : GTLRObject
+
+/** The data execution status. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataExecutionStatus *dataExecutionStatus;
+
+/** The updated data source. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSource *dataSource;
+
+@end
+
+
+/**
+ *  A request to update properties of developer metadata. Updates the properties
+ *  of the developer metadata selected by the filters to the values provided in
+ *  the DeveloperMetadata resource. Callers must specify the properties they
+ *  wish to update in the fields parameter, as well as specify at least one
+ *  DataFilter matching the metadata they wish to update.
+ */
+@interface GTLRSheets_UpdateDeveloperMetadataRequest : GTLRObject
+
+/** The filters matching the developer metadata entries to update. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DataFilter *> *dataFilters;
+
+/**
+ *  The value that all metadata matched by the data filters will be updated to.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DeveloperMetadata *developerMetadata;
+
+/**
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `developerMetadata` is implied and should not be specified. A single
+ *  `"*"` can be used as short-hand for listing every field.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *fields;
+
+@end
+
+
+/**
+ *  The response from updating developer metadata.
+ */
+@interface GTLRSheets_UpdateDeveloperMetadataResponse : GTLRObject
+
+/** The updated developer metadata. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_DeveloperMetadata *> *developerMetadata;
+
+@end
+
+
+/**
+ *  Updates the state of the specified group.
+ */
+@interface GTLRSheets_UpdateDimensionGroupRequest : GTLRObject
+
+/**
+ *  The group whose state should be updated. The range and depth of the group
+ *  should specify a valid group on the sheet, and all other fields updated.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_DimensionGroup *dimensionGroup;
+
+/**
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `dimensionGroup` is implied and should not be specified. A single `"*"`
+ *  can be used as short-hand for listing every field.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *fields;
 
 @end
 
@@ -6008,10 +10868,13 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
  */
 @interface GTLRSheets_UpdateDimensionPropertiesRequest : GTLRObject
 
+/** The columns on a data source sheet to update. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataSourceSheetDimensionRange *dataSourceSheetRange;
+
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root `properties` is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `properties` is implied and should not be specified. A single `"*"` can
+ *  be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -6027,30 +10890,27 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Update an embedded object's position (such as a moving or resizing a
- *  chart or image).
+ *  Update an embedded object's position (such as a moving or resizing a chart
+ *  or image).
  */
 @interface GTLRSheets_UpdateEmbeddedObjectPositionRequest : GTLRObject
 
 /**
- *  The fields of OverlayPosition
- *  that should be updated when setting a new position. Used only if
- *  newPosition.overlayPosition
- *  is set, in which case at least one field must
- *  be specified. The root `newPosition.overlayPosition` is implied and
- *  should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields of OverlayPosition that should be updated when setting a new
+ *  position. Used only if newPosition.overlayPosition is set, in which case at
+ *  least one field must be specified. The root `newPosition.overlayPosition` is
+ *  implied and should not be specified. A single `"*"` can be used as
+ *  short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
 @property(nonatomic, copy, nullable) NSString *fields;
 
 /**
- *  An explicit position to move the embedded object to.
- *  If newPosition.sheetId is set,
- *  a new sheet with that ID will be created.
- *  If newPosition.newSheet is set to true,
- *  a new sheet will be created with an ID that will be chosen for you.
+ *  An explicit position to move the embedded object to. If newPosition.sheetId
+ *  is set, a new sheet with that ID will be created. If newPosition.newSheet is
+ *  set to true, a new sheet will be created with an ID that will be chosen for
+ *  you.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_EmbeddedObjectPosition *newPosition NS_RETURNS_NOT_RETAINED;
 
@@ -6081,9 +10941,9 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_UpdateFilterViewRequest : GTLRObject
 
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root `filter` is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `filter` is implied and should not be specified. A single `"*"` can be
+ *  used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -6096,15 +10956,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Updates properties of the named range with the specified
- *  namedRangeId.
+ *  Updates properties of the named range with the specified namedRangeId.
  */
 @interface GTLRSheets_UpdateNamedRangeRequest : GTLRObject
 
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root `namedRange` is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `namedRange` is implied and should not be specified. A single `"*"` can
+ *  be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -6117,15 +10976,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Updates an existing protected range with the specified
- *  protectedRangeId.
+ *  Updates an existing protected range with the specified protectedRangeId.
  */
 @interface GTLRSheets_UpdateProtectedRangeRequest : GTLRObject
 
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root `protectedRange` is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `protectedRange` is implied and should not be specified. A single `"*"`
+ *  can be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -6138,15 +10996,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
- *  Updates properties of the sheet with the specified
- *  sheetId.
+ *  Updates properties of the sheet with the specified sheetId.
  */
 @interface GTLRSheets_UpdateSheetPropertiesRequest : GTLRObject
 
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root `properties` is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `properties` is implied and should not be specified. A single `"*"` can
+ *  be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -6159,14 +11016,42 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 
 /**
+ *  Updates a slicer's specifications. (This does not move or resize a slicer.
+ *  To move or resize a slicer use UpdateEmbeddedObjectPositionRequest.
+ */
+@interface GTLRSheets_UpdateSlicerSpecRequest : GTLRObject
+
+/**
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root `SlicerSpec` is implied and should not be specified. A single "*"` can
+ *  be used as short-hand for listing every field.
+ *
+ *  String format is a comma-separated list of fields.
+ */
+@property(nonatomic, copy, nullable) NSString *fields;
+
+/**
+ *  The id of the slicer to update.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *slicerId;
+
+/** The specification to apply to the slicer. */
+@property(nonatomic, strong, nullable) GTLRSheets_SlicerSpec *spec;
+
+@end
+
+
+/**
  *  Updates properties of a spreadsheet.
  */
 @interface GTLRSheets_UpdateSpreadsheetPropertiesRequest : GTLRObject
 
 /**
- *  The fields that should be updated. At least one field must be specified.
- *  The root 'properties' is implied and should not be specified.
- *  A single `"*"` can be used as short-hand for listing every field.
+ *  The fields that should be updated. At least one field must be specified. The
+ *  root 'properties' is implied and should not be specified. A single `"*"` can
+ *  be used as short-hand for listing every field.
  *
  *  String format is a comma-separated list of fields.
  */
@@ -6174,6 +11059,49 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 /** The properties to update. */
 @property(nonatomic, strong, nullable) GTLRSheets_SpreadsheetProperties *properties;
+
+@end
+
+
+/**
+ *  The response when updating a range of values by a data filter in a
+ *  spreadsheet.
+ */
+@interface GTLRSheets_UpdateValuesByDataFilterResponse : GTLRObject
+
+/** The data filter that selected the range that was updated. */
+@property(nonatomic, strong, nullable) GTLRSheets_DataFilter *dataFilter;
+
+/**
+ *  The number of cells updated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *updatedCells;
+
+/**
+ *  The number of columns where at least one cell in the column was updated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *updatedColumns;
+
+/**
+ *  The values of the cells in the range matched by the dataFilter after all
+ *  updates were applied. This is only included if the request's
+ *  `includeValuesInResponse` field was `true`.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ValueRange *updatedData;
+
+/** The range (in A1 notation) that updates were applied to. */
+@property(nonatomic, copy, nullable) NSString *updatedRange;
+
+/**
+ *  The number of rows where at least one cell in the row was updated.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *updatedRows;
 
 @end
 
@@ -6201,9 +11129,8 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, strong, nullable) NSNumber *updatedColumns;
 
 /**
- *  The values of the cells after updates were applied.
- *  This is only included if the request's `includeValuesInResponse` field
- *  was `true`.
+ *  The values of the cells after updates were applied. This is only included if
+ *  the request's `includeValuesInResponse` field was `true`.
  */
 @property(nonatomic, strong, nullable) GTLRSheets_ValueRange *updatedData;
 
@@ -6226,16 +11153,14 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @interface GTLRSheets_ValueRange : GTLRObject
 
 /**
- *  The major dimension of the values.
- *  For output, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
- *  then requesting `range=A1:B2,majorDimension=ROWS` will return
- *  `[[1,2],[3,4]]`,
- *  whereas requesting `range=A1:B2,majorDimension=COLUMNS` will return
- *  `[[1,3],[2,4]]`.
- *  For input, with `range=A1:B2,majorDimension=ROWS` then `[[1,2],[3,4]]`
- *  will set `A1=1,B1=2,A2=3,B2=4`. With `range=A1:B2,majorDimension=COLUMNS`
- *  then `[[1,2],[3,4]]` will set `A1=1,B1=3,A2=2,B2=4`.
- *  When writing, if this field is not set, it defaults to ROWS.
+ *  The major dimension of the values. For output, if the spreadsheet data is:
+ *  `A1=1,B1=2,A2=3,B2=4`, then requesting `range=A1:B2,majorDimension=ROWS`
+ *  will return `[[1,2],[3,4]]`, whereas requesting
+ *  `range=A1:B2,majorDimension=COLUMNS` will return `[[1,3],[2,4]]`. For input,
+ *  with `range=A1:B2,majorDimension=ROWS` then `[[1,2],[3,4]]` will set
+ *  `A1=1,B1=2,A2=3,B2=4`. With `range=A1:B2,majorDimension=COLUMNS` then
+ *  `[[1,2],[3,4]]` will set `A1=1,B1=3,A2=2,B2=4`. When writing, if this field
+ *  is not set, it defaults to ROWS.
  *
  *  Likely values:
  *    @arg @c kGTLRSheets_ValueRange_MajorDimension_Columns Operates on the
@@ -6248,23 +11173,21 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 @property(nonatomic, copy, nullable) NSString *majorDimension;
 
 /**
- *  The range the values cover, in A1 notation.
- *  For output, this range indicates the entire requested range,
- *  even though the values will exclude trailing rows and columns.
- *  When appending values, this field represents the range to search for a
- *  table, after which values will be appended.
+ *  The range the values cover, in A1 notation. For output, this range indicates
+ *  the entire requested range, even though the values will exclude trailing
+ *  rows and columns. When appending values, this field represents the range to
+ *  search for a table, after which values will be appended.
  */
 @property(nonatomic, copy, nullable) NSString *range;
 
 /**
- *  The data that was read or to be written. This is an array of arrays,
- *  the outer array representing all the data and each inner array
- *  representing a major dimension. Each item in the inner array
- *  corresponds with one cell.
- *  For output, empty trailing rows and columns will not be included.
- *  For input, supported value types are: bool, string, and double.
- *  Null values will be skipped.
- *  To set a cell to an empty value, set the string value to an empty string.
+ *  The data that was read or to be written. This is an array of arrays, the
+ *  outer array representing all the data and each inner array representing a
+ *  major dimension. Each item in the inner array corresponds with one cell. For
+ *  output, empty trailing rows and columns will not be included. For input,
+ *  supported value types are: bool, string, and double. Null values will be
+ *  skipped. To set a cell to an empty value, set the string value to an empty
+ *  string.
  *
  *  Can be any valid JSON type.
  */
@@ -6272,4 +11195,157 @@ GTLR_EXTERN NSString * const kGTLRSheets_ValueRange_MajorDimension_Rows;
 
 @end
 
+
+/**
+ *  Styles for a waterfall chart column.
+ */
+@interface GTLRSheets_WaterfallChartColumnStyle : GTLRObject
+
+/** The color of the column. */
+@property(nonatomic, strong, nullable) GTLRSheets_Color *color;
+
+/**
+ *  The color of the column. If color is also set, this field takes precedence.
+ */
+@property(nonatomic, strong, nullable) GTLRSheets_ColorStyle *colorStyle;
+
+/** The label of the column's legend. */
+@property(nonatomic, copy, nullable) NSString *label;
+
+@end
+
+
+/**
+ *  A custom subtotal column for a waterfall chart series.
+ */
+@interface GTLRSheets_WaterfallChartCustomSubtotal : GTLRObject
+
+/**
+ *  True if the data point at subtotal_index is the subtotal. If false, the
+ *  subtotal will be computed and appear after the data point.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *dataIsSubtotal;
+
+/** A label for the subtotal column. */
+@property(nonatomic, copy, nullable) NSString *label;
+
+/**
+ *  The 0-based index of a data point within the series. If data_is_subtotal is
+ *  true, the data point at this index is the subtotal. Otherwise, the subtotal
+ *  appears after the data point with this index. A series can have multiple
+ *  subtotals at arbitrary indices, but subtotals do not affect the indices of
+ *  the data points. For example, if a series has three data points, their
+ *  indices will always be 0, 1, and 2, regardless of how many subtotals exist
+ *  on the series or what data points they are associated with.
+ *
+ *  Uses NSNumber of intValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *subtotalIndex;
+
+@end
+
+
+/**
+ *  The domain of a waterfall chart.
+ */
+@interface GTLRSheets_WaterfallChartDomain : GTLRObject
+
+/** The data of the WaterfallChartDomain. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *data;
+
+/**
+ *  True to reverse the order of the domain values (horizontal axis).
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *reversed;
+
+@end
+
+
+/**
+ *  A single series of data for a waterfall chart.
+ */
+@interface GTLRSheets_WaterfallChartSeries : GTLRObject
+
+/**
+ *  Custom subtotal columns appearing in this series. The order in which
+ *  subtotals are defined is not significant. Only one subtotal may be defined
+ *  for each data point.
+ */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_WaterfallChartCustomSubtotal *> *customSubtotals;
+
+/** The data being visualized in this series. */
+@property(nonatomic, strong, nullable) GTLRSheets_ChartData *data;
+
+/**
+ *  True to hide the subtotal column from the end of the series. By default, a
+ *  subtotal column will appear at the end of each series. Setting this field to
+ *  true will hide that subtotal column for this series.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *hideTrailingSubtotal;
+
+/** Styles for all columns in this series with negative values. */
+@property(nonatomic, strong, nullable) GTLRSheets_WaterfallChartColumnStyle *negativeColumnsStyle;
+
+/** Styles for all columns in this series with positive values. */
+@property(nonatomic, strong, nullable) GTLRSheets_WaterfallChartColumnStyle *positiveColumnsStyle;
+
+/** Styles for all subtotal columns in this series. */
+@property(nonatomic, strong, nullable) GTLRSheets_WaterfallChartColumnStyle *subtotalColumnsStyle;
+
+@end
+
+
+/**
+ *  A waterfall chart.
+ */
+@interface GTLRSheets_WaterfallChartSpec : GTLRObject
+
+/** The line style for the connector lines. */
+@property(nonatomic, strong, nullable) GTLRSheets_LineStyle *connectorLineStyle;
+
+/** The domain data (horizontal axis) for the waterfall chart. */
+@property(nonatomic, strong, nullable) GTLRSheets_WaterfallChartDomain *domain;
+
+/**
+ *  True to interpret the first value as a total.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *firstValueIsTotal;
+
+/**
+ *  True to hide connector lines between columns.
+ *
+ *  Uses NSNumber of boolValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *hideConnectorLines;
+
+/** The data this waterfall chart is visualizing. */
+@property(nonatomic, strong, nullable) NSArray<GTLRSheets_WaterfallChartSeries *> *series;
+
+/**
+ *  The stacked type.
+ *
+ *  Likely values:
+ *    @arg @c kGTLRSheets_WaterfallChartSpec_StackedType_Sequential Series will
+ *        spread out along the horizontal axis. (Value: "SEQUENTIAL")
+ *    @arg @c kGTLRSheets_WaterfallChartSpec_StackedType_Stacked Values
+ *        corresponding to the same domain (horizontal axis) value will be
+ *        stacked vertically. (Value: "STACKED")
+ *    @arg @c kGTLRSheets_WaterfallChartSpec_StackedType_WaterfallStackedTypeUnspecified
+ *        Default value, do not use. (Value:
+ *        "WATERFALL_STACKED_TYPE_UNSPECIFIED")
+ */
+@property(nonatomic, copy, nullable) NSString *stackedType;
+
+@end
+
 NS_ASSUME_NONNULL_END
+
+#pragma clang diagnostic pop

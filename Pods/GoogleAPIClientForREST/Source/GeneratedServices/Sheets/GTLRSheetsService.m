@@ -14,6 +14,7 @@
 // Authorization scopes
 
 NSString * const kGTLRAuthScopeSheetsDrive                = @"https://www.googleapis.com/auth/drive";
+NSString * const kGTLRAuthScopeSheetsDriveFile            = @"https://www.googleapis.com/auth/drive.file";
 NSString * const kGTLRAuthScopeSheetsDriveReadonly        = @"https://www.googleapis.com/auth/drive.readonly";
 NSString * const kGTLRAuthScopeSheetsSpreadsheets         = @"https://www.googleapis.com/auth/spreadsheets";
 NSString * const kGTLRAuthScopeSheetsSpreadsheetsReadonly = @"https://www.googleapis.com/auth/spreadsheets.readonly";
@@ -30,7 +31,7 @@ NSString * const kGTLRAuthScopeSheetsSpreadsheetsReadonly = @"https://www.google
     // From discovery.
     self.rootURLString = @"https://sheets.googleapis.com/";
     self.batchPath = @"batch";
-    self.prettyPrintQueryParameterNames = @[ @"prettyPrint", @"pp" ];
+    self.prettyPrintQueryParameterNames = @[ @"prettyPrint" ];
   }
   return self;
 }

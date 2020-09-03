@@ -23,7 +23,7 @@ class GoogleSheetsDataProvider: NSObject {
     private let spreadsheetId = "1dJs3rjIdYwpWbwT5ekmFRK7tPbEXrFLHW-ag2XILpiE"
     
     private let service = GTLRSheetsService()
-    
+
     weak var delegate: GoogleSheetsDataProviderDelegate?
     
 //    private var listLoadingCompletionHandler: ((DailyMenuModel) -> ())?
@@ -42,9 +42,9 @@ class GoogleSheetsDataProvider: NSObject {
         }
     }
     
-    init(_ authorizer: GTMFetcherAuthorizationProtocol) {
+    override init() {
         super.init()
-        self.service.authorizer = authorizer
+        self.service.authorizer = GIDSignIn.sharedInstance().currentUser.authentication.fetcherAuthorizer()
     }
     
     func updateServiceAuthorizer(to authorizer: GTMFetcherAuthorizationProtocol) {
