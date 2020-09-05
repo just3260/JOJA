@@ -26,7 +26,7 @@ class GoogleSheetsDataProvider: NSObject {
     
     weak var delegate: GoogleSheetsDataProviderDelegate?
     
-//    private var listLoadingCompletionHandler: ((DailyMenuModel) -> ())?
+    private var listLoadingCompletionHandler: (([CustomerModel]) -> ())?
     
     enum GoogleSheetsDataProviderErrors: Error {
         case invalidData
@@ -42,9 +42,9 @@ class GoogleSheetsDataProvider: NSObject {
         }
     }
     
-    init(_ authorizer: GTMFetcherAuthorizationProtocol) {
+    override init() {
         super.init()
-        self.service.authorizer = authorizer
+        self.service.authorizer = GIDSignIn.sharedInstance().currentUser.authentication.fetcherAuthorizer()
     }
     
     func updateServiceAuthorizer(to authorizer: GTMFetcherAuthorizationProtocol) {
@@ -52,10 +52,10 @@ class GoogleSheetsDataProvider: NSObject {
     }
     
     
-    func listMajors(range: String) {
+    func listMajors(range: String, _ completionHandler: @escaping (([CustomerModel]) -> ())) {
         let query = GTLRSheetsQuery_SpreadsheetsValuesGet
             .query(withSpreadsheetId: spreadsheetId, range: range)
-//        self.listLoadingCompletionHandler = completionHandler
+        self.listLoadingCompletionHandler = completionHandler
         service.executeQuery(query,
                              delegate: self,
                              didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:))
@@ -66,7 +66,6 @@ class GoogleSheetsDataProvider: NSObject {
     @objc private func displayResultWithTicket(ticket: GTLRServiceTicket,
                                                finishedWithObject result : GTLRSheets_ValueRange,
                                                error : NSError?) {
-        
         if let error = error {
             delegate?.didFailFetchingData(with: error)
             return
@@ -81,8 +80,13 @@ class GoogleSheetsDataProvider: NSObject {
         }
         
 //        let model = DailyMenuModel(with: data)
+        let customers = data.map { (singleData) -> CustomerModel in
+            return CustomerModel(name: singleData[2],
+                                 date: singleData[1],
+                                 amount: singleData[0])
+        }
         
-//        listLoadingCompletionHandler?(model)
+        listLoadingCompletionHandler?(customers)
     }
     
 }

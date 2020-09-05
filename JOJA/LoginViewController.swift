@@ -45,6 +45,7 @@ extension LoginViewController: GoogleLoginManagerDelegate {
         debug("Login Google success!!")
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CustomerListVC") as? CustomerListViewController {
             vc.modalPresentationStyle = .fullScreen
+            vc.modalTransitionStyle = .crossDissolve
             self.present(vc, animated: true, completion: nil)
         }
     }

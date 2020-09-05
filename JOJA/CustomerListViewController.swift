@@ -15,15 +15,11 @@ class CustomerListViewController: UIViewController, AlertPresentable {
     @IBOutlet weak var output: UITextView!
     
     private var sheetsDataProvider: GoogleSheetsDataProvider!
-    private var sheetService = SpreadSheetService()
-    var token: GTMFetcherAuthorizationProtocol!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        token = GIDSignIn.sharedInstance().currentUser.authentication.fetcherAuthorizer()
-        configureSheetsDataProvider(from: token)
-
+        configureSheetsDataProvider()
         configView()
     }
     
@@ -32,15 +28,14 @@ class CustomerListViewController: UIViewController, AlertPresentable {
         output.isEditable = false
         output.text = "Getting sheet data..."
         
-//        sheetService.listMajors()
-        
-        sheetsDataProvider.listMajors(range: "B2:D50")
-        
+        sheetsDataProvider.listMajors(range: "B2:D50", { (models) in
+            debug("get return data!!")
+        })
     }
     
     
-    private func configureSheetsDataProvider(from token: GTMFetcherAuthorizationProtocol) {
-        sheetsDataProvider = GoogleSheetsDataProvider(token)
+    private func configureSheetsDataProvider() {
+        sheetsDataProvider = GoogleSheetsDataProvider()
         sheetsDataProvider.delegate = self
     }
 
