@@ -1,26 +1,29 @@
 PODS:
-  - AppAuth (1.4.0):
-    - AppAuth/Core (= 1.4.0)
-    - AppAuth/ExternalUserAgent (= 1.4.0)
-  - AppAuth/Core (1.4.0)
-  - AppAuth/ExternalUserAgent (1.4.0)
-  - GoogleAPIClientForREST/Core (1.4.3):
+  - GoogleAPIClientForREST/Core (1.2.1):
     - GTMSessionFetcher (>= 1.1.7)
-  - GoogleAPIClientForREST/Sheets (1.4.3):
+  - GoogleAPIClientForREST/Sheets (1.2.1):
     - GoogleAPIClientForREST/Core
     - GTMSessionFetcher (>= 1.1.7)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
-    - GTMAppAuth (~> 1.0)
+  - GoogleSignIn (4.1.2):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GTMAppAuth (1.0.0):
-    - AppAuth/Core (~> 1.0)
+  - GoogleToolboxForMac/DebugUtils (2.2.2):
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - GoogleToolboxForMac/Defines (2.2.2)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.2)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.2)
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.2)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.2)"
+  - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.4.0):
-    - GTMSessionFetcher/Full (= 1.4.0)
-  - GTMSessionFetcher/Core (1.4.0)
-  - GTMSessionFetcher/Full (1.4.0):
-    - GTMSessionFetcher/Core (= 1.4.0)
+  - GTMSessionFetcher (1.2.0):
+    - GTMSessionFetcher/Full (= 1.2.0)
+  - GTMSessionFetcher/Core (1.2.0)
+  - GTMSessionFetcher/Full (1.2.0):
+    - GTMSessionFetcher/Core (= 1.2.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -29,32 +32,33 @@ PODS:
   - RxSwift (5.1.1)
 
 DEPENDENCIES:
-  - GoogleAPIClientForREST/Sheets
-  - GoogleSignIn
+  - GoogleAPIClientForREST/Sheets (~> 1.2.1)
+  - GoogleSignIn (~> 4.1.1)
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
 
 SPEC REPOS:
-  trunk:
-    - AppAuth
+  https://github.com/CocoaPods/Specs.git:
     - GoogleAPIClientForREST
-    - GoogleSignIn
-    - GTMAppAuth
     - GTMSessionFetcher
+  trunk:
+    - GoogleSignIn
+    - GoogleToolboxForMac
+    - GTMOAuth2
     - RxCocoa
     - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
-  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
-  GoogleAPIClientForREST: e2d95a611ac06a90d143c93bfd8597719f8b0938
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
-  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
-  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  GoogleAPIClientForREST: a8b95a252014ce2e618df6b75dc72eca2c00b4af
+  GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
+  GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
+  GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
+  GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: c377b9792e69ce9555c1ee614fb1016728706008
+PODFILE CHECKSUM: ed8a16d488ceb5dadafd17429a6f83be583e118e
 
 COCOAPODS: 1.9.3
