@@ -6,9 +6,9 @@ target 'JOJA' do
   use_frameworks!
 
   # Pods for JOJA
-  pod 'GoogleAPIClientForREST/Sheets'
-  pod 'GoogleSignIn'
-  pod 'RxSwift'
-  pod 'RxCocoa'
+  pod 'GoogleAPIClientForREST/Sheets', '~> 1.2.1'
+  pod 'GoogleSignIn', '~> 4.1.1'
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
 
 end
