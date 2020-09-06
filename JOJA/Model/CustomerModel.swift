@@ -8,34 +8,6 @@
 
 import Foundation
 
-//class CustomerModel: Codable {
-//
-
-//
-//    private var input = [[String]]()
-//    private(set) var workerMeal = [String]()
-//
-//    init(with data: [[String]]) {
-//        self.input = data
-//        formDailyMenu()
-//    }
-//
-//    private func formDailyMenu() {
-//        input.removeFirst() // removing unnecessary fields
-//        let menu = input.removeFirst() // geting menu items
-//
-//        for workerRequests in input {
-//            for item in 1..<workerRequests.count {
-//                if !workerRequests[item].isEmpty {
-//                    workerMeal.append(menu[item])
-//                }
-//            }
-//        }
-//    }
-//
-//}
-
-
 struct CustomerModel: Codable {
     let name: String
     let date: String
@@ -45,5 +17,15 @@ struct CustomerModel: Codable {
         case name = "name"
         case date = "date"
         case amount = "amount"
+    }
+}
+
+extension CustomerModel {
+    func getAmount() -> Int {
+        let string = self.amount.replacingOccurrences(of: ",", with: "")
+        guard let value = Int(string) else {
+            return 0
+        }
+        return value
     }
 }

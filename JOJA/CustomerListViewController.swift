@@ -16,7 +16,11 @@ class CustomerListViewController: UIViewController, AlertPresentable {
 
     @IBOutlet private weak var tableview: UITableView!
     
-    private var sheetsDataProvider: GoogleSheetsDataProvider!
+    lazy private var sheetsDataProvider: GoogleSheetsDataProvider = {
+        let provider = GoogleSheetsDataProvider()
+        provider.delegate = self
+        return provider
+    }()
     
 //    var customerDatas = Observable.just([CustomerModel]())
     var customerDatas: PublishSubject<[CustomerModel]> = PublishSubject()
@@ -25,7 +29,6 @@ class CustomerListViewController: UIViewController, AlertPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureSheetsDataProvider()
         configureTableView()
         getSheetData()
     }
@@ -38,12 +41,6 @@ class CustomerListViewController: UIViewController, AlertPresentable {
         })
     }
     
-    
-    private func configureSheetsDataProvider() {
-        sheetsDataProvider = GoogleSheetsDataProvider()
-        sheetsDataProvider.delegate = self
-    }
-
     private func configureTableView() {
         tableview.register(UINib(nibName: "\(CustomerCell.self)", bundle: nil), forCellReuseIdentifier: CustomerCell.Identifier)
         
@@ -62,7 +59,7 @@ extension CustomerListViewController: GoogleSheetsDataProviderDelegate {
 }
 
 
-// MARK: - Rx Setup
+// MARK: - TableView Rx Setup
 
 extension CustomerListViewController {
     func setupCellConfiguration() {
