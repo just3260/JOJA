@@ -14,7 +14,6 @@ import RxCocoa
 
 class CustomerListViewController: UIViewController, AlertPresentable {
 
-//    @IBOutlet weak var output: UITextView!
     @IBOutlet private weak var tableview: UITableView!
     
     private var sheetsDataProvider: GoogleSheetsDataProvider!
@@ -26,18 +25,15 @@ class CustomerListViewController: UIViewController, AlertPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableview.register(UINib(nibName: "\(CustomerCell.self)", bundle: nil), forCellReuseIdentifier: CustomerCell.Identifier)
-        
         configureSheetsDataProvider()
-        setupCellConfiguration()
-        configView()
+        configureTableView()
+        getSheetData()
     }
     
-
-    func configView() {
-        sheetsDataProvider.listMajors(range: "B2:D50", { (models) in
+    // get sheet data
+    private func getSheetData() {
+        sheetsDataProvider.listMajors(range: "B2:D", { (models) in
             debug("get return data!!")
-//            self.customerDatas = Observable.from(optional: models)
             self.customerDatas.onNext(models)
         })
     }
@@ -48,6 +44,12 @@ class CustomerListViewController: UIViewController, AlertPresentable {
         sheetsDataProvider.delegate = self
     }
 
+    private func configureTableView() {
+        tableview.register(UINib(nibName: "\(CustomerCell.self)", bundle: nil), forCellReuseIdentifier: CustomerCell.Identifier)
+        
+        setupCellConfiguration()
+        setupCellTapHandling()
+    }
 }
 
 
@@ -71,6 +73,17 @@ extension CustomerListViewController {
                        cellType: CustomerCell.self)) { row, customer, cell in
                         cell.configureWithModel(model: customer)
         }
+        .disposed(by: disposeBag)
+    }
+    
+    func setupCellTapHandling() {
+        tableview
+            .rx
+            .modelSelected(CustomerModel.self)
+            .subscribe(onNext: { (cell) in
+                // TODO: do some action here
+                debug(cell.name)
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
         .disposed(by: disposeBag)
     }
 }
